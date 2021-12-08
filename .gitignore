@@ -9,4 +9,4 @@ ms.pdf
 dag.pdf
 
 # Conda environment
-.env
+env
