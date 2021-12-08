@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://github.com/rodluger/showyourwork">
-<img width = "450" src="https://github.com/trevordavid/rossby-ridge/tree/main/src/static/surveys.png" alt="showyourwork"/>
+<img width = "450" src="https://github.com/trevordavid/rossby-ridge/blob/35893ebf0ae2768bafd0d4edb54d63caf36c390d/src/static/surveys.png" alt="showyourwork"/>
 </a>
 <br>
 <br>
