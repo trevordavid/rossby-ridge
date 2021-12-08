@@ -18,6 +18,6 @@
 </a>
 </p>
 
-## Pile-ups in the Temperature--Period Distribution
+## Pile-ups in the Temperature–Period Distribution
 
-Code for reproducing the analysis and text presented in "Further Evidence for Modified Spin-down in Sun-like Stars: Pile-ups in the Temperature--Period Distribution," (David et al., submitted).
+Code for reproducing the analysis and text presented in "Further Evidence for Modified Spin-down in Sun-like Stars: Pile-ups in the Temperature–Period Distribution," (David et al., submitted).
