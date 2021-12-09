@@ -120,7 +120,7 @@ lam_ridge = (frac_dist<0.05) & (lam["Teff_lam"]>5500) & (lam["Teff_lam"]<6500) &
 
 
 
-sns.set(font_scale=1.4, context="paper", style="ticks", palette="Blues")
+sns.set(font_scale=1.5, context="paper", style="ticks", palette="Blues")
 
 xeps = 5
 yeps = 1

@@ -139,7 +139,7 @@ period_90th_pctl, e_period_90th_pctl = percentile_bootstrap(pctl=90.)
 period_10th_pctl, e_period_10th_pctl = percentile_bootstrap(pctl=10.)    
 
 
-sns.set(font_scale=1.4, context="paper", style="ticks", palette="Blues")
+sns.set(font_scale=1.5, context="paper", style="ticks", palette="Blues")
 
 teff_bin_centers = np.arange(4000,7020,20)
 roc_period_90th_pctl = np.zeros(len(teff_bin_centers))

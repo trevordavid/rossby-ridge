@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://github.com/rodluger/showyourwork">
+<a href="https://github.com/trevordavid/rossby-ridge">
 <img width = "900" src="https://github.com/trevordavid/rossby-ridge/blob/35893ebf0ae2768bafd0d4edb54d63caf36c390d/src/static/surveys.png" alt="showyourwork"/>
 </a>
 <br>

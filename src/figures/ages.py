@@ -162,7 +162,7 @@ ax.plot(lam["Teff_lam"][lam_ridge], lam["Prot"][lam_ridge], 'o', mfc="None", col
 # In[9]:
 
 
-sns.set(font_scale=1.2, context="paper", style="ticks")
+sns.set(font_scale=1.1, context="paper", style="ticks")
 
 mpl.rcParams["legend.markerscale"] = 2
 
