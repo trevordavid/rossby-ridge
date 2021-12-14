@@ -80,8 +80,8 @@ sc_kws = {"marker":".", "color":"C0", "rasterized":True, "alpha":1}
 fig, ax = plt.subplots(nrows=2,ncols=1,figsize=(4.5,6.5))
 
 ax[0].scatter(cks["p20_cks_steff"], cks["d21_prot"], **sc_kws, label=r"California–Kepler Survey", zorder=999, s=4)
-#ax[1].scatter(lam['Teff_lam'][ik], lam['Prot'][ik], **sc_kws, label=r"LAMOST–McQuillan", s=0.5)
-ax[1].scatter(lam['Teff_lam'], lam['Prot'], **sc_kws, label=r"LAMOST–McQuillan", s=0.5)
+ax[1].scatter(lam['Teff_lam']+41, lam['Prot'], **sc_kws, label=r"LAMOST–McQuillan", s=0.5)
+#Note: the 41 K offset is derived in the appendix
 
 for i in range(2):
     arg = hall["Type"] == "MS"
