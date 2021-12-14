@@ -213,23 +213,33 @@ ax = axes[1]
 cks['cks_e_age'] = cks['cks_age'] - (10.**(cks['cks_logAiso']-cks['cks_e_logAiso'])/1.0e9)
 cks['cks_E_age'] = (10.**(cks['cks_logAiso']+cks['cks_E_logAiso'])/1.0e9) - cks['cks_age']
 
+ax[0].errorbar(cks['p20_cks_steff'], cks['cks_age'], 
+             xerr=[cks['cks_e_Teff'], cks['cks_E_Teff']],
+             yerr=[cks['cks_e_age'], cks['cks_E_age']], fmt='o', color='lightgrey',mec='lightgrey', linewidth=0, ecolor='lightgrey', zorder=1, alpha=0.5)
 
 ax[0].errorbar(cks['p20_cks_steff'][ridge], cks['cks_age'][ridge], 
              xerr=[cks['cks_e_Teff'][ridge], cks['cks_E_Teff'][ridge]],
-             yerr=[cks['cks_e_age'][ridge], cks['cks_E_age'][ridge]], fmt='o', mec='white', linewidth=1, ecolor='lightgrey')
+             yerr=[cks['cks_e_age'][ridge], cks['cks_E_age'][ridge]], fmt='o', mec='white', linewidth=0, color='k', ecolor='k', zorder=2)
+
 ax[0].set_ylabel('CKS Age [Gyr]')
 ax[0].set_xlabel('Effective temperature [K]')
 
+
+ax[1].errorbar(cks['p20_cks_steff'], cks['bf18_Age'], 
+             xerr=[cks['cks_e_Teff'], cks['cks_E_Teff']],
+             yerr=[cks['bf18_e_Age'], cks['bf18_E_Age']], fmt='o', color='lightgrey', mec='lightgrey', linewidth=0, ecolor='lightgrey', alpha=0.5,  zorder=1)
+
 ax[1].errorbar(cks['p20_cks_steff'][ridge], cks['bf18_Age'][ridge], 
              xerr=[cks['cks_e_Teff'][ridge], cks['cks_E_Teff'][ridge]],
-             yerr=[cks['bf18_e_Age'][ridge], cks['bf18_E_Age'][ridge]], fmt='o', mec='white', linewidth=1, ecolor='lightgrey')
+             yerr=[cks['bf18_e_Age'][ridge], cks['bf18_E_Age'][ridge]], fmt='o', mec='white', linewidth=0, color='k', ecolor='k', zorder=2)
+
 ax[1].set_ylabel('SPOCS Age [Gyr]')
 ax[1].set_xlabel('Effective temperature [K]')
 
 for i in range(2):
     ax[i].set_xlim(6600,5600)
     ax[i].set_ylim(0,12)
-    ax[i].scatter(sun["teff"], 4.567, color='orange')
+    ax[i].scatter(sun["teff"], 4.567, color='orange', zorder=3)
     
 for i,let in enumerate("cd"):
     ax[i].text(1.05,1.05,let,transform=ax[i].transAxes,weight='bold')
@@ -242,8 +252,6 @@ plt.show()
 
 print('5th and 95th percentile range of CKS ages (Gyr)   :', np.nanpercentile(cks['cks_age'][ridge], [5,95]))
 print('5th and 95th percentile range of SPOCS ages (Gyr) :', np.nanpercentile(cks['bf18_Age'][ridge], [5,95]))
-
-
 # In[ ]:
 
 
