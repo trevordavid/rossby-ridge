@@ -28,9 +28,6 @@ sun = {"teff": 5772,
 sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 
 
-# In[2]:
-
-
 ######################################################################################
 #McQuillan et al. 2013
 mcq_koi = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/ApJ/775/L11/table1.dat",
@@ -129,9 +126,6 @@ def constant_rossby(teff, ro):
 ######################################################################################
 
 
-# In[10]:
-
-
 fig, ax = plt.subplots()
 sns.kdeplot(
     x=lam["Teff_lam"], 
@@ -159,9 +153,6 @@ lam_ridge = (frac_dist<0.05) & (lam["Teff_lam"]>5500) & (lam["Teff_lam"]<6500) &
 ax.plot(lam["Teff_lam"][lam_ridge], lam["Prot"][lam_ridge], 'o', mfc="None", color='white', alpha=0.2);
 
 
-# In[9]:
-
-
 sns.set(font_scale=1.1, context="paper", style="ticks")
 
 mpl.rcParams["legend.markerscale"] = 2
@@ -176,8 +167,6 @@ ax[0].plot(cks['p20_cks_steff'], cks['p20_cks_slogg'], '.', color='lightgrey', l
 ax[0].plot(cks['p20_cks_steff'][ridge], cks['p20_cks_slogg'][ridge], '.', color='k', label='Long-period pile-up', rasterized=True, ms=2)
 ax[0].errorbar(5000, 4.8, xerr=np.nanmedian(cks['p20_cks_steff_err1']),
                           yerr=np.nanmedian(cks['p20_cks_slogg_err1']), fmt='.', color='k', zorder=1000)
-
-
 
 
 ax[1].plot(lam['Teff_lam'], lam['logg_lam'], 
@@ -201,8 +190,7 @@ for i in range(2):
     ax[i].text(4900, 4.9, 'typical\nerror', size=10)
     ax[i].plot(sun["teff"], sun["logg"], 'o', color='orange', label='Sun')
     lgnd = ax[i].legend(prop={'size':10}, loc='upper left')
-    
-    
+      
     
 for i,let in enumerate("ab"):
     ax[i].text(1.05,1.05,let,transform=ax[i].transAxes,weight='bold')    
