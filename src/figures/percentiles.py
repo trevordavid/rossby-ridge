@@ -49,6 +49,23 @@ cks = pd.read_parquet('../data/data.parquet')
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
 cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
+
+def ridge_hi(teff):
+    m = (2-24)/(6500-5800)
+    b = (2 - m*6500) 
+    return m*teff + b
+
+def ridge_lo(teff):
+    m = (2-24)/(6500-5800)
+    b = (-5 - m*6500) 
+    return m*teff + b
+
+mask = (cks['p20_cks_slogg']>4) #main sequence
+ridge = (cks['p20_cks_steff']>5850)
+ridge &= (cks['p20_cks_steff']<6500)
+ridge &= (cks['d21_prot']<ridge_hi(cks['p20_cks_steff']))
+ridge &= (cks['d21_prot']>ridge_lo(cks['p20_cks_steff']))
+ridge &= mask
 ######################################################################################
 
 
@@ -145,7 +162,7 @@ period_90th_pctl, e_period_90th_pctl = percentile_bootstrap(pctl=90.)
 period_10th_pctl, e_period_10th_pctl = percentile_bootstrap(pctl=10.)    
 
 
-sns.set(font_scale=1.5, context="paper", style="ticks", palette="Blues")
+sns.set(font_scale=1.6, context="paper", style="ticks", palette="Blues")
 
 teff_bin_centers = np.arange(4000,7020,20)
 roc_period_90th_pctl = np.zeros(len(teff_bin_centers))
@@ -165,7 +182,8 @@ for i, tc in enumerate(teff_bin_centers):
         
 plt.plot(teff_bin_centers, std_period_90th_pctl, color='C2', label='Standard model', lw=6, alpha=0.5)
 plt.plot(teff_bin_centers, roc_period_90th_pctl, color='C5', label='WMB model', lw=3, alpha=0.5, ls='--')
-plt.scatter(teff_bin_centers, period_90th_pctl, color='k', label='Data', s=2)
+plt.scatter(teff_bin_centers, period_90th_pctl, color='k', label='LAMOST–McQuillan', s=2)
+plt.plot(cks['cks_Teff'][ridge], cks['d21_prot'][ridge], 'o', mfc='None', mec='k', ms=4, mew=0.5, alpha=0.5, label='CKS long-period pile-up')
 
 plt.plot(teff_bin_centers, roc_period_10th_pctl, color='C2', lw=6, alpha=0.5)
 plt.plot(teff_bin_centers, std_period_10th_pctl, color='C5', lw=3, alpha=0.5, ls='--')
