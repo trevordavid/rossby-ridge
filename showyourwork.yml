@@ -13,8 +13,6 @@ zenodo_sandbox:
       - src/data/mcquillan2014/table2.dat
       - src/data/models/rocrit_model.csv
       - src/data/models/standard_model.csv
-      - src/data/models/rocrit_population.h5
-      - src/data/models/standard_population.h5
 
 dependencies:
   src/figures/ages.py:
@@ -64,16 +62,12 @@ dependencies:
     - src/data/KeplerRot-LAMOST.csv
     - src/data/models/rocrit_model.csv
     - src/data/models/standard_model.csv
-    - src/data/models/rocrit_population.h5
-    - src/data/models/standard_population.h5    
   src/figures/percentiles.py:
     - src/data/mcquillan2014/ReadMe
     - src/data/mcquillan2014/table1.dat
     - src/data/mcquillan2014/table2.dat
     - src/data/models/rocrit_model.csv
     - src/data/models/standard_model.csv
-    - src/data/models/rocrit_population.h5
-    - src/data/models/standard_population.h5    
     - src/data/KeplerRot-LAMOST.csv
     - src/data/barnes_kim_2010/barnes-kim-2010.csv
   src/figures/ridge.py:
