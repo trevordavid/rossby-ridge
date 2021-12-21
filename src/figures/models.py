@@ -41,6 +41,8 @@ cks = pd.read_parquet('../data/data.parquet')
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
 cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
+# Filter stars that have discrepant Teff between CKS and SPOCS
+#cks_mask = abs(cks['cks_Teff']-cks['bf18_Teff'])/cks['cks_Teff'] < 0.02
 ######################################################################################
 
 

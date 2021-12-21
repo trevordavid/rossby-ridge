@@ -24,7 +24,7 @@ import seaborn as sns
 hall = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/table1.dat",
                   readme="https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/ReadMe",
                   format="ascii.cds")
-hall.info()
+#hall.info()
 
 
 # ### CKS sample
@@ -34,7 +34,7 @@ mcq_koi = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/ApJ/775/L11/table1.dat
                 format="ascii.cds")
 mcq_koi = mcq_koi.to_pandas()
 mcq_koi = mcq_koi.add_prefix('mcq_')
-mcq_koi.head()
+#mcq_koi.head()
 
 cks = pd.read_parquet('../data/data.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
