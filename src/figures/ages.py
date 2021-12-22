@@ -265,8 +265,3 @@ plt.show()
 
 print('5th and 95th percentile range of CKS ages (Gyr)   :', np.nanpercentile(cks['cks_age'][ridge], [5,95]))
 print('5th and 95th percentile range of SPOCS ages (Gyr) :', np.nanpercentile(cks['bf18_Age'][ridge], [5,95]))
-# In[ ]:
-
-
-
-

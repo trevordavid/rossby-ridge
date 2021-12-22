@@ -111,9 +111,6 @@ model.head()
 ######################################################################################
 
 
-# In[5]:
-
-
 bk = pd.read_csv("../data/barnes_kim_2010/barnes-kim-2010.csv")
 
 def convective_turnover_timescale(teff,
