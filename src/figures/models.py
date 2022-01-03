@@ -143,7 +143,7 @@ sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":1, "rasterized":True, "alpha":0.75}
 
 sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–Kepler', **sc_kws)
+plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
@@ -158,7 +158,7 @@ plt.savefig('../figures/std-model-lamost.pdf')
 plt.show()
 
 sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–Kepler', **sc_kws)
+plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
