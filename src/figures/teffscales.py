@@ -174,20 +174,17 @@ def residual(ax,
 
     ax.axhline(0, color='k', ls='--', lw=0.5)
     ax.scatter(x1, resid, **sc_kws)
+
     text1 = ax.text(0.05,0.17,'rms = '+str(int(rms))+' K', transform=ax.transAxes)
     text2 = ax.text(0.05,0.05,'median = '+str(int(np.nanmedian(resid)))+' K', transform=ax.transAxes)
     
-    text1.set_path_effects([path_effects.Stroke(linewidth=3, foreground='white'),
-                       path_effects.Normal()])
-    text2.set_path_effects([path_effects.Stroke(linewidth=3, foreground='white'),
-                       path_effects.Normal()])                          
-    
+    for text in [text1,text2]:
+        text.set_path_effects([path_effects.Stroke(linewidth=3, foreground='white'), path_effects.Normal()])
+       
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_xlim(xmin, xmax)
     ax.set_ylim(ymin, ymax)
-    
-
     
     return ax
 

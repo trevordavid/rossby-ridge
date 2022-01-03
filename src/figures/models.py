@@ -3,17 +3,30 @@
 
 import numpy as np
 import pandas as pd
-
+import astropy.constants as c
 from astropy.table import Table
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+
 
 mpl.rcParams["figure.dpi"] = 100
 mpl.rcParams["savefig.bbox"] = "tight"
 mpl.rcParams["savefig.dpi"] = 300
 
 import seaborn as sns
+
+####################################################################
+# The Sun
+sun = {"teff": 5772,
+       "prot": 25.4,
+       "e_prot": 25.4-24.5,
+       "E_prot": 36-25.4
+      }
+
+sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
+####################################################################
+
 
 ######################################################################################
 #McQuillan et al. 2013
@@ -91,9 +104,12 @@ model.head()
 mpl.rcParams["legend.markerscale"] = 1
 sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":8, "rasterized":True}
+sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 
 sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
+plt.plot(sun["teff"], sun["prot"], **sun_kws)
+plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
 plt.xlim(6500,5000)
 plt.ylim(0,50)
@@ -108,6 +124,8 @@ plt.show()
 
 sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
+plt.plot(sun["teff"], sun["prot"], **sun_kws)
+plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
 plt.xlim(6500,5000)
 plt.ylim(0,50)
@@ -126,6 +144,8 @@ sc_kws = {"marker":",", "color":"orange", "s":1, "rasterized":True, "alpha":0.75
 
 sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–Kepler', **sc_kws)
+plt.plot(sun["teff"], sun["prot"], **sun_kws)
+plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
 plt.xlim(6500,5000)
 plt.ylim(0,50)
@@ -139,6 +159,8 @@ plt.show()
 
 sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–Kepler', **sc_kws)
+plt.plot(sun["teff"], sun["prot"], **sun_kws)
+plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
 plt.xlim(6500,5000)
 plt.ylim(0,50)
