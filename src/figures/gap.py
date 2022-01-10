@@ -72,7 +72,7 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 
 ######################################################################################
-bk = pd.read_csv("../data/barnes_kim_2010/barnes-kim-2010.csv")
+#bk = pd.read_csv("../data/_kim_2010/-kim-2010.csv")
 
 def convective_turnover_timescale(teff,
                                   ref='gunn1998'):
@@ -82,18 +82,18 @@ def convective_turnover_timescale(teff,
         #Gunn et al. 1998 relation, from Cranmer & Saar 2011
         return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
     
-    elif ref == 'barnes2010':
-        #Barnes & Kim 2010 relation for local tau_c
-        teff_pts = 10.**bk['logT']
-        tc_pts   = bk['Local_tau_c']
-        return np.interp(teff, teff_pts, tc_pts)
+    # elif ref == '2010':
+    #     # & Kim 2010 relation for local tau_c
+    #     teff_pts = 10.**bk['logT']
+    #     tc_pts   = bk['Local_tau_c']
+    #     return np.interp(teff, teff_pts, tc_pts)
 
 def constant_rossby(teff, ro):
     #Return locus of rotation periods corresponding to constant Rossby number
     return ro * convective_turnover_timescale(teff)
 
 lam["Ro"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"], ref='gunn1998')    
-lam["Ro_barnes"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"], ref='barnes2010')
+#lam["Ro_"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"], ref='2010')
 mcq["Ro"] = mcq["mcq_Prot"]/convective_turnover_timescale(mcq["mcq_Teff"], ref='gunn1998')    
 
 
