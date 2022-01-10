@@ -85,14 +85,14 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # van Saders et al. 2019 models
-std = pd.read_csv('../data/models/standard_model.csv')
-roc = pd.read_csv('../data/models/rocrit_model.csv')
+# std = pd.read_csv('../data/models/standard_model.csv')
+# roc = pd.read_csv('../data/models/rocrit_model.csv')
 
-# std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
-# std = std[std['evo']==1]
+std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
+std = std[std['evo']==1]
 
-# roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')
-# roc = roc[roc['evo']==1]
+roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')
+roc = roc[roc['evo']==1]
 
 std['flag'] = 'std'
 roc['flag'] = 'roc'
@@ -107,7 +107,8 @@ sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":8, "rasterized":True}
 sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 
-sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+#sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
@@ -123,7 +124,8 @@ plt.savefig('../figures/std-model-cks.pdf')
 #plt.show()
 
 
-sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+#sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
@@ -143,7 +145,8 @@ mpl.rcParams["legend.markerscale"] = 5
 sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":1, "rasterized":True, "alpha":0.75}
 
-sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+#sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
@@ -158,7 +161,8 @@ plt.text(1.15,1.05,"c",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/std-model-lamost.pdf')
 #plt.show()
 
-sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+#sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})]
+sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
