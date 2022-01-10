@@ -199,7 +199,7 @@ def constant_rossby_sampler(x, y, yerr,
     ax.set_xlabel("Teff [K]")
     ax.set_ylabel("Prot [d]")
     ax.invert_xaxis()
-    plt.show()
+    #plt.show()
     
     #Functions for MCMC sampling
     def log_likelihood(theta, x, y, yerr):
@@ -375,7 +375,7 @@ def rossby_plot(teff_bin_centers, flat_samples_10, flat_samples_90):
     sns.despine()
     plt.tight_layout()
     plt.savefig('../figures/mcmc.pdf')
-    plt.show()
+    #plt.show()
     
     return
 

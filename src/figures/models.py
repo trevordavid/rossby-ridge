@@ -85,14 +85,14 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # van Saders et al. 2019 models
-#std = pd.read_csv('../data/models/standard_model.csv')
-#roc = pd.read_csv('../data/models/rocrit_model.csv')
+std = pd.read_csv('../data/models/standard_model.csv')
+roc = pd.read_csv('../data/models/rocrit_model.csv')
 
-std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
-std = std[std['evo']==1]
+# std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
+# std = std[std['evo']==1]
 
-roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')
-roc = roc[roc['evo']==1]
+# roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')
+# roc = roc[roc['evo']==1]
 
 std['flag'] = 'std'
 roc['flag'] = 'roc'
@@ -120,7 +120,7 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"a",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/std-model-cks.pdf')
-plt.show()
+#plt.show()
 
 
 sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
@@ -136,7 +136,7 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"b",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/wmb-model-cks.pdf')
-plt.show()
+#plt.show()
 
 
 mpl.rcParams["legend.markerscale"] = 5
@@ -156,7 +156,7 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"c",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/std-model-lamost.pdf')
-plt.show()
+#plt.show()
 
 sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
@@ -171,4 +171,4 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"d",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/wmb-model-lamost.pdf')
-plt.show()
+#plt.show()

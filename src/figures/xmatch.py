@@ -72,7 +72,7 @@ arg = (np.isfinite(xm["Teff"]) & (np.isfinite(xm["mcq_Prot"])))
 print(len(xm[arg]), 'unique stars in LAMOST-McQuillan cross-match with Teff and Prot')
 
 
-sns.set(font_scale=1.4, context="paper", style="ticks")
+sns.set(font_scale=1.3, context="paper", style="ticks")
 
 sun = {"teff": 5772,
        "prot": 25.4,
@@ -90,8 +90,8 @@ ms  = arg & (xm["logg_x"]>4.2)
 sg  = arg & (xm["logg_x"]<4.2)
 
 titles = ["LAMOST-McQuillan\nall stars",
-          "LAMOST-McQuillan\nlog(g)<4.2 (subgiants)",
-          "LAMOST-McQuillan\nlog(g)>4.2 (dwarfs)"]
+          "LAMOST-McQuillan\nlog(g) < 4.2 (subgiants)",
+          "LAMOST-McQuillan\nlog(g) > 4.2 (dwarfs)"]
 
 h_kws = {"bins":150, "cmap": "Blues", "cmin": 1}
 
@@ -105,9 +105,9 @@ cb3 = axes[2].hist2d(x[ms], y[ms], **h_kws)
 for i,cb in enumerate([cb1,cb2,cb3]):
     fig.colorbar(cb[3], ax=axes[i], label=r"N$_\mathregular{stars}$")
 
-axes[0].text(0.7,0.9,str(len(x[arg]))+' stars', transform=axes[0].transAxes, size=8)
-axes[1].text(0.7,0.9,str(len(x[sg]))+' stars', transform=axes[1].transAxes, size=8)
-axes[2].text(0.7,0.9,str(len(x[ms]))+' stars', transform=axes[2].transAxes, size=8)
+axes[0].text(0.7,0.9,str(len(x[arg]))+' stars', transform=axes[0].transAxes, size=9)
+axes[1].text(0.7,0.9,str(len(x[sg]))+' stars', transform=axes[1].transAxes, size=9)
+axes[2].text(0.7,0.9,str(len(x[ms]))+' stars', transform=axes[2].transAxes, size=9)
 
 for i,ax in enumerate(axes):
     ax.set_xlim(7000,4000)
@@ -121,9 +121,7 @@ for i,ax in enumerate(axes):
 sns.despine()
 plt.tight_layout()
 plt.savefig('../figures/lamost-mcquillan.pdf')
-plt.show()
-
-
+#plt.show()
 
 
 
@@ -151,8 +149,8 @@ ms  = arg & (xm["logg_x"]>4.2)
 sg  = arg & (xm["logg_x"]<4.2)
 
 titles = ["LAMOST-Santos\nall stars",
-          "LAMOST-Santos\nlog(g)<4.2 (subgiants)",
-          "LAMOST-Santos\nlog(g)>4.2 (dwarfs)"]
+          "LAMOST-Santos\nlog(g) < 4.2 (subgiants)",
+          "LAMOST-Santos\nlog(g) > 4.2 (dwarfs)"]
 
 h_kws = {"bins":200, "cmap": "Blues", "cmin": 1, "density":False}
 
@@ -164,9 +162,9 @@ cb2 = axes[1].hist2d(x[sg], y[sg], **h_kws)
 cb3 = axes[2].hist2d(x[ms], y[ms], **h_kws)
 
 
-axes[0].text(0.7,0.9,str(len(x[arg]))+' stars', transform=axes[0].transAxes, size=8)
-axes[1].text(0.7,0.9,str(len(x[sg]))+' stars', transform=axes[1].transAxes, size=8)
-axes[2].text(0.7,0.9,str(len(x[ms]))+' stars', transform=axes[2].transAxes, size=8)
+axes[0].text(0.7,0.9,str(len(x[arg]))+' stars', transform=axes[0].transAxes, size=9)
+axes[1].text(0.7,0.9,str(len(x[sg]))+' stars', transform=axes[1].transAxes, size=9)
+axes[2].text(0.7,0.9,str(len(x[ms]))+' stars', transform=axes[2].transAxes, size=9)
 
 for i,cb in enumerate([cb1,cb2,cb3]):
     fig.colorbar(cb[3], ax=axes[i], label=r"N$_\mathregular{stars}$")
@@ -184,4 +182,4 @@ for i,ax in enumerate(axes):
 sns.despine()
 plt.tight_layout()
 plt.savefig('../figures/lamost-santos.pdf')
-plt.show()
+#plt.show()

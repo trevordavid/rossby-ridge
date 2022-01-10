@@ -151,7 +151,7 @@ plt.xlabel("Effective temperature [K]")
 plt.legend()
 sns.despine()
 plt.savefig('../figures/fraction.pdf')
-plt.show()
+#plt.show()
 
 
 

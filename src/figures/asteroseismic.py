@@ -99,4 +99,4 @@ for i in range(2):
 sns.despine()    
 plt.tight_layout()
 plt.savefig('../figures/asteroseismic.pdf')
-plt.show()
+#plt.show()

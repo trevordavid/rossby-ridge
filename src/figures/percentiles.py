@@ -192,7 +192,7 @@ plt.ylabel("Rotation period [d]")
 plt.legend(prop={'size':13})
 sns.despine()
 plt.savefig('../figures/percentiles.pdf')
-plt.show()
+#plt.show()
 
 arg = (teff_bin_centers<6250) & (teff_bin_centers>4500)
 chisq_roc = np.sum((period_90th_pctl[arg] - roc_period_90th_pctl[arg])**2 / roc_period_90th_pctl[arg])
