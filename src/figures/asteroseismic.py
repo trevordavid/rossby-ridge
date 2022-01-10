@@ -36,7 +36,7 @@ mcq_koi = mcq_koi.to_pandas()
 mcq_koi = mcq_koi.add_prefix('mcq_')
 #mcq_koi.head()
 
-cks = pd.read_parquet('../data/data.parquet')
+cks = pd.read_parquet('../data/cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 print(np.shape(cks))
@@ -48,7 +48,7 @@ cks.head()
 
 
 # ### LAMOST-Kepler sample
-lam = pd.read_csv('../data/KeplerRot-LAMOST.csv')
+lam = pd.read_csv('../data/kepler_lamost.csv')
 
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')

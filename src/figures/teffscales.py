@@ -19,7 +19,7 @@ from astropy.table import Table
 from astropy import units as u
 from astroquery.xmatch import XMatch
 
-cks = pd.read_parquet('../data/data.parquet')
+cks = pd.read_parquet('../data/cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 print(np.shape(cks))
@@ -70,17 +70,18 @@ table = table.drop_duplicates(subset="gaia_ra", keep="first")
 
 
 
-lam = pd.read_csv('../data/KeplerRot-LAMOST.csv')
+lam = pd.read_csv('../data/kepler_lamost.csv')
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 lam.head()
 
 #McQuillan et al. 2014
-mcq = Table.read('../data/mcquillan2014/table1.dat',
-                readme='../data/mcquillan2014/ReadMe',
-                format='ascii.cds')
-mcq = mcq.to_pandas()
-mcq = mcq.add_prefix('mcq_')
+# mcq = Table.read('../data/mcquillan2014/table1.dat',
+#                 readme='../data/mcquillan2014/ReadMe',
+#                 format='ascii.cds')
+# mcq = mcq.to_pandas()
+# mcq = mcq.add_prefix('mcq_')
+mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
 
 lam = lam.merge(mcq, how="left", left_on="KIC", right_on="mcq_KIC")
 

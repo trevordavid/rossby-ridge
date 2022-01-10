@@ -1,88 +1,60 @@
 zenodo_sandbox:
   src/data/data_dir.tar.gz:
-    id: 977757
+    id: 992581
     contents:
-      - src/data/KeplerRot-LAMOST.csv
-      - src/data/allStarLite-Kepler.fits
-      - src/data/barnes_kim_2010/apj364262t1_ascii.txt
-      - src/data/barnes_kim_2010/barnes-kim-2010.csv
-      - src/data/data.parquet
+      - src/data/kepler_lamost.csv
+      - src/data/kepler_apogee_dr16.fits
+      - src/data/cks_merged.parquet
       - src/data/kepler_dr2_1arcsec.parquet
-      - src/data/mcquillan2014/ReadMe
-      - src/data/mcquillan2014/table1.dat
-      - src/data/mcquillan2014/table2.dat
+      - src/data/mcquillan2014_table1.parquet
       - src/data/models/rocrit_model.csv
       - src/data/models/standard_model.csv
 
 dependencies:
   src/figures/ages.py:
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat
-    - src/data/data.parquet
-    - src/data/KeplerRot-LAMOST.csv
-    - src/data/barnes_kim_2010/barnes-kim-2010.csv
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/cks_merged.parquet
+    - src/data/kepler_lamost.csv
   src/figures/asteroseismic.py:
-    - src/data/KeplerRot-LAMOST.csv
-    - src/data/data.parquet
+    - src/data/kepler_lamost.csv
+    - src/data/cks_merged.parquet
   src/figures/comparison.py:
-    - src/data/data.parquet
+    - src/data/cks_merged.parquet
   src/figures/fraction.py:
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat 
-    - src/data/KeplerRot-LAMOST.csv
-    - src/data/barnes_kim_2010/barnes-kim-2010.csv
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/kepler_lamost.csv
   src/figures/gap.py:
-    - src/data/KeplerRot-LAMOST.csv
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat 
+    - src/data/kepler_lamost.csv
+    - src/data/mcquillan2014_table1.parquet
     - src/data/kepler_dr2_1arcsec.parquet
-    - src/data/barnes_kim_2010/barnes-kim-2010.csv
   src/figures/kde.py:
-    - src/data/barnes_kim_2010/barnes-kim-2010.csv
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat
-    - src/data/data.parquet
-    - src/data/KeplerRot-LAMOST.csv
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/cks_merged.parquet
+    - src/data/kepler_lamost.csv
   src/figures/mcmc.py:
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat
-    - src/data/data.parquet
-    - src/data/KeplerRot-LAMOST.csv
-    - src/data/barnes_kim_2010/barnes-kim-2010.csv
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/cks_merged.parquet
+    - src/data/kepler_lamost.csv
   src/figures/models.py:
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat
-    - src/data/data.parquet
-    - src/data/KeplerRot-LAMOST.csv
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/cks_merged.parquet
+    - src/data/kepler_lamost.csv
     - src/data/models/rocrit_model.csv
     - src/data/models/standard_model.csv
   src/figures/percentiles.py:
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat
+    - src/data/mcquillan2014_table1.parquet
     - src/data/models/rocrit_model.csv
     - src/data/models/standard_model.csv
-    - src/data/KeplerRot-LAMOST.csv
-    - src/data/barnes_kim_2010/barnes-kim-2010.csv
+    - src/data/kepler_lamost.csv
   src/figures/ridge.py:
-    - src/data/data.parquet
+    - src/data/cks_merged.parquet
   src/figures/surveys.py:
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat
-    - src/data/data.parquet
-    - src/data/KeplerRot-LAMOST.csv
-    - src/data/allStarLite-Kepler.fits
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/cks_merged.parquet
+    - src/data/kepler_lamost.csv
+    - src/data/kepler_apogee_dr16.fits
   src/figures/teffscales.py:
-    - src/data/data.parquet
-    - src/data/KeplerRot-LAMOST.csv
+    - src/data/cks_merged.parquet
+    - src/data/kepler_lamost.csv
     - src/data/kepler_dr2_1arcsec.parquet
-    - src/data/mcquillan2014/ReadMe
-    - src/data/mcquillan2014/table1.dat
-    - src/data/mcquillan2014/table2.dat
+    - src/data/mcquillan2014_table1.parquet

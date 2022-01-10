@@ -29,16 +29,17 @@ sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 
 ######################################################################################
 #McQuillan et al. 2014
-mcq = Table.read('../data/mcquillan2014/table1.dat',
-                readme='../data/mcquillan2014/ReadMe',
-                format='ascii.cds')
-mcq = mcq.to_pandas()
-mcq = mcq.add_prefix('mcq_')
+# mcq = Table.read('../data/mcquillan2014/table1.dat',
+#                 readme='../data/mcquillan2014/ReadMe',
+#                 format='ascii.cds')
+# mcq = mcq.to_pandas()
+# mcq = mcq.add_prefix('mcq_')
+mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
 ######################################################################################
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/KeplerRot-LAMOST.csv')
+lam = pd.read_csv('../data/kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 

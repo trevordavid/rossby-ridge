@@ -17,7 +17,7 @@ sns.set_context("paper")
 from astropy.table import Table
 
 
-cks = pd.read_parquet('../data/data.parquet')
+cks = pd.read_parquet('../data/cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 print(np.shape(cks))

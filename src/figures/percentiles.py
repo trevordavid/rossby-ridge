@@ -33,18 +33,19 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-mcq = Table.read('../data/mcquillan2014/table1.dat',
-                readme='../data/mcquillan2014/ReadMe',
-                format='ascii.cds')
-mcq = mcq.to_pandas()
-mcq = mcq.add_prefix('mcq_')
+# mcq = Table.read('../data/mcquillan2014/table1.dat',
+#                 readme='../data/mcquillan2014/ReadMe',
+#                 format='ascii.cds')
+# mcq = mcq.to_pandas()
+# mcq = mcq.add_prefix('mcq_')
+mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
 ######################################################################################
 
 
 ######################################################################################
 # California-Kepler Survey (Fulton & Petigura 2018)
 # This data table has been augmented with data from other surveys (see David et al. 2021)
-cks = pd.read_parquet('../data/data.parquet')
+cks = pd.read_parquet('../data/cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -71,7 +72,7 @@ ridge &= mask
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/KeplerRot-LAMOST.csv')
+lam = pd.read_csv('../data/kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 

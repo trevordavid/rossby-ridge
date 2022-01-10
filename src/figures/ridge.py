@@ -102,7 +102,7 @@ mcq_koi.head()
 
 #CKS catalog with auxiliary data
 #Originally from Fulton & Petigura 2018, with auxiliary literature data compiled in David et al. 2021
-cks = pd.read_parquet('../data/data.parquet')
+cks = pd.read_parquet('../data/cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
