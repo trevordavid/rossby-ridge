@@ -20,6 +20,6 @@ jobs:
         id: build
         uses: ./showyourwork/showyourwork-action
         with:
-          article-cache-number: 0 
+          article-cache-number: 1
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
