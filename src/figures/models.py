@@ -108,7 +108,7 @@ sc_kws = {"marker":",", "color":"orange", "s":8, "rasterized":True}
 sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 
 #sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
@@ -125,7 +125,7 @@ plt.savefig('../figures/std-model-cks.pdf')
 
 
 #sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
@@ -146,7 +146,7 @@ sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":1, "rasterized":True, "alpha":0.75}
 
 #sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
@@ -162,7 +162,7 @@ plt.savefig('../figures/std-model-lamost.pdf')
 #plt.show()
 
 #sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})]
-sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
