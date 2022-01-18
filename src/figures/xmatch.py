@@ -85,13 +85,15 @@ sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 x = xm["Teff"]
 y = xm["mcq_Prot"]
 
+logg_thresh = 4.1
+
 arg = (np.isfinite(x)) & (np.isfinite(y))
-ms  = arg & (xm["logg_x"]>4.2)
-sg  = arg & (xm["logg_x"]<4.2)
+ms  = arg & (xm["logg_x"]>logg_thresh)
+sg  = arg & (xm["logg_x"]<logg_thresh)
 
 titles = ["LAMOST-McQuillan\nall stars",
-          "LAMOST-McQuillan\nlog(g) < 4.2 (subgiants)",
-          "LAMOST-McQuillan\nlog(g) > 4.2 (dwarfs)"]
+          "LAMOST-McQuillan\nlog(g) < "+str(logg_thresh)+" (subgiants)",
+          "LAMOST-McQuillan\nlog(g) > "+str(logg_thresh)+" (dwarfs)"]
 
 h_kws = {"bins":150, "cmap": "Blues", "cmin": 1}
 
@@ -141,16 +143,19 @@ print(len(xm), 'unique stars in LAMOST-Santos cross-match')
 arg = (np.isfinite(xm["Teff"])&(np.isfinite(xm["san_Prot"])))
 print(len(xm[arg]), 'unique stars in LAMOST-Santos cross-match with Teff and Prot')
 
+xm = xm[arg]
+xm.to_parquet('../data/lamost-santos-xmatch.parquet')
+
 x = xm["Teff"]
 y = xm["san_Prot"]
 
 arg = (np.isfinite(x)) & (np.isfinite(y))
-ms  = arg & (xm["logg_x"]>4.2)
-sg  = arg & (xm["logg_x"]<4.2)
+ms  = arg & (xm["logg_x"]>logg_thresh)
+sg  = arg & (xm["logg_x"]<logg_thresh)
 
 titles = ["LAMOST-Santos\nall stars",
-          "LAMOST-Santos\nlog(g) < 4.2 (subgiants)",
-          "LAMOST-Santos\nlog(g) > 4.2 (dwarfs)"]
+          "LAMOST-Santos\nlog(g) < "+str(logg_thresh)+" (subgiants)",
+          "LAMOST-Santos\nlog(g) > "+str(logg_thresh)+" (dwarfs)"]
 
 h_kws = {"bins":200, "cmap": "Blues", "cmin": 1, "density":False}
 
@@ -182,4 +187,3 @@ for i,ax in enumerate(axes):
 sns.despine()
 plt.tight_layout()
 plt.savefig('../figures/lamost-santos.pdf')
-#plt.show()

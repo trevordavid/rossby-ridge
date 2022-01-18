@@ -100,16 +100,20 @@ roc['flag'] = 'roc'
 model = pd.concat([std, roc], ignore_index=True, sort=True)
 model.head()
 ######################################################################################
-
-
 mpl.rcParams["legend.markerscale"] = 1
 sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":8, "rasterized":True}
 sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 
 #sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+
+#We only want to plot dwarf stars
+logg_thresh = 4.1
+cks_ms = cks['p20_cks_slogg'] > logg_thresh
+lam_ms = lam['logg_lam'] > logg_thresh
+
 sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
+plt.scatter(cks['cks_Teff'][cks_ms], cks['d21_prot'][cks_ms], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
@@ -121,12 +125,10 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"a",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/std-model-cks.pdf')
-#plt.show()
-
 
 #sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-plt.scatter(cks['cks_Teff'], cks['d21_prot'], label='California–Kepler Survey', **sc_kws)
+plt.scatter(cks['cks_Teff'][cks_ms], cks['d21_prot'][cks_ms], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
@@ -138,8 +140,6 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"b",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/wmb-model-cks.pdf')
-#plt.show()
-
 
 mpl.rcParams["legend.markerscale"] = 5
 sns.set(font_scale=1.2, context="paper", style="ticks")
@@ -147,7 +147,7 @@ sc_kws = {"marker":",", "color":"orange", "s":1, "rasterized":True, "alpha":0.75
 
 #sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
+plt.scatter(lam['Teff_lam'][lam_ms], lam['Prot'][lam_ms], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
@@ -159,11 +159,10 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"c",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/std-model-lamost.pdf')
-#plt.show()
 
 #sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})]
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-plt.scatter(lam['Teff_lam'], lam['Prot'], label='LAMOST–McQuillan', **sc_kws)
+plt.scatter(lam['Teff_lam'][lam_ms], lam['Prot'][lam_ms], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
 plt.gca().invert_xaxis()
@@ -175,4 +174,3 @@ plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"d",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig('../figures/wmb-model-lamost.pdf')
-#plt.show()
