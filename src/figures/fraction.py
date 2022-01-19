@@ -50,7 +50,8 @@ lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 
 lam_mask = (lam["Teff_lam"]>3000)
 lam_mask = (lam["Teff_lam"]<8000)
-lam_mask &= (lam["logg_lam"]>3)
+#lam_mask &= (lam["logg_lam"]>3)
+lam_mask &= (lam["logg_lam"]>4.1)
 lam_mask &= (lam["logg_lam"]<5)
 lam_mask &= (abs(lam["feh_lam"])<2)
 lam = lam[lam_mask]
