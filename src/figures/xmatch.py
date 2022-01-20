@@ -144,7 +144,7 @@ arg = (np.isfinite(xm["Teff"])&(np.isfinite(xm["san_Prot"])))
 print(len(xm[arg]), 'unique stars in LAMOST-Santos cross-match with Teff and Prot')
 
 xm = xm[arg]
-xm.to_parquet('../data/lamost-santos-xmatch.parquet')
+#xm.to_parquet('../data/lamost-santos-xmatch.parquet')
 
 x = xm["Teff"]
 y = xm["san_Prot"]
