@@ -352,8 +352,6 @@ Notably, both models fail to reproduce the observed short-period pile-up, possib
     \label{fig:models}
 \end{figure*}
 
-%The excess of stars with periods $\gtrsim$~35 days, seen most clearly in the models, are due to subgiants which have expanded off the main-sequence \citep[referred to as the long-period overdensity in][]{vanSaders2019}.
-
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{./figures/percentiles.pdf}
@@ -414,6 +412,8 @@ We additionally fit the CKS long-period pile-up (using three different homogeneo
 The constant Rossby model provides a reasonably good description of the \lamostmcq long-period edge in the \teff range of $\approx$~5000--6250~K, with fractional residuals $\lesssim5\%$ over this range. Above and below this \teff range we see clear and significant divergence from the constant Rossby model, such that the model under-predicts periods of hotter stars and over-predicts periods of cooler stars, possibly because the cooler stars have not had enough time to evolve to the critical Rossby number associated with weakened magnetic braking \citep[see Figure 6 in][]{vanSaders2019}.
 
 We caution that the specific values of \rocrit found here are highly sensitive to shifts in the \teff scales between the models and observations, as well as the \teff scale of the models used to derive the \taucz relation. Therefore, while we find values of \rocritfinal are able to explain the various individual data sets, a value of \rocrit  $\approx$~2 may be compatible with all of the data sets if modest \teff systematics are present. Comparison of the long-period pile-ups as seen in the CKS and \lamostmcq samples support the notion that the LAMOST \teff scale is about 30--40~K cooler than the CKS scale (see also Appendix~\ref{app:teff}).
+
+%{\color{red} To further explore whether our \rocrit inference procedure is biased by systematics in the data, we performed non-linear least-squares fits of two models to the CKS long-period pile-up and the \lamostmcq 90th percentile curve (both in the \teff range of 5800--6250~K) using the \texttt{curve_fit} function in \texttt{scipy.optimize}. The first model assumes \rocrit = 2 and has one free parameter, a temperature shift added to the data. The second model assumes no temperature shift and allows \rocrit to vary (\rocrit being the only free parameter). The results of these fits are shown in Figure~\ref{fig:rocrit}. We found that for the CKS sample, particularly when using the more precise temperatures from \citet{Fulton2018}, that the $\Delta \chi^2$ between the \rocrit = 2 and variable \rocrit models was negligible. In other words, the \rocrit = 2 model fits the data well with a \teff shift of $\approx$80--150~K depending on the \teff source used. For the \lamostmcq sample, there is weak support for the variable \rocrit model. However, as shown in Appendix~\ref{app:teff}, there is a strong systematic trend in the LAMOST temperatures, when compared to other spectroscopic catalogs. Correcting for these systematic trends weakens the support for the variable \rocrit model, and we speculate that temperature systematics bias the \rocrit inference procedure.}
 
 \begin{figure}
     \centering
