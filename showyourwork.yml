@@ -26,6 +26,7 @@ dependencies:
     - src/data/cks_merged.parquet
   src/figures/comparison.py:
     - src/data/cks_merged.parquet
+    - src/data/santos2021/S21_rotators.csv
   src/figures/fraction.py:
     - src/data/mcquillan2014_table1.parquet
     - src/data/kepler_lamost.csv
