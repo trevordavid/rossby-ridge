@@ -62,6 +62,10 @@ dependencies:
     - src/data/models/standard_model.csv
     - src/data/kepler_lamost.csv
   src/figures/ridge.py:
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/kepler_lamost.csv
+    - src/data/cks_merged.parquet
+  src/figures/rocrit.py:
     - src/data/cks_merged.parquet
   src/figures/surveys.py:
     - src/data/mcquillan2014_table1.parquet

@@ -123,8 +123,6 @@ for i,ax in enumerate(axes):
 sns.despine()
 plt.tight_layout()
 plt.savefig('../figures/lamost-mcquillan.pdf')
-#plt.show()
-
 
 
 #Santos et al. 2021
