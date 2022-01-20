@@ -82,6 +82,7 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 apo = Table.read('../data/kepler_apogee_dr16.fits')
 names = [name for name in apo.colnames if len(apo[name].shape) <= 1]
 apo  = apo[names].to_pandas()
+#apo = pd.read_parquet('../data/kepler_apogee_dr16.parquet')
 apok = apo.merge(mcq, how='inner', left_on='kepid', right_on='mcq_KIC')
 ######################################################################################
 

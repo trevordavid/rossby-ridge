@@ -24,7 +24,6 @@ import seaborn as sns
 hall = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/table1.dat",
                   readme="https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/ReadMe",
                   format="ascii.cds")
-#hall.info()
 
 
 # ### CKS sample
@@ -34,25 +33,18 @@ mcq_koi = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/ApJ/775/L11/table1.dat
                 format="ascii.cds")
 mcq_koi = mcq_koi.to_pandas()
 mcq_koi = mcq_koi.add_prefix('mcq_')
-#mcq_koi.head()
 
 cks = pd.read_parquet('../data/cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
-print(np.shape(cks))
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
-
 cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
-print(np.shape(cks))
-cks.head()
-
 
 # ### LAMOST-Kepler sample
 lam = pd.read_csv('../data/kepler_lamost.csv')
 
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
-lam.head()
 
 #ik = (lam['Teff_lam']>0)
 #ik &= (lam['Gmag']<15)
@@ -93,10 +85,8 @@ for i in range(2):
     ax[i].set_xlim(6500,5000)
     ax[i].set_xlabel("Effective temperature [K]")
     ax[i].set_ylabel("Rotation period [d]")
-    #ax[i].set_title(titles[i])
     ax[i].legend(prop={"size":9})
     
 sns.despine()    
 plt.tight_layout()
 plt.savefig('../figures/asteroseismic.pdf')
-#plt.show()

@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-
 import numpy as np
 
 mpl.rcParams["figure.dpi"] = 100
@@ -26,7 +25,6 @@ san = pd.read_csv('../data/santos2021/S21_rotators.csv')
 san = san.add_prefix('san_')
 san = san.sort_values(['san_KIC', 'san_Kp'], ascending = (True, True))
 san = san.drop_duplicates(subset=['san_KIC'], keep='first')
-# san.head()
 cks = cks.merge(san, left_on='kepid', right_on='san_KIC', how='left')
 
 
@@ -35,11 +33,9 @@ print(len(cks[np.isfinite(cks['ra'])]))
 
 cks = cks.dropna(subset=['gaia_ra'])
 print(np.shape(cks))
-cks.head()
 
 
 cks_pos = cks[['gaia_ra', 'gaia_dec']].copy()
-cks_pos.head()
 cks_pos.to_csv('../data/cks-gaia-coords.csv', index=False)
 
 

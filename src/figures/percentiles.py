@@ -108,7 +108,6 @@ std['flag'] = 'std'
 roc['flag'] = 'roc'
 
 model = pd.concat([std, roc], ignore_index=True, sort=True)
-model.head()
 ######################################################################################
 
 

@@ -1,11 +1,14 @@
 zenodo_sandbox:
   src/data/data.tar.gz:
     id: 992742
+    #id: 999328
     contents:
       - src/data/kepler_lamost.csv
       - src/data/kepler_apogee_dr16.fits
+      #- src/data/kepler_apogee_dr16.parquet
       - src/data/cks_merged.parquet
       - src/data/kepler_dr2_1arcsec.parquet
+      #- src/data/lamost_santos.parquet
       - src/data/mcquillan2014_table1.parquet
       - src/data/models/rocrit_model.csv
       - src/data/models/standard_model.csv
@@ -73,6 +76,7 @@ dependencies:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/kepler_apogee_dr16.fits
+    #- src/data/kepler_apogee_dr16.parquet
   src/figures/teffscales.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv

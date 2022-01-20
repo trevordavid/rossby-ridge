@@ -98,7 +98,6 @@ std['flag'] = 'std'
 roc['flag'] = 'roc'
 
 model = pd.concat([std, roc], ignore_index=True, sort=True)
-model.head()
 ######################################################################################
 mpl.rcParams["legend.markerscale"] = 1
 sns.set(font_scale=1.2, context="paper", style="ticks")

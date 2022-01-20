@@ -31,10 +31,8 @@ print(len(cks[np.isfinite(cks['ra'])]))
 
 cks = cks.dropna(subset=['gaia_ra'])
 print(np.shape(cks))
-cks.head()
 
 cks_pos = cks[['gaia_ra', 'gaia_dec']].copy()
-cks_pos.head()
 cks_pos.to_csv('../data/cks-gaia-coords.csv', index=False)
 
 
@@ -61,11 +59,7 @@ for i in range(len(table)):
     
 table = table.sort_values(by=["gaia_ra"])
 table = table.merge(cks, how='right', left_on='gaia_ra', right_on='gaia_ra')
-#table.head()
-
 table = table.sort_values(["gaia_ra","angDist"], ascending = (True, True))
-#table.head()
-
 table = table.drop_duplicates(subset="gaia_ra", keep="first")
 
 
@@ -73,7 +67,6 @@ table = table.drop_duplicates(subset="gaia_ra", keep="first")
 lam = pd.read_csv('../data/kepler_lamost.csv')
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
-lam.head()
 
 #McQuillan et al. 2014
 # mcq = Table.read('../data/mcquillan2014/table1.dat',
@@ -104,7 +97,6 @@ hall = hall.merge(gk,
 
 
 hall_pos = hall[['gaia_ra', 'gaia_dec']].copy()
-hall_pos.head()
 hall_pos.to_csv('../data/hall2021-gaia-coords.csv', index=False)
 
 

@@ -23,8 +23,6 @@ mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
 
 #Gaia-Kepler cross-match from Megan Bedell
 gk = pd.read_parquet('../data/kepler_dr2_1arcsec.parquet')
-#gk = gk.to_pandas()
-#gk.head()
 
 mcq = mcq.merge(gk, how="left", left_on="mcq_KIC", right_on="kepid")
 #np.shape(mcq)
@@ -34,7 +32,7 @@ mcq = mcq.drop_duplicates(subset=['kepid'], keep='first')
 def lamost_xmatch(df):
     
     df_pos = df[['ra', 'dec']].copy()
-    df_pos.head()
+    #df_pos.head()
     df_pos.to_csv('../data/coords.csv', index=False)
     
     table = XMatch.query(cat1=open('../data/coords.csv'),
@@ -133,7 +131,6 @@ san = san.merge(gk, how="left", left_on="san_KIC", right_on="kepid")
 san = san.sort_values(by=["kepid", "kepler_gaia_ang_dist"])
 san = san.drop_duplicates(subset=['kepid'], keep='first')
 print(len(san), 'stars after removing duplicates')
-san.head()
     
 xm = lamost_xmatch(san)
 
@@ -142,7 +139,7 @@ arg = (np.isfinite(xm["Teff"])&(np.isfinite(xm["san_Prot"])))
 print(len(xm[arg]), 'unique stars in LAMOST-Santos cross-match with Teff and Prot')
 
 xm = xm[arg]
-#xm.to_parquet('../data/lamost-santos-xmatch.parquet')
+xm.to_parquet('../data/lamost-santos-xmatch.parquet')
 
 x = xm["Teff"]
 y = xm["san_Prot"]
