@@ -96,7 +96,7 @@ def ridge_lo(teff):
     b = (-5 - m*6500) 
     return m*teff + b
 
-mask = (cks['p20_cks_slogg']>4) #main sequence
+mask = (cks['p20_cks_slogg']>4.1) #main sequence
 ridge = (cks['p20_cks_steff']>5850)
 ridge &= (cks['p20_cks_steff']<6500)
 ridge &= (cks['d21_prot']<ridge_hi(cks['p20_cks_steff']))
@@ -149,7 +149,7 @@ ax.plot(_x, constant_rossby(_x, 0.5), 'k--')
 
 dist = abs(lam["Prot"] - constant_rossby(lam["Teff_lam"], 1.3))
 frac_dist = abs(lam["Prot"] - constant_rossby(lam["Teff_lam"], 1.3))/constant_rossby(lam["Teff_lam"], 1.3)
-lam_ridge = (frac_dist<0.05) & (lam["Teff_lam"]>5500) & (lam["Teff_lam"]<6500) & (lam["logg_lam"]>4) & (lam["logg_lam"]<4.75)
+lam_ridge = (frac_dist<0.05) & (lam["Teff_lam"]>5500) & (lam["Teff_lam"]<6500) & (lam["logg_lam"]>4.1) & (lam["logg_lam"]<4.75)
 
 ax.plot(lam["Teff_lam"][lam_ridge], lam["Prot"][lam_ridge], 'o', mfc="None", color='white', alpha=0.2);
 
@@ -171,15 +171,15 @@ ax[0].errorbar(5000, 4.8, xerr=np.nanmedian(cks['p20_cks_steff_err1']),
 
 
 ax[1].plot(lam['Teff_lam'], lam['logg_lam'], 
-           '.', color='lightgrey', label='LAMOST–Kepler Survey', rasterized=True, ms=2)
+           '.', color='lightgrey', label='LAMOST–McQuillan', rasterized=True, ms=2)
 ax[1].plot(lam['Teff_lam'][lam_ridge], lam['logg_lam'][lam_ridge], 
            '.', color='k', label='Long-period pile-up', rasterized=True, ms=2)
 ax[1].errorbar(5000, 4.8, xerr=np.nanmedian(lam['e_Teff_lam']),
                           yerr=np.nanmedian(lam['e_logg_lam']), fmt='.', color='k', zorder=1000)
 
 
-ax[0].plot([5850,6500,6500,5850,5850],[4,4,4.75,4.75,4],color='k',lw=0.5)
-ax[1].plot([5500,6500,6500,5500,5500],[4,4,4.75,4.75,4],color='k',lw=0.5)
+ax[0].plot([5850,6500,6500,5850,5850],[4.1,4.1,4.75,4.75,4.1],color='k',lw=0.5)
+ax[1].plot([5500,6500,6500,5500,5500],[4.1,4.1,4.75,4.75,4.1],color='k',lw=0.5)
 
 for i in range(2):
     
@@ -258,11 +258,9 @@ for i in range(2):
 for i,let in enumerate("cd"):
     ax[i].text(1.05,1.05,let,transform=ax[i].transAxes,weight='bold')
     
-
 plt.tight_layout()
 sns.despine()
 plt.savefig('../figures/ages.pdf')
-#plt.show()
 
 print('5th and 95th percentile range of CKS ages (Gyr)   :', np.nanpercentile(cks['cks_age'][ridge], [5,95]))
 print('5th and 95th percentile range of SPOCS ages (Gyr) :', np.nanpercentile(cks['bf18_Age'][ridge], [5,95]))
