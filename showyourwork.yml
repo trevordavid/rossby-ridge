@@ -24,6 +24,8 @@ dependencies:
     - src/data/mcquillan2014_table1.parquet
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
+    - src/data/models/rocrit_population.h5
+    - src/data/models/standard_population.h5
   src/figures/asteroseismic.py:
     - src/data/kepler_lamost.csv
     - src/data/cks_merged.parquet

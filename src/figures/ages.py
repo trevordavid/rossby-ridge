@@ -127,6 +127,18 @@ def constant_rossby(teff, ro):
 ######################################################################################
 
 
+#Models
+std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
+std['ro'] = std['period']/(std['taucz']/86400)
+std = std[std['evo']==1] # limit to main-sequence
+
+roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')
+roc['ro'] = roc['period']/(roc['taucz']/86400)
+roc = roc[roc['evo']==1] # limit to main-sequence
+
+
+
+
 fig, ax = plt.subplots()
 sns.kdeplot(
     x=lam["Teff_lam"], 
@@ -218,6 +230,13 @@ spocs_teff_err = np.nanmedian(cks['bf18_e_Teff'])
 
 ax[0].plot(cks['p20_cks_steff'], cks['cks_age'], 
             '.', color='lightgrey', zorder=1)
+
+#Plot models
+for i in range(2):
+    ax[i].plot(roc['Teff'][roc['ro']>2], roc['age'][roc['ro']>2], 
+                ',', ms=0.2, color='orange', alpha=0.5, zorder=1, rasterized=True)
+    ax[i].plot(roc['Teff'][roc['ro']<2], roc['age'][roc['ro']<2], 
+                ',', ms=0.2, color='C0', alpha=0.5, zorder=1, rasterized=True)            
 
 ax[0].plot(cks['p20_cks_steff'][ridge], cks['cks_age'][ridge], 
             '.', color='k', zorder=2)
