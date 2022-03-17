@@ -4,10 +4,12 @@ import matplotlib as mpl
 from astropy.table import Table
 import pandas as pd
 import seaborn as sns
+import scipy.stats as st
 
 mpl.rcParams["figure.dpi"] = 150
 mpl.rcParams["savefig.bbox"] = "tight"
 mpl.rcParams["savefig.dpi"] = 300
+mpl.rcParams["legend.markerscale"] = 10
 
 sns.set(
         context="paper",
@@ -81,7 +83,7 @@ bprp = dr2['dr2_bp_rp']
 MG   = dr2['MG']
 arg  = np.isfinite(bprp) & np.isfinite(MG)
 
-h_kws = {"bins":400, "cmap": "Blues", "cmin": 0, "cmax":5, "density":False}
+h_kws = {"bins":200, "cmap": "Blues_r", "cmin": 1, "cmax":100, "density":False}
 
 phot_kws = {"ms": 0.1,
             "color": "orange",
@@ -98,19 +100,33 @@ for i in range(2):
     axes[i].set_xlabel(r'G$_\mathregular{BP}$-G$_\mathregular{RP}$ [mag]')
     axes[i].set_ylabel(r'M$_\mathregular{G}$ [mag]')
 
-axes[0].plot(bprp[mcq_rot], MG[mcq_rot], '.', label='photometric periods\n(McQuillan et al. 2014)', **phot_kws)
-axes[1].plot(bprp[san_rot], MG[san_rot], '.', label='photometric periods\n(Santos et al. 2021)', **phot_kws)
+axes[0].plot(bprp[mcq_rot], MG[mcq_rot], ',', **phot_kws)
+axes[1].plot(bprp[san_rot], MG[san_rot], ',', **phot_kws)
+
+#Hack for legend troubles
+axes[0].plot(bprp[mcq_rot].iloc[0], MG[mcq_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(McQuillan et al. 2014)')
+axes[1].plot(bprp[san_rot].iloc[0], MG[san_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(Santos et al. 2021)')
 
 for i in range(2):        
     
     axes[i].plot(cks['gaia_bp_rp'][ridge], cks['MG'][ridge], 'k.', ms=1, label='long-period pile-up (this work)', zorder=999)
-    sns.kdeplot(bprp[hall_ast], MG[hall_ast], levels=4, color='k', ax=axes[0], **{"linewidths":0.75}, zorder=998, label='asteroseismic periods\n(Hall et al. 2021)')
-        
+   
+    #Represent the asteroseismic sample with Guassian KDE contours
+    x, y = bprp[hall_ast], MG[hall_ast]
+
+    xmin, xmax = 0.8*x.min(),1.2*x.max()
+    ymin, ymax = 0.8*y.min(),1.2*y.max()
+
+    # Peform the kernel density estimate
+    xx, yy = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
+    positions = np.vstack([xx.ravel(), yy.ravel()])
+    values = np.vstack([x, y])
+    kernel = st.gaussian_kde(values)
+    f = np.reshape(kernel(positions).T, xx.shape)
+
+    cset = axes[i].contour(xx, yy, f, colors='k', levels=4, linewidths=0.5, zorder=998)
+    #cset.collections[0].set_label('asteroseismic periods\n(Hall et al. 2021)')
     lgnd = axes[i].legend(loc='lower left', prop={'size':8})
-    #change the marker size manually for both lines
-    #lgnd.legendHandles[0]._legmarker.set_markersize(6)
-    #lgnd.legendHandles[1]._legmarker.set_markersize(6)
-    #lgnd.legendHandles[0]._sizes = [30]
-    #lgnd.legendHandles[1]._sizes = [30]
     
+sns.despine()
 plt.savefig('../figures/cmd.pdf')
