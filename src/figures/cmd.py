@@ -104,7 +104,7 @@ axes[1].plot(bprp[san_rot], MG[san_rot], '.', label='photometric periods\n(Santo
 for i in range(2):        
     
     axes[i].plot(cks['gaia_bp_rp'][ridge], cks['MG'][ridge], 'k.', ms=1, label='long-period pile-up (this work)', zorder=999)
-    sns.kdeplot(bprp[hall_ast], MG[hall_ast], levels=4, color='k', ax=axes[i], **{"linewidths":0.75}, zorder=998, label='asteroseismic periods\n(Hall et al. 2021)')
+    sns.kdeplot(bprp[hall_ast], MG[hall_ast], levels=4, color='k', ax=axes[0], **{"linewidths":0.75}, zorder=998, label='asteroseismic periods\n(Hall et al. 2021)')
         
     lgnd = axes[i].legend(loc='lower left', prop={'size':8})
     #change the marker size manually for both lines
