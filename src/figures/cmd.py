@@ -126,6 +126,10 @@ for i in range(2):
 
     cset = axes[i].contour(xx, yy, f, colors='k', levels=4, linewidths=0.5, zorder=998)
     #cset.collections[0].set_label('asteroseismic periods\n(Hall et al. 2021)')
+
+    #Hack for asteroseismic legend label
+    axes[i].plot([-100,-99],[12,12],'k',label='asteroseismic periods\n(Hall et al. 2021)')
+
     lgnd = axes[i].legend(loc='lower left', prop={'size':8})
     
 sns.despine()
