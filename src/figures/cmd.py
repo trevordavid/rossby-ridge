@@ -110,7 +110,7 @@ for i in range(2):
     #change the marker size manually for both lines
     #lgnd.legendHandles[0]._legmarker.set_markersize(6)
     #lgnd.legendHandles[1]._legmarker.set_markersize(6)
-    lgnd.legendHandles[0]._sizes = [30]
-    lgnd.legendHandles[1]._sizes = [30]
+    #lgnd.legendHandles[0]._sizes = [30]
+    #lgnd.legendHandles[1]._sizes = [30]
     
 plt.savefig('../figures/cmd.pdf')
