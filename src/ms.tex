@@ -332,6 +332,12 @@ In both the CKS and LAMOST samples, there is a change of slope along the ridge, 
 
 In the CKS sample, there appears to be a clustering of stars above the ridge with \teff~$>6100$~K (seen most clearly in the top panels of Figure~\ref{fig:models}). This cluster of points has a similar slope in the \teff--\prot plane as the long-period pile-up, and does not reside on the harmonic of the ridge line as one might expect if the periods were erroneously determined. After inspecting the light curves of stars on the ridge and above the ridge in the temperature range 6100~K~$<$~ \teff~$<6300$~K we did not notice any obvious trends or differences between the two samples. The periods of the stars in the cluster above the ridge appear to be just as reliable as those on the ridge. Interestingly, a similar clustering of points is not observed in the \edit1{\lamostmcq} sample and is less pronounced or absent when substituting the CKS temperatures with \teff from either \citet{Brewer2018} or \citet{Martinez2019}, two studies that independently derived spectroscopic parameters from the CKS spectra. Further inspection of the stars in this cluster revealed that they have anomalously large \teff discrepancies between the CKS and SPOCS catalogs, such that the SPOCS temperatures shift the stars onto the long-period pile-up. We conclude that the temperatures for these stars in the CKS catalog are too high by $\gtrsim$~100~K.
 
+\subsection{Detection biases}
+\edit1{To this point, we have not addressed the detection biases inherent to Kepler rotation period catalogs. As rotation periods become longer, it becomes more difficult to measure periods directly from rotational brightness modulations in Kepler time series. This is true for at least three reasons: (1) the Kepler baseline is finite, (2) photometric variation amplitude declines with increasing rotation period, and (3) photometric variations tend to become less periodic with increasing rotation period.
+\citet{vanSaders2019} addressed this issue in detail...}
+
+
+
 \subsection{Comparison with theory}
 \label{subsec:models}
 
@@ -469,12 +475,6 @@ CKS (SPOCS \teff) & 5800~K--6250~K & 1.9 $\pm$ 0.1 & 0.12 $\pm$ 0.01 & -136 $\pm
 CKS (M19 \teff) & 5800~K--6250~K & 1.6 $\pm$ 0.2 & 0.18 $\pm$ 0.02 & 21 $\pm$ 42 \\
 \citet{Hall2021} main-sequence & 5000~K--6250~K & 1.7 $\pm$ 0.2 & 0.30 $\pm$ 0.04 & -5 $\pm$ 64 \\
 \citet{Hall2021} main-sequence & 5800~K--6250~K & 1.9 $\pm$ 0.4 & 0.27 $\pm$ 0.05 & -29 $\pm$ 79 \\
-%All samples & 5000~K--6250~K & 1.47 $\pm$ 0.05 & 0.132 $\pm$ 0.008 & 2 $\pm$ 23 (LAMOST) \\
-% & & & & 10 $\pm$ 15 (CKS) \\
-% & & & & 61 $\pm$ 21  (Hall) \\
-%All samples & 5800~K--6250~K & 1.67 $\pm$ 0.08 & 0.116 $\pm$ 0.009 & -42 $\pm$ 24 (LAMOST) \\
-%&  &  &  & -44 $\pm$ 20 (CKS) \\
-%&  &  &  & 3 $\pm$ 23 (Hall) \\ 
 \enddata
 %\tablecomments{}
 \end{deluxetable*}
@@ -619,6 +619,14 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
     \includegraphics[width=\linewidth]{./figures/teffscales.pdf}
     \caption{Comparison of \teff estimates from different catalogs: LAMOST \citep{Xiang2019}, CKS \citep{Fulton2018}, SPOCS \citep{Brewer2018}, M19 \citep{Martinez2019}, \citet{McQuillan2014}, and \citet{Hall2021}.}
     \label{fig:teffscales}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{./figures/harmonic.pdf}
+    \caption{}
+    \label{fig:harmonic}    
 \end{figure}
 
 

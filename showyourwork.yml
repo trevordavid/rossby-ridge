@@ -44,15 +44,13 @@ dependencies:
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
     - src/data/kepler_dr2_1arcsec.parquet
+  src/figures/harmonic.py:
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/kepler_dr2_1arcsec.parquet
   src/figures/kde.py:
     - src/data/mcquillan2014_table1.parquet
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
-  src/figures/xmatch.py:
-    - src/data/mcquillan2014_table1.parquet
-    - src/data/kepler_dr2_1arcsec.parquet
-    - src/data/S21_rotators.csv
-    - src/data/santos2021/S21_rotators.csv
   src/figures/mcmc.py:
     - src/data/mcquillan2014_table1.parquet
     - src/data/cks_merged.parquet
@@ -99,3 +97,8 @@ dependencies:
     - src/data/kepler_lamost.csv
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
+  src/figures/xmatch.py:
+    - src/data/mcquillan2014_table1.parquet
+    - src/data/kepler_dr2_1arcsec.parquet
+    - src/data/S21_rotators.csv
+    - src/data/santos2021/S21_rotators.csv
