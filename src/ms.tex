@@ -594,7 +594,6 @@ The code and data tables required to reproduce the figures and analysis presente
 \section{Comparison of temperature-period distributions}\label{app:teffprot}
 In Figure~\ref{fig:comparison}, we show how the \teff--\prot distribution of the CKS sample changes when sourcing \teff and \prot from different, homogeneous catalogs in the literature. The sharpness of the long-period pile-up appears to be determined primarily by the source of \teff, rather than \prot. The CKS-Gaia catalog \citep{Fulton2018} appears to offer the highest internal precision.  
 
-
 \begin{figure*}
     \centering
     \includegraphics[width=\linewidth]{./figures/comparison.pdf}
@@ -609,7 +608,6 @@ In Figure~\ref{fig:comparison}, we show how the \teff--\prot distribution of the
     \label{fig:ridge}
 \end{figure*}
 
-
 \section{Comparison of spectroscopic temperature scales}\label{app:teff}
 
 In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST DR5} catalog \citep{Xiang2019} and temperatures from other surveys. We find that the LAMOST \teff scale is consistently cooler than other surveys by $\sim$20--80~K, with the exception of the \citet{McQuillan2014} study which sourced photometric \teff estimates from the KIC \citep{Brown2011}. A LAMOST \teff scale which is systematically cooler provides support to the notion that \rocrit determined from LAMOST temperatures will be systematically underestimated. 
@@ -622,10 +620,14 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
 \end{figure}
 
 
+\section{Confounding scenarios}\label{app:harmonics}
+
+\edit1{Here we consider the possibility that there is only one astrophysical overdensity in the true \teff–\prot distribution, the long-period pile-up, and other features in the observed \teff–\prot distribution appear at period harmonics of this feature due to the difficult problem of reliable, automated rotation period measurement for large samples of stars. Figure~\ref{fig:harmonic} shows a Gaussian kernel density estimation of the \lamostmcq \teff–\prot distribution for stars with \logg~$>$~4.1. The short-period pile-up is observed in this sample, particularly for \teff~$>$~6000~K. We found through inspection a constant Rossby curve that traces the long-period pile-up. Taking this curve and dividing the periods by factors of 2 and 3, we find that neither resulting curve satisfactorily threads the short-period pile-up, though they both bracket the feature seen through density estimation. We interpret this as evidence that the short-period pile-up is not simply due to measurement error, although we have not definitively ruled out that scenario.}
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{./figures/harmonic.pdf}
-    \caption{}
+    \caption{Gaussian kernel density estimation of the \teff–\prot distribution in the \lamostmcq sample for stars with \logg~$>$~4.1. A curve of constant Rossby number is shown by the solid line. The \prot/2 and \prot/3 harmonics of this curve are shown by the dashed and dotted lines, respectively. The short-period pile-up is seen near the short-period edge, particularly for \teff~$>$~6000~K. The short-period pile-up does not appear to be simply a harmonic of the long-period pile-up, as one might expect if the periods for the stars in the short-period pile-up were erroneously determined.}
     \label{fig:harmonic}    
 \end{figure}
 
