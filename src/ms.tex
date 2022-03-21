@@ -317,7 +317,7 @@ To place the Sun in the context of the long-period pile-up, we use up-to-date es
 \label{sec:analysis}
 
 \subsection{Initial observations}
-We first noted a pile-up of stars along the long-period edge for stars with \teff~$>5800$~K when examining the \teff-\prot plane for the CKS sample, using the CKS \teff values and the vetted rotation period compilation from \citet{David2021}. \edit1{The pile-up in that sample is visible even when sourcing \prot uniformly from \citet{McQuillan2014}, as shown in the rightmost panel of Figure~\ref{fig:surveys}.} Sourcing rotation periods from \citet{McQuillan2013, Mazeh2015} and \citet{Angus2018} revealed that this pile-up is still apparent when adopting periods uniformly from \edit1{other catalogs as well} (\edit1{see Appendix~\ref{app:teffprot}}). A secondary pile-up at the short-period edge is also apparent, though less pronounced, in the \teff--\prot distribution of the \lamostmcq sample. We verified through inspection that the secondary pile-up does not lie along the \prot/2 harmonic line of the long-period pile-up. As shown in Figure~\ref{fig:kde}, This secondary pile-up is seen most clearly through applying Gaussian kernel density estimation (KDE), which was performed with the \texttt{seaborn} package \citep{seaborn}. 
+We first noted a pile-up of stars along the long-period edge for stars with \teff~$>5800$~K when examining the \teff-\prot plane for the CKS sample, using the CKS \teff values and the vetted rotation period compilation from \citet{David2021}. \edit1{The pile-up in that sample is visible even when sourcing \prot uniformly from \citet{McQuillan2013}, as shown in the rightmost panel of Figure~\ref{fig:surveys}.} Sourcing rotation periods from \citet{Mazeh2015}, \citet{Angus2018}, and \citet{Santos2021} revealed that this pile-up is still apparent when adopting periods uniformly from \edit1{other catalogs as well} (\edit1{see Appendix~\ref{app:teffprot}}). A secondary pile-up at the short-period edge is also apparent, though less pronounced, in the \teff--\prot distribution of the \lamostmcq sample. We verified through inspection that the secondary pile-up does not lie along the \prot/2 harmonic line of the long-period pile-up \edit1{(see Appendix~\ref{app:harmonics})}. As shown in \edit1{the middle panel of} Figure~\ref{fig:kde}, this secondary pile-up is seen most clearly through applying Gaussian kernel density estimation (KDE), which was performed with the \texttt{seaborn} package \citep{seaborn}. \edit1{The short-period pile-up is also subtly apparent in the upper right panel of Figure~\ref{fig:xmatch}, as well as scatter plots of the \lamostmcq sample, e.g. the second panel of Figure~\ref{fig:surveys}, and the bottom panels of Figures~\ref{fig:models} and \ref{fig:shifted}.}
 
 \begin{figure*}
     \centering
@@ -610,18 +610,6 @@ In Figure~\ref{fig:comparison}, we show how the \teff--\prot distribution of the
     \label{fig:ridge}
 \end{figure*}
 
-\section{Comparison of spectroscopic temperature scales}\label{app:teff}
-
-In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST DR5} catalog \citep{Xiang2019} and temperatures from other surveys. We find that the LAMOST \teff scale is consistently cooler than other surveys by $\sim$20--80~K, with the exception of the \citet{McQuillan2014} study which sourced photometric \teff estimates from the KIC \citep{Brown2011}. A LAMOST \teff scale which is systematically cooler provides support to the notion that \rocrit determined from LAMOST temperatures will be systematically underestimated. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{./figures/teffscales.pdf}
-    \caption{Comparison of \teff estimates from different catalogs: LAMOST \citep{Xiang2019}, CKS \citep{Fulton2018}, SPOCS \citep{Brewer2018}, M19 \citep{Martinez2019}, \citet{McQuillan2014}, and \citet{Hall2021}.}
-    \label{fig:teffscales}
-\end{figure}
-
-
 \section{Confounding scenarios}\label{app:harmonics}
 
 \edit1{Here we consider the possibility that there is only one astrophysical overdensity in the true \teff–\prot distribution, the long-period pile-up, and other features in the observed \teff–\prot distribution appear at period harmonics of this feature due to the difficult problem of reliable, automated rotation period measurement for large samples of stars. Figure~\ref{fig:harmonic} shows a Gaussian kernel density estimation of the \lamostmcq \teff–\prot distribution for stars with \logg~$>$~4.1. The short-period pile-up is observed in this sample, particularly for \teff~$>$~6000~K. We found through inspection a constant Rossby curve that traces the long-period pile-up. Taking this curve and dividing the periods by factors of 2 and 3, we find that neither resulting curve satisfactorily matches the short-period pile-up, though they both bracket the feature seen through density estimation. We interpret this as evidence that the short-period pile-up is not simply due to measurement error, although we have not definitively ruled out that scenario.}
@@ -634,6 +622,20 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
     \caption{Gaussian kernel density estimation of the \teff–\prot distribution in the \lamostmcq sample for stars with \logg~$>$~4.1. A curve of constant Rossby number is shown by the solid line. The \prot/2 and \prot/3 harmonics of this curve are shown by the dashed and dotted lines, respectively. The short-period pile-up is seen near the short-period edge, particularly for \teff~$>$~6000~K. The short-period pile-up does not appear to be simply a harmonic of the long-period pile-up, as one might expect if the periods for the stars in the short-period pile-up were erroneously determined.}
     \label{fig:harmonic}    
 \end{figure}
+
+\section{Comparison of spectroscopic temperature scales}\label{app:teff}
+
+In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST DR5} catalog \citep{Xiang2019} and temperatures from other surveys. We find that the LAMOST \teff scale is consistently cooler than other surveys by $\sim$20--80~K, with the exception of the \citet{McQuillan2014} study which sourced photometric \teff estimates from the KIC \citep{Brown2011}. A LAMOST \teff scale which is systematically cooler provides support to the notion that \rocrit determined from LAMOST temperatures will be systematically underestimated. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{./figures/teffscales.pdf}
+    \caption{Comparison of \teff estimates from different catalogs: LAMOST \citep{Xiang2019}, CKS \citep{Fulton2018}, SPOCS \citep{Brewer2018}, M19 \citep{Martinez2019}, \citet{McQuillan2014}, and \citet{Hall2021}.}
+    \label{fig:teffscales}
+\end{figure}
+
+
+
 
 
 \begin{acknowledgments}
