@@ -8,8 +8,9 @@ import astropy.constants as c
 from astropy.table import Table
 from astropy.table import join
 
-import matplotlib.pyplot as plt
 import matplotlib as mpl
+import matplotlib.pyplot as plt
+
 
 mpl.rcParams["figure.dpi"] = 100
 mpl.rcParams["savefig.bbox"] = "tight"
@@ -20,7 +21,7 @@ import seaborn as sns
 sun = {"teff": 5772,
        "prot": 25.4,
        "e_prot": 25.4-24.5,
-       "E_prot": 36-25.4
+       "E_prot": 27-25.4
       }
 
 sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
@@ -103,6 +104,7 @@ ax[2].scatter(apok["TEFF"], apok["mcq_Prot"], **sc_kws, s=0.5)
 ax[3].scatter(cks["cks_Teff"], cks["mcq_Prot"], **sc_kws, s=2)
 
 for i in range(4):
+
     ax[i].set_title(titles[i])
     ax[i].set_xlabel("Effective temperature [K]")        
     ax[i].set_xlim(7250,3250)

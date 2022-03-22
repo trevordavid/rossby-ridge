@@ -75,7 +75,7 @@ sns.set(font_scale=1.3, context="paper", style="ticks")
 sun = {"teff": 5772,
        "prot": 25.4,
        "e_prot": 25.4-24.5,
-       "E_prot": 36-25.4
+       "E_prot": 27-25.4
       }
 
 sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)

@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import matplotlib.patches as patches
 import numpy as np
 
 mpl.rcParams["figure.dpi"] = 100
@@ -12,6 +13,19 @@ sns.set_context("paper")
 
 from astropy.table import Table
 
+def ridge_hi(teff):
+    m = (2-24)/(6500-5800)
+    b = (2 - m*6500) 
+    return m*teff + b
+
+def ridge_lo(teff):
+    m = (2-24)/(6500-5800)
+    b = (-5 - m*6500) 
+    return m*teff + b
+
+# Parallelogram
+xp = [6500,6500,5800,5800]
+yp = [ridge_lo(6500),ridge_hi(6500),ridge_hi(5800),ridge_lo(5800)]
 
 cks = pd.read_parquet('../data/cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
@@ -102,6 +116,9 @@ for i in range(5):
             
         axes[i][j].set_xlim(7000,4100)
         axes[i][j].set_ylim(-2,65)
+       
+        #Parallelogram
+        #axes[i][j].add_patch(patches.Polygon(xy=list(zip(xp,yp)), fill=False, lw=1, color='k'))
 
         
 axes[4][0].set_xlabel('Effective temperature [K]\n(LAMOST; Xiang et al. 2019)')

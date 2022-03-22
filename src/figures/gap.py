@@ -21,7 +21,7 @@ import seaborn as sns
 sun = {"teff": 5772,
        "prot":25.4,
        "e_prot":0,
-       "E_prot":36-25.4
+       "E_prot":27-25.4
       }
 
 sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)

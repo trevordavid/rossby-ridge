@@ -19,7 +19,7 @@ import seaborn as sns
 sun = {"teff": 5772,
        "prot":26.09,
        "e_prot":26.09-24.5,
-       "E_prot":36-26.09
+       "E_prot":27-26.09
       }
 
 
