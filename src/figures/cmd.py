@@ -25,7 +25,7 @@ new_cmap = truncate_colormap(cmap, 0.2, 0.8)
 sns.set(
         context="paper",
         style="ticks",
-        font_scale=1.2,
+        font_scale=1.4,
         palette="colorblind"
         )
 
@@ -124,7 +124,7 @@ axes[1].legend(loc='lower left', prop={'size':8})
 
 for i in range(2,3):        
     
-    axes[i].plot(cks['gaia_bp_rp'][ridge], cks['MG'][ridge], '.', color='C0', ms=1, label='long-period pile-up (this work)', zorder=999)
+    axes[i].plot(cks['gaia_bp_rp'][ridge], cks['MG'][ridge], '.', color='C0', ms=1, label='long-period pile-up\n(David et al. 2022)', zorder=999)
    
     #Represent the asteroseismic sample with Guassian KDE contours
     x, y = bprp[hall_ast], MG[hall_ast]
@@ -143,7 +143,7 @@ for i in range(2,3):
     #cset.collections[0].set_label('asteroseismic periods\n(Hall et al. 2021)')
 
     #Hack for asteroseismic legend label
-    axes[i].plot([-100,-99],[12,12],'k',label='asteroseismic periods\n(Hall et al. 2021)')
+    axes[i].plot([-100,-99],[12,12],'C0',label='asteroseismic periods\n(Hall et al. 2021)')
 
     lgnd = axes[i].legend(loc='lower left', prop={'size':8})
     
