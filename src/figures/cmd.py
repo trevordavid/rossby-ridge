@@ -90,24 +90,28 @@ phot_kws = {"ms": 0.1,
             "alpha": 1,
             "rasterized":True}
 
-fig,axes = plt.subplots(nrows=1,ncols=2,
-                      figsize=(10,4))
+fig,axes = plt.subplots(nrows=1,ncols=3,
+                      figsize=(14,4))
 
-for i in range(2):
+for i in range(3):
     cb1 = axes[i].hist2d(bprp[arg], MG[arg], **h_kws)
     axes[i].set_xlim(-0.5,4)
     axes[i].set_ylim(13,-3)
     axes[i].set_xlabel(r'G$_\mathregular{BP}$-G$_\mathregular{RP}$ [mag]')
     axes[i].set_ylabel(r'M$_\mathregular{G}$ [mag]')
 
-axes[0].plot(bprp[mcq_rot], MG[mcq_rot], ',', **phot_kws)
+#axes[0].plot(bprp[mcq_rot], MG[mcq_rot], ',', **phot_kws)
 axes[1].plot(bprp[san_rot], MG[san_rot], ',', **phot_kws)
+axes[2].plot(bprp[san_rot], MG[san_rot], ',', **phot_kws)
 
 #Hack for legend troubles
-axes[0].plot(bprp[mcq_rot].iloc[0], MG[mcq_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(McQuillan et al. 2014)')
+#axes[0].plot(bprp[mcq_rot].iloc[0], MG[mcq_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(McQuillan et al. 2014)')
 axes[1].plot(bprp[san_rot].iloc[0], MG[san_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(Santos et al. 2021)')
+axes[2].plot(bprp[san_rot].iloc[0], MG[san_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(Santos et al. 2021)')
 
-for i in range(2):        
+axes[1].legend(loc='lower left', prop={'size':8})
+
+for i in range(2,3):        
     
     axes[i].plot(cks['gaia_bp_rp'][ridge], cks['MG'][ridge], 'k.', ms=1, label='long-period pile-up (this work)', zorder=999)
    
