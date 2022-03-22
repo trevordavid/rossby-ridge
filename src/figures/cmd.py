@@ -6,10 +6,21 @@ import pandas as pd
 import seaborn as sns
 import scipy.stats as st
 
+import matplotlib.colors as colors
+
 mpl.rcParams["figure.dpi"] = 150
 mpl.rcParams["savefig.bbox"] = "tight"
 mpl.rcParams["savefig.dpi"] = 300
 mpl.rcParams["legend.markerscale"] = 10
+
+def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
+    new_cmap = colors.LinearSegmentedColormap.from_list(
+        'trunc({n},{a:.2f},{b:.2f})'.format(n=cmap.name, a=minval, b=maxval),
+        cmap(np.linspace(minval, maxval, n)))
+    return new_cmap
+
+cmap = plt.get_cmap('Greys_r')
+new_cmap = truncate_colormap(cmap, 0.2, 0.8)
 
 sns.set(
         context="paper",
@@ -83,7 +94,7 @@ bprp = dr2['dr2_bp_rp']
 MG   = dr2['MG']
 arg  = np.isfinite(bprp) & np.isfinite(MG)
 
-h_kws = {"bins":200, "cmap": "Blues_r", "cmin": 1, "cmax":100, "density":False}
+h_kws = {"bins":200, "cmap": new_cmap, "cmin": 1, "cmax":100, "density":False}
 
 phot_kws = {"ms": 0.1,
             "color": "orange",
@@ -113,7 +124,7 @@ axes[1].legend(loc='lower left', prop={'size':8})
 
 for i in range(2,3):        
     
-    axes[i].plot(cks['gaia_bp_rp'][ridge], cks['MG'][ridge], 'k.', ms=1, label='long-period pile-up (this work)', zorder=999)
+    axes[i].plot(cks['gaia_bp_rp'][ridge], cks['MG'][ridge], '.', color='C0', ms=1, label='long-period pile-up (this work)', zorder=999)
    
     #Represent the asteroseismic sample with Guassian KDE contours
     x, y = bprp[hall_ast], MG[hall_ast]
@@ -128,7 +139,7 @@ for i in range(2,3):
     kernel = st.gaussian_kde(values)
     f = np.reshape(kernel(positions).T, xx.shape)
 
-    cset = axes[i].contour(xx, yy, f, colors='k', levels=4, linewidths=0.5, zorder=998)
+    cset = axes[i].contour(xx, yy, f, colors='C0', levels=4, linewidths=0.5, zorder=998)
     #cset.collections[0].set_label('asteroseismic periods\n(Hall et al. 2021)')
 
     #Hack for asteroseismic legend label
