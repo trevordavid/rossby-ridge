@@ -464,17 +464,19 @@ Notably, both models fail to reproduce the observed short-period pile-up, possib
     \label{fig:percentiles}
 \end{figure}
 
-\subsection{Comparison with asteroseismic rotation rates}
+\subsection{Comparison with \edit1{literature surveys}}
 \label{subsec:asteroseismic}
 
 \citet{Hall2021} determined rotation periods for 91 main-sequence, asteroseismic Kepler targets from rotational splitting of asteroseismic oscillation frequencies. We found that the distribution of the asteroseismic sample in the \teff--\prot plane approximately matches the pile-up we observe, although the \citet{Hall2021} sample appears shifted slightly to either higher \prot or higher \teff values relative to the ridge in the \edit1{\lamostmcq} sample while such an offset is either absent or not as apparent relative to the CKS sample. Such an offset could be due to differing spectroscopic temperature scales between the two studies. To investigate the origin of this offset, we cross-matched the \citet{Hall2021} sample with the LAMOST DR5 catalog \citep{Xiang2019}. We found a root mean square (RMS) of the residuals between the \citet{Hall2021} and LAMOST DR5 \teff measurements of 55~K, with a median offset of 41~K, such that the LAMOST \teff scale is cooler, on average. Though this discrepancy is modest, adopting the LAMOST \teff scale appeared to resolve most of the offset between the pile-up as seen in the two samples. 
 
-\begin{figure}
+\edit1{\citet{Masuda2021} inferred the \prot distribution of 144 late-F/early-G dwarfs in the Kepler field from their precise stellar radii and spectroscopically determined \vsini. As with the asteroseismic sample, we compare the CKS and \lamostmcq samples with the results of those authors. We find that the long-period pile-up we observe appears to overlap with the \citet{Masuda2021} data. We therefore consider it likely that the long-period pile-up is the same feature, or an extension of the same feature, that was detected in the \citet{Hall2021} and \citet{Masuda2021} studies.}
+
+\begin{figure*}
     \centering
     \includegraphics[width=\linewidth]{./figures/asteroseismic.pdf}
     \caption{Comparison of CKS (left) and \edit1{\lamostmcq} samples (right) with the \citet{Hall2021} main-sequence asteroseismic sample in the \teff--\prot plane. Note, the CKS, LAMOST, and \citet{Hall2021} samples derive \teff from distinct pipelines. A constant offset of +41~K was applied to the LAMOST \teff to bring that sample onto the same scale as the asteroseismic sample (see Appendix~\ref{app:teff}). Using LAMOST \teff, where it exists, for the \citet{Hall2021} sample brings that sample into even closer agreement with the long-period pile-up in the LAMOST-McQuillan sample.}
     \label{fig:asteroseismic}
-\end{figure}
+\end{figure*}
 
 
 
@@ -482,7 +484,7 @@ Notably, both models fail to reproduce the observed short-period pile-up, possib
 \label{subsec:ages}
 The WMB model predicts that hotter stars pile up on the long-period edge at younger ages, producing an age gradient across the edge. In Figure~\ref{fig:ages} we show the \teff-age distributions of stars on the ridge using ages from the CKS and SPOCS \citep{Brewer2018} catalogs, where we use the trapezoidal selection described in \S\ref{subsec:rossby} to select stars on the long-period pile-up. Both catalogs derive spectroscopic parameters from the CKS spectra, but use different pipelines for both the spectroscopic parameters and the isochrone fitting. In both cases, there appears to be an age gradient such that hotter stars are younger on average. However, such a trend is also expected in a sample of main-sequence stars as a natural consequence of the shorter main-sequence lifetimes of hotter, more massive stars. We also find that the dispersion in age is a sensitive function of \teff, with cooler stars on the ridge showing a broader range of ages. This observation could be due to cooler stars populating the ridge for longer periods of time (relative to hotter stars), the lower precision of isochrone ages for cooler stars, or some combination of the two effects.
 
-We determined that 90\% of the stars on the ridge have ages between 1.4--5.6~Gyr (using ages from the CKS catalog), or 2.3--5.9~Gyr (using SPOCS ages). However, we note that systematic effects in surveys and theoretical models lead to large uncertainties in isochrone ages that are not necessarily represented by the reported age uncertainties. The SPOCS ages in particular are questionable given that only $\sim$1\% of the stars have ages $<$~2~Gyr and that stars are concentrated at the upper age boundary for a given \teff (Figure~\ref{fig:ages}). In fact, there are only a handful of long-period pile-up stars in the CKS sample with ages older than the age of the Sun (using CKS ages), and almost all of the pile-up stars would be compatible with an age equal to or less than the Sun's given the large age uncertainties. 
+We determined that 90\% of the stars on the ridge have ages between 1.4--5.6~Gyr (using ages from the CKS catalog), or 2.3--5.9~Gyr (using SPOCS ages). \edit1{These ranges are consistent with the range of ages observed in the \citet{Hall2021} and \citet{Masuda2021} samples, as shown in Figure~11 of the latter reference.} However, we note that systematic effects in surveys and theoretical models lead to large uncertainties in isochrone ages that are not necessarily represented by the reported age uncertainties. The SPOCS ages in particular are questionable given that only $\sim$1\% of the stars have ages $<$~2~Gyr and that stars are concentrated at the upper age boundary for a given \teff (Figure~\ref{fig:ages}). In fact, there are only a handful of long-period pile-up stars in the CKS sample with ages older than the age of the Sun (using CKS ages), and almost all of the pile-up stars would be compatible with an age equal to or less than the Sun's given the large age uncertainties. 
 
 In the WMB model, although wind-driven angular momentum losses cease, stars continue to evolve structurally which results in evolution in the moment of inertia and stellar spin, driven by expansion of the stars away from the main-sequence \citep{vanSaders2019}. Stars reach \rocrit~$\approx$~2 approximately halfway through their main-sequence lifetimes and remain there until the main-sequence turnoff. Thus, higher mass stars with shorter main-sequence lifetimes should show a smaller age spread on the long-period pile-up relative to lower mass stars with longer main-sequence lifetimes. Though we have not quantified such an age-gradient, the data suggest that some stars spend several Gyr occupying the ridge with only modest evolution of their spin rates.
 
@@ -525,7 +527,7 @@ While it not clear whether or not these declines are astrophysical in nature, th
 
 \edit1{\citet{vanSaders2019} addressed this issue in detail, finding that a threshold of Ro$_\mathrm{thresh} \approx 2$ could reproduce the observed upper edge of the \citet{McQuillan2014} \teff–\prot distribution. In this scenario, the detection threshold sets the upper edge of the observed \teff–\prot distribution at high \teff, while the age of the galaxy sets the upper edge at low \teff (since low-mass stars have not yet had enough time to spin down to Ro$_\mathrm{thresh}$). However, those authors presented arguments that suggest detection bias is not solely responsible for producing the observed \teff–\prot distribution. First, stars at the upper edge are not those with the lowest-amplitude signals detected, as one would expect from a detection edge. For the variability amplitudes typical of Sun-like stars at the upper edge, one finds cooler stars with similar amplitude at even longer periods, as well as hotter stars with much smaller amplitudes (though at shorter periods). Even among Sun-like stars, those authors found that 9\% of stars below the edge have amplitudes smaller than stars with similar \teff at the edge (possibly due to issues such as flux dilution).}
 
-\edit1{Critically, we also note that while an Ro-dependent detection threshold may reproduce the upper edge of the \teff–\prot distribution, it would not be responsible for producing a pile-up or overdensity at this edge. To our knowledge, there are no systematics of the rotation period catalogs considered here that would bias stars towards the detection threshold. Furthermore, two independent samples with different observational biases than the rotation period catalogs considered here also appear to yield a pile-up of stars at the long-period edge. These samples are the Kepler asteroseismic sample, which measures rotation through asteroseismic mode splitting (discussed in \S\ref{subsec:asteroseismic}), and the sample of Kepler stars with \vsini from high-resolution spectroscopy, from which \citet{Masuda2021} inferred the peak of the \teff–\prot distribution using constraints on the stellar radii.}
+\edit1{Critically, we also note that while an Ro-dependent detection threshold may reproduce the upper edge of the \teff–\prot distribution, it would not be responsible for producing a pile-up or overdensity at this edge. To our knowledge, there are no systematics of the rotation period catalogs considered here that would bias stars towards the detection threshold. Furthermore, two independent samples with different observational biases than the rotation period catalogs considered here also appear to yield a pile-up of stars at the long-period edge. These samples are the Kepler asteroseismic sample, which measures rotation through asteroseismic mode splitting (discussed in \S\ref{subsec:asteroseismic}), and the sample of Kepler stars with \vsini from high-resolution spectroscopy, from which \citet{Masuda2021} inferred the peak of the \teff–\prot distribution using constraints on the stellar radii. We do note, however, that we can not rule out the possibility that the long-period pile-up is wider in period space than we observe, with stars just above the pile-up being undetected through rotational brightness modulations.}
 
 
 \subsection{Long-period behavior} \label{subsec:longperiod}
@@ -624,6 +626,18 @@ In Figure~\ref{fig:comparison}, we show how the \teff--\prot distribution of the
 %     \label{fig:ridge}
 % \end{figure*}
 
+\section{Comparison of spectroscopic temperature scales}\label{app:teff}
+
+In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST DR5} catalog \citep{Xiang2019} and temperatures from other surveys. We find that the LAMOST \teff scale is consistently cooler than other surveys by $\sim$20--80~K, with the exception of the \citet{McQuillan2014} study which sourced photometric \teff estimates from the KIC \citep{Brown2011}. A LAMOST \teff scale which is systematically cooler provides support to the notion that \rocrit determined from LAMOST temperatures will be systematically underestimated. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{./figures/teffscales.pdf}
+    \caption{Comparison of \teff estimates from different catalogs: LAMOST \citep{Xiang2019}, CKS \citep{Fulton2018}, SPOCS \citep{Brewer2018}, M19 \citep{Martinez2019}, \citet{McQuillan2014}, and \citet{Hall2021}.}
+    \label{fig:teffscales}
+\end{figure}
+
+
 \section{Confounding scenarios}\label{app:harmonics}
 
 \edit1{Here we consider the possibility that there is only one astrophysical overdensity in the true \teff–\prot distribution, the long-period pile-up, and other features in the observed \teff–\prot distribution appear at period harmonics of this feature due to the difficult problem of reliable, automated rotation period measurement for large samples of stars. Figure~\ref{fig:harmonic} shows a Gaussian kernel density estimation of the \lamostmcq \teff–\prot distribution for stars with \logg~$>$~4.1. The short-period pile-up is observed in this sample, particularly for \teff~$>$~6000~K. We found through inspection a constant Rossby curve that traces the long-period pile-up. Taking this curve and dividing the periods by factors of 2 and 3, we find that neither resulting curve satisfactorily matches the short-period pile-up, though they both bracket the feature seen through density estimation. We interpret this as evidence that the short-period pile-up is not simply due to measurement error, although we have not definitively ruled out that scenario.}
@@ -637,16 +651,6 @@ In Figure~\ref{fig:comparison}, we show how the \teff--\prot distribution of the
     \label{fig:harmonic}    
 \end{figure}
 
-\section{Comparison of spectroscopic temperature scales}\label{app:teff}
-
-In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST DR5} catalog \citep{Xiang2019} and temperatures from other surveys. We find that the LAMOST \teff scale is consistently cooler than other surveys by $\sim$20--80~K, with the exception of the \citet{McQuillan2014} study which sourced photometric \teff estimates from the KIC \citep{Brown2011}. A LAMOST \teff scale which is systematically cooler provides support to the notion that \rocrit determined from LAMOST temperatures will be systematically underestimated. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{./figures/teffscales.pdf}
-    \caption{Comparison of \teff estimates from different catalogs: LAMOST \citep{Xiang2019}, CKS \citep{Fulton2018}, SPOCS \citep{Brewer2018}, M19 \citep{Martinez2019}, \citet{McQuillan2014}, and \citet{Hall2021}.}
-    \label{fig:teffscales}
-\end{figure}
 
 
 \section{The Gaia Color–Period Plane}\label{app:gaia}
@@ -654,9 +658,16 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{./figures/gaia.pdf}
-    \caption{The color–\prot plane for the \citet{McQuillan2014} sample in relation to a curve of constant Rossby number (orange dashed curve, $\mathrm{Ro} = 0.5 \approx \mathrm{Ro}_\odot$) from the empirical \taucz calibration of \citet{Corsaro2021}, which is valid in the color range $0.55 < (G_\mathrm{BP}−G_\mathrm{RP}) < 0.97$. The top rows show 2–d histograms of the entire sample (left), a subsample with low reddening (middle), and the same low reddening subsample with a -0.1 mag color shift applied to the data. Each panel in the bottom row shows a Gaussian kernel density estimation of the respective panel above. The orange point in each panel represents the position of the Sun, using the estimated Gaia color of \citet{Casagrande2018}.}
-    \label{fig:gaia}
+    \includegraphics[width=\linewidth]{./figures/gaia-mcquillan.pdf}
+    \caption{The color–\prot plane for the \citet{McQuillan2014} sample in relation to a curve of constant Rossby number (orange dashed curve, $\mathrm{Ro} = 0.5 \approx \mathrm{Ro}_\odot$) from the empirical \taucz calibration of \citet{Corsaro2021}, which is valid in the color range $0.55 < (G_\mathrm{BP}−G_\mathrm{RP}) < 0.97$. The top rows show 2–d histograms of the probability density for the entire sample (left), a subsample with low reddening (middle), and the same low reddening subsample with a -0.1 mag color shift applied to the data. Each panel in the bottom row shows a Gaussian kernel density estimation of the respective panel above. The orange point in each panel represents the position of the Sun, using the estimated Gaia color of \citet{Casagrande2018}.}
+    \label{fig:gaia-mcquillan}
+\end{figure}
+
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{./figures/gaia-santos.pdf}
+    \caption{The same as Figure~\ref{fig:gaia-mcquillan} but for the \citet{Santos2021} sample.}
+    \label{fig:gaia-santos}
 \end{figure}
 
 
