@@ -165,6 +165,7 @@ sun = {"teff": 5772,
 ####################################################################
 
 _bprp = np.linspace(0.55,0.97,1000)
+_bprp_cluster = np.linspace(0.6,2,1000)
 
 h_kws = {"bins":100, "cmap": "Blues", "density":True}
 kde_kws = {"fill": True, "bw_adjust": 0.25, "cmap": "Blues"}
@@ -218,7 +219,7 @@ for ax in zip(axes,axs):
         ax[i].legend()
 
         for j,seq in enumerate(gyro_sequences):
-            ax[i].plot(_bprp, curtis_gyrochrone(_bprp, kind=seq), label=gyro_ages[j], color='k', lw=1, alpha=0.25)
+            ax[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
 
 
 axes[0].set_title("All stars\n(McQuillan et al. 2014 + Gaia EDR3)")
