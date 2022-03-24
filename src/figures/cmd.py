@@ -13,6 +13,15 @@ mpl.rcParams["savefig.bbox"] = "tight"
 mpl.rcParams["savefig.dpi"] = 300
 mpl.rcParams["legend.markerscale"] = 10
 
+#Solar data
+import astropy.units as u
+import astropy.constants as c
+dpc_sun = c.au.to(u.pc).value
+mG_sun = -26.895
+MG_sun = mG_sun - 5.*(np.log10(dpc_sun) - 1.)
+bprp_sun = 0.818
+
+
 def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
     new_cmap = colors.LinearSegmentedColormap.from_list(
         'trunc({n},{a:.2f},{b:.2f})'.format(n=cmap.name, a=minval, b=maxval),
@@ -94,6 +103,7 @@ bprp = dr2['dr2_bp_rp']
 MG   = dr2['MG']
 arg  = np.isfinite(bprp) & np.isfinite(MG)
 
+sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 h_kws = {"bins":200, "cmap": new_cmap, "cmin": 1, "cmax":100, "density":False}
 
 phot_kws = {"ms": 0.1,
@@ -106,6 +116,8 @@ fig,axes = plt.subplots(nrows=1,ncols=3,
 
 for i in range(3):
     cb1 = axes[i].hist2d(bprp[arg], MG[arg], **h_kws)
+    axes[i].plot(bprp_sun, MG_sun,  zorder=999, **sun_kws)
+    axes[i].plot(bprp_sun, MG_sun, 'k.', zorder=999)
     axes[i].set_xlim(-0.5,4)
     axes[i].set_ylim(13,-3)
     axes[i].set_xlabel(r'G$_\mathregular{BP}$-G$_\mathregular{RP}$ [mag]')

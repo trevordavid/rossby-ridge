@@ -147,10 +147,12 @@ cb2 = ax2.scatter(mcq["mcq_Teff"],
 for ax in [ax1,ax2]:
     _teff = np.linspace(3000,7000,1000)
     ax.plot(_teff, constant_rossby(_teff, 0.5), '--', color='k', lw=2, alpha=0.5)
-    ax.set_xlim(7000,3000)
     ax.set_ylim(0,50)  
     ax.set_xlabel("Effective temperature [K]")
     ax.set_ylabel("Rotation period [d]")    
+
+ax1.set_xlim(7000,4000)
+ax2.set_xlim(7000,3000)
     
 ax1.set_title('LAMOST–McQuillan')
 ax2.set_title('McQuillan et al. 2014')
