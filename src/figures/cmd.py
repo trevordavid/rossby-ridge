@@ -28,7 +28,7 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
         cmap(np.linspace(minval, maxval, n)))
     return new_cmap
 
-cmap = plt.get_cmap('Greys_r')
+cmap = plt.get_cmap('Greys')
 new_cmap = truncate_colormap(cmap, 0.2, 0.8)
 
 sns.set(
@@ -104,7 +104,8 @@ MG   = dr2['MG']
 arg  = np.isfinite(bprp) & np.isfinite(MG)
 
 sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
-h_kws = {"bins":200, "cmap": new_cmap, "cmin": 1, "cmax":100, "density":False}
+#h_kws = {"bins":200, "cmap": new_cmap, "cmin": 1, "cmax":100, "density":False}
+h_kws = {"bins":200, "cmap": new_cmap, "cmin": 5, "density":False}
 
 phot_kws = {"ms": 0.1,
             "color": "orange",
@@ -118,7 +119,7 @@ for i in range(3):
     cb1 = axes[i].hist2d(bprp[arg], MG[arg], **h_kws)
     axes[i].plot(bprp_sun, MG_sun,  zorder=999, **sun_kws)
     axes[i].plot(bprp_sun, MG_sun, 'k.', zorder=999)
-    axes[i].set_xlim(-0.5,4)
+    axes[i].set_xlim(-0.8,3.5)
     axes[i].set_ylim(13,-3)
     axes[i].set_xlabel(r'G$_\mathregular{BP}$-G$_\mathregular{RP}$ [mag]')
     axes[i].set_ylabel(r'M$_\mathregular{G}$ [mag]')
