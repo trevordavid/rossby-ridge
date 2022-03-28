@@ -1,7 +1,7 @@
-zenodo_sandbox:
+zenodo:
   src/data/data.tar.gz:
-    id: 992742
-    #id: 999328
+    id: 6391526
+    #id: 992742
     contents:
       - src/data/kepler_lamost.csv
       - src/data/kepler_apogee_dr16.fits
