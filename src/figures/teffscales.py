@@ -218,6 +218,7 @@ ax8 = fig.add_subplot(spec[1,3])
 ax9 = fig.add_subplot(spec[0,4])
 ax10 = fig.add_subplot(spec[1,4])
 
+
 one_to_one(ax1, table["Teff"], table["cks_Teff"], 'LAMOST'+tstr, 'CKS'+tstr, xmin=xmin, xmax=xmax, sc_kws=sc_kws)
 residual(ax2, table["Teff"], table["cks_Teff"], 'LAMOST'+tstr, 'LAMOST-\nCKS [K]', xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, sc_kws=sc_kws)    
 

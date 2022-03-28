@@ -218,7 +218,6 @@ for ax in zip(axes,axs):
         for j,seq in enumerate(gyro_sequences):
             ax[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
 
-
 axes[0].set_title("All stars\n(Santos et al. 2021 + Gaia EDR3)")
 axes[1].set_title("Low reddening sample\n(A$_\mathregular{V}$<0.2 mag)")
 axes[2].set_title("Low reddening sample\nwith -0.1 mag shift")
