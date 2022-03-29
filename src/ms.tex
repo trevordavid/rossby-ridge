@@ -679,7 +679,7 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
 
 
 \section{The Gaia Color–Period Plane}\label{app:gaia}
-\edit1{Given that the long-period pile-up was previously obscured by imprecise \teff measurements, we explored whether the feature could be recovered using the high precision photometric colors provided by the Gaia mission \citep{Gaia2016}. We cross-matched the \citet{McQuillan2014} sample with Gaia EDR3 \citep{GaiaEDR3}. We then compared the ($G_{BP}-G_{RP}$)–\prot distribution with constant Rossby curves. For this exercise, we used the empirically calibrated \taucz relation of \citet{Corsaro2021}, who presented \taucz as a quadratic function of Gaia $G_{BP}-G_{RP}$ color using the Kepler LEGACY asteroseismic sample as calibrators. We found that the long-period pile-up is clearly visible in the ($G_{BP}-G_{RP}$)–\prot plane once stars with high reddening ($A_V>0.2$) are excluded. In order to match a curve of constant Rossby number, given by $\mathrm{Ro}=\mathrm{Ro_\odot}=0.496$ on the \citet{Corsaro2021} scale, we found that a -0.1 mag shift to the Gaia colors of the data was required.}
+\edit1{Given that the long-period pile-up was previously obscured by imprecise \teff measurements, we explored whether the feature could be recovered using the high precision photometric colors provided by the Gaia mission \citep{Gaia2016}. We cross-matched the \citet{McQuillan2014} sample with Gaia EDR3 \citep{GaiaEDR3} using a 1 arcsec search radius and the \texttt{astroquery} package \citep{astroquery}. We computed reddening estimates for each target using the \texttt{dustmaps} package \citep{dustmaps}. We then compared the ($G_{BP}-G_{RP}$)–\prot distribution with constant Rossby curves. For this exercise, we used the empirically calibrated \taucz relation of \citet{Corsaro2021}, who presented \taucz as a quadratic function of Gaia $G_{BP}-G_{RP}$ color using the Kepler LEGACY asteroseismic sample as calibrators. We found that the long-period pile-up is clearly visible in the ($G_{BP}-G_{RP}$)–\prot plane once stars with high reddening ($A_V>0.2$) are excluded. In order to match a curve of constant Rossby number, given by $\mathrm{Ro}=\mathrm{Ro_\odot}=0.496$ on the \citet{Corsaro2021} scale, we found that a -0.1 mag shift to the Gaia colors of the data was required.}
 
 \edit1{We note that the morphology of the color–period distribution appears to be different between the Gaia–McQuillan and Gaia–Santos catalogs, with the Gaia–Santos distribution presenting a break near $G_{BP}-G_{RP}= 0.7$. This break is not apparent in the Gaia–McQuillan sample. Similar behavior is seen in \teff–\prot plane, as shown in Figure~\ref{fig:xmatch}. At present, we do not have a satisfactory explanation for this behavior.}
 
@@ -716,7 +716,8 @@ This research has made use of NASA's Astrophysics Data System Bibliographic Serv
 
 \facilities{Gaia; Kepler; Keck:I (HIRES); LAMOST; Sloan (APOGEE)}
 
-\software{\texttt{astropy} \citep{astropy13, astropy18}, 
+\software{\texttt{astropy} \citep{astropy13, astropy18},
+          \texttt{astroquery} \citep{astroquery},
           \texttt{corner} \citep{corner},
           \texttt{dustmaps} \citep{dustmaps}, 
           \texttt{emcee} \citep{emcee2013, emcee2019},
