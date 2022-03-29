@@ -19,6 +19,17 @@ sns.set(
         palette="colorblind"
         )
 
+####################################################################
+# The Sun
+sun = {"teff": 5772,
+       "prot": 25.4,
+       "e_prot": 25.4-24.5,
+       "E_prot": 27-25.4
+      }
+
+sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}      
+####################################################################
+
 
 ######################################################################################
 #McQuillan et al. 2013
@@ -77,7 +88,7 @@ def constant_rossby(teff, ro):
 
 def rocrit_teff_shift(teff, teff_shift):
     #Return locus of rotation periods corresponding to constant Rossby number
-    return 2 * convective_turnover_timescale(teff+teff_shift)
+    return 1.97 * convective_turnover_timescale(teff+teff_shift)
 
 lam["Ro"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"])    
 ######################################################################################
@@ -223,9 +234,10 @@ for i,teff in enumerate([cks['cks_Teff'],
     axes[i].errorbar(_xdata[_arg], _ydata[_arg], yerr = 0.1*_ydata[_arg], 
                      **ebar_kws)
     axes[i].plot(model_teff, _model, color='orange', lw=3, alpha=0.5,
-                 label=r'Ro$_\mathregular{crit}$ = 2 ($\mathregular{\Delta}$T$_\mathregular{eff}$ = '+str(int(_popt[0]))+')')
+                 label=r'Ro$_\mathregular{crit}$ = Ro$_\mathregular{\odot}$ ($\mathregular{\Delta}$T$_\mathregular{eff}$ = '+str(int(_popt[0]))+')')
     axes[i].plot(model_teff, __model, color='C2', lw=3, alpha=0.5,
                  label='Ro$_\mathregular{crit}$ = '+str(np.round(__popt[0],2))+' ($\mathregular{\Delta}$T$_\mathregular{eff}$ = 0)')
+
     axes[i].set_xlim(6400,5600)
     axes[i].set_ylim(-2,30)
     axes[i].text(0.05,0.05, 
@@ -253,7 +265,7 @@ axes[3].errorbar(x_lam_det, y_lam_det, yerr = 0.1*y_lam_det,
                  **ebar_kws)
 
 axes[3].plot(model_teff, _model, color='orange', lw=3, alpha=0.5,
-             label=r'Ro$_\mathregular{crit}$ = 2 ($\mathregular{\Delta}$T$_\mathregular{eff}$ = '+str(int(_popt[0]))+')')
+             label=r'Ro$_\mathregular{crit}$ = Ro$_\mathregular{\odot}$ ($\mathregular{\Delta}$T$_\mathregular{eff}$ = '+str(int(_popt[0]))+')')
 axes[3].plot(model_teff, __model, color='C2', lw=3, alpha=0.5,
              label='Ro$_\mathregular{crit}$ = '+str(np.round(__popt[0],2))+' ($\mathregular{\Delta}$T$_\mathregular{eff}$ = 0)')
 
