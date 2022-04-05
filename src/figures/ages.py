@@ -272,13 +272,13 @@ for i in range(2):
     ax[i].set_xlim(6600,5600)
     ax[i].set_ylim(0,12)
     ax[i].scatter(sun["teff"], 4.567, color='orange', zorder=3)
-    ax[i].text(6500, 11.5, 'typical error', size=10)
+    ax[i].text(6450, 11, 'typical error', size=10)
     
 for i,let in enumerate("cd"):
     ax[i].text(1.05,1.05,let,transform=ax[i].transAxes,weight='bold')
     
 plt.tight_layout()
-sns.despine()
+#sns.despine()
 plt.savefig('../figures/ages.pdf')
 
 print('5th and 95th percentile range of CKS ages (Gyr)   :', np.nanpercentile(cks['cks_age'][ridge], [5,95]))

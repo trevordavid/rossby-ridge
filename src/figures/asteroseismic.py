@@ -65,7 +65,6 @@ sns.set(font_scale=1.2, context="paper", style="ticks")
 
 mpl.rcParams["legend.markerscale"] = 2
 titles = ["California–Kepler Survey","LAMOST–McQuillan"]
-ebar_kws = {"fmt":"o", "lw":1, "ecolor":"orange", "color":"orange", "alpha":1, "ms":4, "mec":"grey", "mew":0.5, "zorder":999}
 
 sc_kws = {"marker":".", "color":"C0", "rasterized":True, "alpha":1}
 
@@ -79,6 +78,8 @@ ax2[0].scatter(cks["p20_cks_steff"], cks["d21_prot"], **sc_kws, label=r"Californ
 ax2[1].scatter(lam['Teff_lam'], lam['Prot'], **sc_kws, label=r"LAMOST–McQuillan", s=0.5)
 
 
+ebar_kws = {"fmt":"o", "ecolor":"orange", "color":"orange", "alpha":1, "mfc":"orange", "mec":"orange", "mew":1, "zorder":999}
+
 #Masuda et al. 2021 data
 specteff = np.array([5996.3610916725,6163.47095871239,6351.57452764171])
 specrot= np.array([15.1398954901294,10.9922199999722,5.40119754702563])
@@ -90,14 +91,15 @@ for i in range(2):
     ax1[i].errorbar(hall["Teff"][arg], hall["P"][arg], 
                    xerr=hall["e_Teff"][arg], 
                    yerr=[hall["e_P"][arg], hall["E_P"][arg]], 
-                   label="Hall et al. 2021\nasteroseismic sample",
+                   label="Hall et al. 2021\nasteroseismic sample", ms=2, lw=0.5, 
                    **ebar_kws)
     ax2[i].errorbar(specteff, specrot, 
                     xerr=spectefferr,
                     yerr=specroterr,
-                    label="Masuda et al. 2021",
+                    label="Masuda et al. 2021", ms=4, lw=1, 
                     **ebar_kws)
     ax1[i].set_xlim(6500,5000)
+    #ax1[i].set_ylim(0,60)
     ax1[i].set_xlabel("Effective temperature [K]")
     ax1[i].set_ylabel("Rotation period [d]")
     ax1[i].legend(loc="upper left", prop={"size":9})
