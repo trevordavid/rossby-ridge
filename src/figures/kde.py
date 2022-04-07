@@ -192,10 +192,6 @@ hall.info()
 
 sns.set(style='ticks', font_scale=1.4, context='paper')
 
-
-# In[4]:
-
-
 sns.set(style='ticks', font_scale=1.6, context='paper')
 
 fig,(ax1,ax2,ax3) = plt.subplots(nrows=1, ncols=3, 
