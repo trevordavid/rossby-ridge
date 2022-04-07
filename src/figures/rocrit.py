@@ -77,10 +77,24 @@ lam = lam[lam_mask]
 
 
 ######################################################################################
-def convective_turnover_timescale(teff):
+def convective_turnover_timescale(teff, author='CS11'):
     #Returns convective turnover timescale in days
-    #Gunn et al. 1998 relation, from Cranmer & Saar 2011
-    return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
+    if author=='CS11':
+        #Gunn et al. 1998 relation, from Cranmer & Saar 2011
+        return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
+    elif author=='VS19':
+        # coeff = [1.61117853e-14, 
+        #      -4.48118958e-10,  
+        #      4.97516474e-06, 
+        #      -2.75645645e-02,
+        #      7.62100664e+01, 
+        #      -8.40866926e+04]
+        # return sum([co*teff**i for i,co in enumerate(coeff[::-1])])
+        a = 1.50290736e+02
+        b = 2.71200127e+03
+        c = 6.35361887e+03
+        d = -3.42283628e+00
+        return a * np.exp(- (teff/b) - (teff/c)**18) + d
 
 def constant_rossby(teff, ro):
     #Return locus of rotation periods corresponding to constant Rossby number
@@ -88,7 +102,8 @@ def constant_rossby(teff, ro):
 
 def rocrit_teff_shift(teff, teff_shift):
     #Return locus of rotation periods corresponding to constant Rossby number
-    return 1.97 * convective_turnover_timescale(teff+teff_shift)
+    rosun = sun["prot"]/convective_turnover_timescale(sun["teff"])
+    return rosun * convective_turnover_timescale(teff+teff_shift)
 
 lam["Ro"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"])    
 ######################################################################################
@@ -155,7 +170,7 @@ def lamost_teff_detrend(teff):
     dteff = 2.55513439e-13*teff**5 - 7.18129973e-09*teff**4 + 8.04175914e-05*teff**3 - 4.48417848e-01*teff**2 + 1.24490338e+03*teff - 1.37649898e+06
     return teff-dteff
 
-lam["Teff_lam"] = lamost_teff_detrend(lam["Teff_lam"])
+#lam["Teff_lam"] = lamost_teff_detrend(lam["Teff_lam"])
 
 lam_teff = lam["Teff_lam"]
 lam_e_teff = lam["e_Teff_lam"]

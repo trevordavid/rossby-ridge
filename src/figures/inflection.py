@@ -87,6 +87,9 @@ print(tau)
 flat_samples = sampler.get_chain(discard=100, thin=15, flat=True)
 print(len(flat_samples)/tau)
 
+for j in range(np.shape(flat_samples)[1]):
+    print(j, np.median(flat_samples[:,j]), np.std(flat_samples[:,j]))
+
 #Stars with large temperature differences between CKS (Fulton & Petigura 2018) & SPOCS (Brewer & Fischer 2018)
 arg = (abs(cks['bf18_Teff']-cks['cks_Teff'])>100)
 
@@ -104,7 +107,7 @@ fig,ax = plt.subplots(nrows=1,ncols=1,figsize=(5,5))
 
 ax.plot(lam['Teff_lam'], lam['Prot'], 'o', ms=4, alpha=0.4, color='lightgrey', label='LAMOST–McQuillan', mew=0, rasterized=True)
 ax.plot(cks['cks_Teff'], cks['d21_prot'], 'o', ms=2, label='CKS–David', rasterized=True)
-ax.plot(cks['cks_Teff'][arg], cks['d21_prot'][arg], 'o', ms=4, mfc='None', mew=0.5, color='r')
+ax.plot(cks['cks_Teff'][arg], cks['d21_prot'][arg], 'o', ms=5, mfc='None', mew=0.5, color='k')
 
 ax.errorbar(5200,1,xerr=np.nanmedian(cks['p20_cks_steff_err1']),yerr=0,fmt='.',color='k', zorder=999)
 ax.errorbar(5200,3,xerr=np.nanmedian(lam['e_Teff_lam'][lam['Teff_lam']>5800]),yerr=0,fmt='.',color='k', zorder=999)

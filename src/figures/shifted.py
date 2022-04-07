@@ -100,8 +100,15 @@ roc['flag'] = 'roc'
 model = pd.concat([std, roc], ignore_index=True, sort=True)
 ######################################################################################
 
-cks_shift = 116
-lamost_shift = 106 + 34
+cks_shift = 111
+lamost_shift = 116
+
+#Detrending LAMOST Teff
+# def lamost_teff_detrend(teff):   
+#     dteff = 2.55513439e-13*teff**5 - 7.18129973e-09*teff**4 + 8.04175914e-05*teff**3 - 4.48417848e-01*teff**2 + 1.24490338e+03*teff - 1.37649898e+06
+#     return teff-dteff
+
+# lam["Teff_lam"] = lamost_teff_detrend(lam["Teff_lam"])
 
 
 mpl.rcParams["legend.markerscale"] = 1

@@ -372,7 +372,7 @@ def rossby_plot(teff_bin_centers, flat_samples_10, flat_samples_90):
     ax3.set_xlabel("Effective temperature [K]")
     ax3.set_ylabel("Residuals [%]")
 
-    sns.despine()
+    #sns.despine()
     plt.tight_layout()
     plt.savefig('../figures/mcmc.pdf')
     
