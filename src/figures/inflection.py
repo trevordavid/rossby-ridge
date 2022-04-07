@@ -103,7 +103,7 @@ sun = {"teff": 5772,
 sns.set(font_scale=1.3, context="paper", style="ticks")
 
 
-fig,ax = plt.subplots(nrows=1,ncols=1,figsize=(5,3))
+fig,ax = plt.subplots(nrows=1,ncols=1,figsize=(5,5))
 
 ax.plot(lam['Teff_lam'], lam['Prot'], 'o', ms=4, alpha=0.4, color='lightgrey', label='LAMOST–McQuillan', mew=0, rasterized=True)
 ax.plot(cks['cks_Teff'], cks['d21_prot'], 'o', ms=2, label='CKS–David', rasterized=True)
