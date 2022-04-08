@@ -178,6 +178,7 @@ def residual(ax,
     ax.set_ylabel(ylabel)
     ax.set_xlim(xmin, xmax)
     ax.set_ylim(ymin, ymax)
+    ax.set_yticks(np.arange(-500,750,250))
     
     return ax
 
@@ -191,9 +192,9 @@ sns.set(context="paper",
 
 tstr = " Teff [K]"
 
-fig = plt.figure(constrained_layout=False, figsize=(20,5))
+fig = plt.figure(constrained_layout=False, figsize=(18,5))
 widths = [1,1,1,1,1]
-heights = [2,1]
+heights = [1,1]
 spec = fig.add_gridspec(ncols=5, nrows=2, 
                         width_ratios=widths,
                         height_ratios=heights)

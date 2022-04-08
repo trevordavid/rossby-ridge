@@ -21,7 +21,8 @@ mG_sun = -26.895
 MG_sun = mG_sun - 5.*(np.log10(dpc_sun) - 1.)
 bprp_sun = 0.818
 
-
+#From StackOverflow user unutbu
+#https://stackoverflow.com/questions/18926031/how-to-extract-a-subset-of-a-colormap-as-a-new-colormap-in-matplotlib
 def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
     new_cmap = colors.LinearSegmentedColormap.from_list(
         'trunc({n},{a:.2f},{b:.2f})'.format(n=cmap.name, a=minval, b=maxval),
