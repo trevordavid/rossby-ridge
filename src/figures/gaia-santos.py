@@ -212,11 +212,22 @@ for ax in zip(axes,axs):
         ax[i].set_ylim(0,50)
         ax[i].set_xlabel(r"$G_\mathregular{BP}-G_\mathregular{RP}$ [mag]")
         ax[i].set_ylabel("Rotation period [d]")
-        ax[i].plot(_bprp, constant_rossby(_bprp, 0.496), color='orange', ls='--', label=r'$\mathregular{Ro} = \mathregular{R}_\odot$')
-        ax[i].legend()
+        ax[i].plot(_bprp, constant_rossby(_bprp, 1.2*0.496), color='orange', ls='-', label=r'$\mathregular{Ro} = 1.2 \mathregular{R}_\odot$', zorder=np.inf)
+        ax[i].plot(_bprp, constant_rossby(_bprp, 0.496), color='orange', ls='--', label=r'$\mathregular{Ro} = 1.0 \mathregular{R}_\odot$', zorder=np.inf)
+        ax[i].plot(_bprp, constant_rossby(_bprp, 0.8*0.496), color='orange', ls=':', label=r'$\mathregular{Ro} = 0.8 \mathregular{R}_\odot$', zorder=np.inf)
+        ax[i].legend(prop={"size":8})
         
-        for j,seq in enumerate(gyro_sequences):
-            ax[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
+        #for j,seq in enumerate(gyro_sequences):
+        #    ax[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
+
+for i in range(3):
+    for j,seq in enumerate(gyro_sequences):
+        if i==2:
+            axes[i].plot(_bprp_cluster-0.1, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
+            axs[i].plot(_bprp_cluster-0.1, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
+        else:
+            axes[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
+            axs[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)        
 
 axes[0].set_title("All stars\n(Santos et al. 2021 + Gaia EDR3)")
 axes[1].set_title("Low reddening sample\n(A$_\mathregular{V}$<0.2 mag)")

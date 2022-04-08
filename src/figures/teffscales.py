@@ -229,11 +229,11 @@ residual(ax4, table["Teff"], table["bf18_Teff"], 'LAMOST'+tstr, 'LAMOST-\nSPOCS 
 one_to_one(ax5, table["Teff"], table["m19_Teff"], 'LAMOST'+tstr, 'M19'+tstr, xmin=xmin, xmax=xmax, sc_kws=sc_kws)
 residual(ax6, table["Teff"], table["m19_Teff"], 'LAMOST'+tstr, 'LAMOST-\nM19 [K]', xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, sc_kws=sc_kws)
 
-one_to_one(ax7, lam["Teff_lam"], lam["mcq_Teff"], 'LAMOST'+tstr, 'McQuillan'+tstr, xmin=xmin, xmax=xmax, sc_kws=sc_kws)
-residual(ax8, lam["Teff_lam"], lam["mcq_Teff"], 'LAMOST'+tstr, 'LAMOST-\nMcQuillan [K]', xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, sc_kws=sc_kws)
+one_to_one(ax7, lam["Teff_lam"], lam["mcq_Teff"], 'LAMOST'+tstr, 'MMA14'+tstr, xmin=xmin, xmax=xmax, sc_kws=sc_kws)
+residual(ax8, lam["Teff_lam"], lam["mcq_Teff"], 'LAMOST'+tstr, 'LAMOST-\nMMA14 [K]', xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, sc_kws=sc_kws)
 
-one_to_one(ax9, hall_lamost_xmatch["med_teff"], hall_lamost_xmatch["hall_Teff"], 'LAMOST', 'Hall et al. 2021'+tstr, xmin=5000, xmax=xmax, sc_kws=sc_kws)
-residual(ax10, hall_lamost_xmatch["med_teff"], hall_lamost_xmatch["hall_Teff"], 'LAMOST', 'LAMOST-\nHall [K]', xmin=5000, xmax=xmax, ymin=ymin, ymax=ymax, sc_kws=sc_kws)
+one_to_one(ax9, hall_lamost_xmatch["med_teff"], hall_lamost_xmatch["hall_Teff"], 'LAMOST', 'H21'+tstr, xmin=5000, xmax=xmax, sc_kws=sc_kws)
+residual(ax10, hall_lamost_xmatch["med_teff"], hall_lamost_xmatch["hall_Teff"], 'LAMOST', 'LAMOST-\nH21 [K]', xmin=5000, xmax=xmax, ymin=ymin, ymax=ymax, sc_kws=sc_kws)
 
 
 for ax in [ax1,ax3,ax5,ax7,ax9]:
