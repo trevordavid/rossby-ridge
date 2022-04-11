@@ -26,7 +26,7 @@ sun = {"teff": 5772,
        "e_prot": 25.4-24.5,
        "E_prot": 27-25.4
       }
-      
+
 sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 ####################################################################
 
@@ -116,11 +116,11 @@ for i in range(2):
     ax1[i].set_xlim(6500,5000)
     #ax1[i].set_ylim(0,60)
 
-    ax1[i].plot(sun["teff"], sun["prot"], **sun_kws)
-    ax1[i].plot(sun["teff"], sun["prot"], 'k.')
+    ax1[i].plot(sun["teff"], sun["prot"], zorder=np.inf, **sun_kws)
+    ax1[i].plot(sun["teff"], sun["prot"], 'k.', zorder=np.inf)
 
-    ax2[i].plot(sun["teff"], sun["prot"], **sun_kws)
-    ax2[i].plot(sun["teff"], sun["prot"], 'k.')    
+    ax2[i].plot(sun["teff"], sun["prot"], zorder=np.inf, **sun_kws)
+    ax2[i].plot(sun["teff"], sun["prot"], 'k.', zorder=np.inf)    
 
     ax1[i].set_xlabel("Effective temperature [K]")
     ax1[i].set_ylabel("Rotation period [d]")
