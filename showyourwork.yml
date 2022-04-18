@@ -87,6 +87,7 @@ dependencies:
     - src/data/rocrit_population.h5
     - src/data/standard_population.h5
   src/figures/skumanich.py:
+    - src/data/models/standard_population.h5
     - src/data/mcquillan2014_table1.parquet
     - src/data/kepler_lamost.csv
   src/figures/surveys.py:

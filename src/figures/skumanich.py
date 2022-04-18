@@ -26,7 +26,6 @@ sun = {"teff": 5772,
 
 sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 
-#bk = pd.read_csv("../data/_kim_2010/-kim-2010.csv")
 
 def convective_turnover_timescale(teff):
     #Returns convective turnover timescale in days
@@ -118,12 +117,29 @@ def curtis_teff_bprp(teff):
     return f(teff)
 
 
+# from scipy.interpolate import interp1d
+
+# std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
+# #roc = pd.read_hdf('../models/rocrit_population.h5', key='sample')
+
+# idx = (abs(std['age']-5)<0.01) & (std['evo']==1) & (abs(std['[Fe/H]'])<0.05)
+# model_teff = np.array(std['Teff'][idx])
+# model_prot = np.array(std['period'][idx])
+
+# order = np.argsort(model_teff)
+# model_teff = model_teff[order]
+# model_prot = model_prot[order]
+
+# df = pd.DataFrame({"x": model_teff,
+#                    "y": model_prot})
+# df = df.drop_duplicates()
+
+# x = np.array(df.x)
+# y = np.array(df.y)
+# f = interp1d(x, y, kind='linear', fill_value='extrapolate')
+
+
 #McQuillan et al. 2014
-# mcq = Table.read('../data/mcquillan2014/table1.dat',
-#                 readme='../data/mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
 
 
@@ -156,7 +172,7 @@ lam = lam[lam_mask]
 
 sns.set(style='ticks', font_scale=1.5, context='paper')
 
-_teff = np.linspace(4500,6250,1000)
+_teff = np.linspace(5000,6250,1000)
 
 seq = 'ngc6819+ruprecht147'
 
@@ -176,6 +192,7 @@ plt.plot(sun["teff"], sun["prot"], **sun_kws)
 plt.plot(sun["teff"], sun["prot"], 'k.')
 
 plt.plot(_teff, curtis_teff_gyrochrone(_teff, kind=seq)*(5./2.5)**0.65, label='5 Gyr (n=0.65)', color='orange', lw=4, ls=':')
+#plt.plot(_teff, f(_teff), label='model', color='orange', lw=4, ls=':')
 plt.plot(_teff, curtis_teff_gyrochrone(_teff, kind=seq)*(5./2.5)**0.5, label='5 Gyr (n=0.5)', color='orange', lw=4, ls='--')
 plt.plot(_teff, curtis_teff_gyrochrone(_teff, kind=seq), label='2.5 Gyr', color='orange', lw=4)
 plt.legend()

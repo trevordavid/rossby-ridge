@@ -67,9 +67,9 @@ xm = lamost_xmatch(mcq)
 
 sns.set(font_scale=1.3, context="paper", style="ticks")
 
-fig, axes = plt.subplots(nrows=1,ncols=5,figsize=(14,2))
+fig, axes = plt.subplots(nrows=1,ncols=3,figsize=(8,1.5))
 
-for i,j in enumerate(np.arange(0.1,0.6,0.1)):
+for i,j in enumerate(np.arange(0.1,0.31,0.1)):
     
     arg = xm['mcq_w']>j
     axes[i].scatter(xm['Teff'][arg], xm['mcq_Prot'][arg], s=0.05, alpha=0.2, rasterized=True)
