@@ -1,31 +1,25 @@
 zenodo:
   src/data/data.tar.gz:
     id: 6391526
-    #id: 992742
     contents:
       - src/data/kepler_lamost.csv
       - src/data/kepler_apogee_dr16.fits
-      #- src/data/kepler_apogee_dr16.parquet
       - src/data/cks_merged.parquet
       - src/data/kepler_dr2_1arcsec.parquet
-      #- src/data/lamost_santos.parquet
       - src/data/mcquillan2014_table1.parquet
-      - src/data/models/rocrit_model.csv
-      - src/data/models/standard_model.csv
-      - src/data/models/rocrit_population.h5
-      - src/data/models/standard_population.h5
-      - src/data/rocrit_population.h5
-      - src/data/standard_population.h5
-      - src/data/S21_rotators.csv
-      - src/data/santos2021/S21_rotators.csv
+      - src/data/santos2021_rotators.parquet
+  src/data/rocrit_population.h5:
+    id: 6471539
+  src/data/standard_population.h5:
+    id: 6471539
 
 dependencies:
   src/figures/ages.py:
     - src/data/mcquillan2014_table1.parquet
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
-    - src/data/models/rocrit_population.h5
-    - src/data/models/standard_population.h5
+    - src/data/rocrit_population.h5
+    - src/data/standard_population.h5
   src/figures/asteroseismic.py:
     - src/data/kepler_lamost.csv
     - src/data/cks_merged.parquet
@@ -33,10 +27,10 @@ dependencies:
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
     - src/data/cks_merged.parquet
-    - src/data/santos2021/S21_rotators.csv
+    - src/data/santos2021_rotators.parquet
   src/figures/comparison.py:
     - src/data/cks_merged.parquet
-    - src/data/santos2021/S21_rotators.csv
+    - src/data/santos2021_rotators.parquet
   src/figures/fraction.py:
     - src/data/mcquillan2014_table1.parquet
     - src/data/kepler_lamost.csv
@@ -61,8 +55,6 @@ dependencies:
     - src/data/kepler_lamost.csv
     - src/data/models/rocrit_model.csv
     - src/data/models/standard_model.csv
-    - src/data/models/rocrit_population.h5
-    - src/data/models/standard_population.h5
     - src/data/rocrit_population.h5
     - src/data/standard_population.h5
   src/figures/percentiles.py:
@@ -80,14 +72,10 @@ dependencies:
     - src/data/mcquillan2014_table1.parquet
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
-    - src/data/models/rocrit_model.csv
-    - src/data/models/standard_model.csv
-    - src/data/models/rocrit_population.h5
-    - src/data/models/standard_population.h5
     - src/data/rocrit_population.h5
     - src/data/standard_population.h5
   src/figures/skumanich.py:
-    - src/data/models/standard_population.h5
+    - src/data/standard_population.h5
     - src/data/mcquillan2014_table1.parquet
     - src/data/kepler_lamost.csv
   src/figures/surveys.py:
@@ -95,7 +83,6 @@ dependencies:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/kepler_apogee_dr16.fits
-    #- src/data/kepler_apogee_dr16.parquet
   src/figures/teffscales.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
@@ -104,5 +91,4 @@ dependencies:
   src/figures/xmatch.py:
     - src/data/mcquillan2014_table1.parquet
     - src/data/kepler_dr2_1arcsec.parquet
-    - src/data/S21_rotators.csv
-    - src/data/santos2021/S21_rotators.csv
+    - src/data/santos2021_rotators.parquet
