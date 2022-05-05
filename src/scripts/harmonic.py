@@ -1,3 +1,4 @@
+import paths
 import scipy.stats as st
 import pandas as pd
 import matplotlib.pyplot as plt

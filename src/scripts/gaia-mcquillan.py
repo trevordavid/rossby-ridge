@@ -1,3 +1,4 @@
+import paths
 from dustmaps.bayestar import BayestarWebQuery
 from dustmaps.config import config
 config.reset()

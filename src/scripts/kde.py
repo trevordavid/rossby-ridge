@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import numpy as np
 import pandas as pd
 
@@ -26,11 +27,21 @@ sun = {"teff": 5772,
 
 sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 
+#bk = pd.read_csv("../data/_kim_2010/-kim-2010.csv")
 
-def convective_turnover_timescale(teff):
+def convective_turnover_timescale(teff,
+                                  ref='gunn1998'):
     #Returns convective turnover timescale in days
-    #Gunn et al. 1998 relation, from Cranmer & Saar 2011
-    return 314.24*np.exp(-(teff/1952.5) - (teff/6250.)**18.) + 0.002
+    
+    if ref == 'gunn1998':
+        #Gunn et al. 1998 relation, from Cranmer & Saar 2011
+        return 314.24*np.exp(-(teff/1952.5) - (teff/6250.)**18.) + 0.002
+    
+    # elif ref == '2010':
+    #     # & Kim 2010 relation for local tau_c
+    #     teff_pts = 10.**bk['logT']
+    #     tc_pts   = bk['Local_tau_c']
+    #     return np.interp(teff, teff_pts, tc_pts)
 
 
 def constant_rossby(teff, ro):
@@ -117,30 +128,36 @@ def curtis_teff_bprp(teff):
     return f(teff)
 
 
-# from scipy.interpolate import interp1d
 
-# std = pd.read_hdf('../data/standard_population.h5', key='sample')
-# #roc = pd.read_hdf('../models/rocrit_population.h5', key='sample')
 
-# idx = (abs(std['age']-5)<0.01) & (std['evo']==1) & (abs(std['[Fe/H]'])<0.05)
-# model_teff = np.array(std['Teff'][idx])
-# model_prot = np.array(std['period'][idx])
-
-# order = np.argsort(model_teff)
-# model_teff = model_teff[order]
-# model_prot = model_prot[order]
-
-# df = pd.DataFrame({"x": model_teff,
-#                    "y": model_prot})
-# df = df.drop_duplicates()
-
-# x = np.array(df.x)
-# y = np.array(df.y)
-# f = interp1d(x, y, kind='linear', fill_value='extrapolate')
+######################################################################################
+#McQuillan et al. 2013
+mcq_koi = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/ApJ/775/L11/table1.dat",
+                readme="https://cdsarc.cds.unistra.fr/ftp/J/ApJ/775/L11/ReadMe",
+                format="ascii.cds")
+mcq_koi = mcq_koi.to_pandas()
+mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
+# mcq = Table.read('../data/mcquillan2014/table1.dat',
+#                 readme='../data/mcquillan2014/ReadMe',
+#                 format='ascii.cds')
+# mcq = mcq.to_pandas()
+# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+######################################################################################
+
+
+######################################################################################
+# California-Kepler Survey (Fulton & Petigura 2018)
+# This data table has been augmented with data from other surveys (see David et al. 2021)
+cks = pd.read_parquet('../data/cks_merged.parquet')
+# The dataframe has a row entry for each KOI, meaning individual star are represented N times
+# where N is the number of KOIs detected around that star so we drop duplicates.
+cks = cks.drop_duplicates(subset=['kepid'], keep='first')
+cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
+######################################################################################
 
 
 ######################################################################################
@@ -160,44 +177,86 @@ lam_mask &= (lam["logg_lam"]>3)
 lam_mask &= (lam["logg_lam"]<5)
 lam_mask &= (abs(lam["feh_lam"])<2)
 lam = lam[lam_mask]
+
+print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
+print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
+print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 ######################################################################################
 
-# ######################################################################################
-# hall = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/table1.dat",
-#                   readme="https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/ReadMe",
-#                   format="ascii.cds")
+######################################################################################
+hall = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/table1.dat",
+                  readme="https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/ReadMe",
+                  format="ascii.cds")
 
-# hall.info()
-# ######################################################################################
+hall.info()
+######################################################################################
 
-sns.set(style='ticks', font_scale=1.5, context='paper')
+sns.set(style='ticks', font_scale=1.4, context='paper')
 
-_teff = np.linspace(5000,6250,1000)
+sns.set(style='ticks', font_scale=1.6, context='paper')
 
-seq = 'ngc6819+ruprecht147'
+fig,(ax1,ax2,ax3) = plt.subplots(nrows=1, ncols=3, 
+                            figsize=(15,6))
 
-#Masuda et al. 2021 data
-specteff = np.array([5996.3610916725,6163.47095871239,6351.57452764171])
-specrot= np.array([15.1398954901294,10.9922199999722,5.40119754702563])
-spectefferr = np.array([[81.4555633310,58.78236529041,103.289013296011],[103.289013296011,79.77606717985,282.15535339398]])
-specroterr = np.array([[5.1308763552480,4.27108719012285,2.39406040514287],[8.1215420545671,7.1261658513948,4.30003441066639]])
+sns.kdeplot(
+    x=cks["cks_Teff"], 
+    y=cks["mcq_Prot"], 
+    fill=True, 
+    bw_adjust=0.5,
+    ax=ax1
+)
 
-sns.displot(x=lam["Teff_lam"], 
-            y=lam["Prot"], binwidth=(50, 1))
+sns.kdeplot(
+    x=lam["Teff_lam"], 
+    y=lam["Prot"], 
+    fill=True, 
+    bw_adjust=0.25,
+    ax=ax2
+)
 
-plt.errorbar(specteff, specrot, xerr=spectefferr, yerr=specroterr, fmt='o', color='white', zorder=np.inf)
+sns.kdeplot(
+    x=hall["Teff"], 
+    y=hall["P"], 
+    fill=True, 
+    bw_adjust=0.5,
+    ax=ax3
+)
 
-sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
-plt.plot(sun["teff"], sun["prot"], **sun_kws)
-plt.plot(sun["teff"], sun["prot"], 'k.')
 
-plt.plot(_teff, curtis_teff_gyrochrone(_teff, kind=seq)*(5./2.5)**0.65, label='5 Gyr (n=0.65)', color='orange', lw=4, ls=':')
-#plt.plot(_teff, f(_teff), label='model', color='orange', lw=4, ls=':')
-plt.plot(_teff, curtis_teff_gyrochrone(_teff, kind=seq)*(5./2.5)**0.5, label='5 Gyr (n=0.5)', color='orange', lw=4, ls='--')
-plt.plot(_teff, curtis_teff_gyrochrone(_teff, kind=seq), label='2.5 Gyr', color='orange', lw=4)
-plt.legend()
-plt.xlim(7000,5000)
-plt.ylim(0,50)
-plt.xlabel("Effective temperature [K]")
-plt.ylabel("Rotation period [d]")
-plt.savefig('../figures/skumanich.pdf')
+for ax in [ax1,ax2,ax3]:
+    
+    ax.set_xlim(6750,4500)
+    ax.set_ylim(-1,41)
+    ax.set_xlabel("Effective temperature [K]")
+    ax.set_ylabel("Rotation period [d]")
+    
+
+    gyro_sequences = ['pleiades-ro', 'praesepe', 'ngc6811', 'ngc6819+ruprecht147']
+    gyro_ages = ['0.12 Gyr', '0.67 Gyr', '1 Gyr', '2.5 Gyr']
+    _teff = np.linspace(4500,6250,1000)
+
+    for i,seq in enumerate(gyro_sequences):
+        ax.plot(_teff, curtis_teff_gyrochrone(_teff, kind=seq), label=gyro_ages[i], color='k', lw=3, alpha=0.5)
+ 
+    for i,_ro in enumerate([0.4,1.45,2]):
+        ax.plot(_teff, constant_rossby(_teff, _ro), 'orange', lw=3, ls='--', alpha=0.5, label="Ro = "+str(_ro))                
+        
+    labelLines(ax.get_lines(), 
+               outline_color='#eeeeee',
+               outline_width=3,
+               xvals=(4500, 5600), 
+               zorder=2.5, 
+               size=9)  
+    
+    
+    ax.plot(sun["teff"], sun["prot"], 'o', color='C1', label='Sun')
+    ax.errorbar(sun["teff"], sun["prot"], yerr=np.vstack([sun["e_prot"], sun["E_prot"]]), fmt="o", 
+                   color="C1", mec="white", ms=6)
+    
+
+ax1.set_title('CKS–McQuillan')
+ax2.set_title('LAMOST–McQuillan')
+ax3.set_title('Hall et al. 2021')
+sns.despine()
+plt.tight_layout()
+plt.savefig('../figures/kde.pdf')
