@@ -42,14 +42,14 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
 
 ######################################################################################
 # California-Kepler Survey (Fulton & Petigura 2018)
 # This data table has been augmented with data from other surveys (see David et al. 2021)
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -59,7 +59,7 @@ cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 #print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 #print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
@@ -297,4 +297,4 @@ axes[3].set_ylabel('Rotation period [d]')
 
 sns.despine()
 plt.tight_layout()
-plt.savefig('../figures/rocrit.pdf')
+plt.savefig(paths.figures / 'rocrit.pdf')

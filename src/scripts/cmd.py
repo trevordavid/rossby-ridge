@@ -41,16 +41,16 @@ sns.set(
         )
 
 #Gaia-Kepler cross-match from Megan Bedell
-dr2 = pd.read_parquet('../data/kepler_dr2_1arcsec.parquet')
+dr2 = pd.read_parquet(paths.data / 'kepler_dr2_1arcsec.parquet')
 dr2 = dr2.rename(columns={"logg": "KIC_logg"})
 dr2 = dr2.add_prefix("dr2_")
 dr2['MG'] = dr2['dr2_phot_g_mean_mag'] - 5 * (np.log10(dr2['dr2_r_est']) - 1)
 
 #McQuillan et al. 2014
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
 #Santos et al. 2021
-san = pd.read_csv('../data/S21_rotators.csv')
+san = pd.read_csv(paths.data / 'S21_rotators.csv')
 san = san.add_prefix('san_')
 
 #Hall et al. 2021
@@ -62,7 +62,7 @@ hall = hall.to_pandas()
 hall = hall.add_prefix('hall_')
 
 #CKS (Fulton & Petigura 2018)
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -163,4 +163,4 @@ for i in range(2,3):
     lgnd = axes[i].legend(loc='lower left', prop={'size':8})
     
 sns.despine()
-plt.savefig('../figures/cmd.pdf')
+plt.savefig(paths.figures / 'cmd.pdf')

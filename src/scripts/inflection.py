@@ -15,10 +15,10 @@ mpl.rcParams["savefig.bbox"] = "tight"
 mpl.rcParams["savefig.dpi"] = 300
 
 #CKS (Fulton & Petigura 2018)
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 
 #LAMOST-McQuillan
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 
 def ridge_hi(teff):
@@ -131,5 +131,5 @@ for ind in inds:
     
 ax.set_xlabel('Effective temperature [K]')
 ax.set_ylabel('Rotation period [d]')
-plt.savefig('../figures/inflection.pdf')
+plt.savefig(paths.figures / 'inflection.pdf')
 plt.show()

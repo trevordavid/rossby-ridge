@@ -36,19 +36,19 @@ mcq_koi = mcq_koi.to_pandas()
 mcq_koi = mcq_koi.add_prefix('mcq_')
 
 #McQuillan et al. 2014
-# mcq = Table.read('../data/mcquillan2014/table1.dat',
-#                 readme='../data/mcquillan2014/ReadMe',
+# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
+#                 readme=paths.data / 'mcquillan2014/ReadMe',
 #                 format='ascii.cds')
 # mcq = mcq.to_pandas()
 # mcq = mcq.add_prefix('mcq_')
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
 
 ######################################################################################
 # California-Kepler Survey (Fulton & Petigura 2018)
 # This data table has been augmented with data from other surveys (see David et al. 2021)
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -58,7 +58,7 @@ cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
@@ -81,10 +81,10 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # APOGEE-Kepler (from Adrian Price-Whelan, using APOGEE DR16)
-apo = Table.read('../data/kepler_apogee_dr16.fits')
+apo = Table.read(paths.data / 'kepler_apogee_dr16.fits')
 names = [name for name in apo.colnames if len(apo[name].shape) <= 1]
 apo  = apo[names].to_pandas()
-#apo = pd.read_parquet('../data/kepler_apogee_dr16.parquet')
+#apo = pd.read_parquet(paths.data / 'kepler_apogee_dr16.parquet')
 apok = apo.merge(mcq, how='inner', left_on='kepid', right_on='mcq_KIC')
 ######################################################################################
 
@@ -122,5 +122,5 @@ for i in range(4):
 ax[0].set_ylabel("Rotation period [d]")    
 sns.despine()
 plt.subplots_adjust(wspace=0)
-plt.savefig('../figures/surveys.pdf')
+plt.savefig(paths.figures / 'surveys.pdf')
 plt.savefig('../static/surveys.png')

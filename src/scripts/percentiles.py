@@ -34,19 +34,19 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-# mcq = Table.read('../data/mcquillan2014/table1.dat',
-#                 readme='../data/mcquillan2014/ReadMe',
+# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
+#                 readme=paths.data / 'mcquillan2014/ReadMe',
 #                 format='ascii.cds')
 # mcq = mcq.to_pandas()
 # mcq = mcq.add_prefix('mcq_')
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
 
 ######################################################################################
 # California-Kepler Survey (Fulton & Petigura 2018)
 # This data table has been augmented with data from other surveys (see David et al. 2021)
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -73,7 +73,7 @@ ridge &= mask
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
@@ -96,13 +96,13 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # van Saders et al. 2019 models
-std = pd.read_csv('../data/standard_model.csv')
-roc = pd.read_csv('../data/rocrit_model.csv')
+std = pd.read_csv(paths.data / 'standard_model.csv')
+roc = pd.read_csv(paths.data / 'rocrit_model.csv')
 
-# std = pd.read_hdf('../data/standard_population.h5', key='sample')
+# std = pd.read_hdf(paths.data / 'standard_population.h5', key='sample')
 # std = std[std['evo']==1]
 
-# roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')
+# roc = pd.read_hdf(paths.data / 'models/rocrit_population.h5', key='sample')
 # roc = roc[roc['evo']==1]
 
 std['flag'] = 'std'
@@ -112,7 +112,7 @@ model = pd.concat([std, roc], ignore_index=True, sort=True)
 ######################################################################################
 
 
-#bk = pd.read_csv("../data/_kim_2010/-kim-2010.csv")
+#bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
 
 def convective_turnover_timescale(teff,
                                   ref='gunn1998'):
@@ -191,7 +191,7 @@ plt.xlabel("Effective temperature [K]")
 plt.ylabel("Rotation period [d]")
 plt.legend(prop={'size':13})
 sns.despine()
-plt.savefig('../figures/percentiles.pdf')
+plt.savefig(paths.figures / 'percentiles.pdf')
 #plt.show()
 
 arg = (teff_bin_centers<6250) & (teff_bin_centers>4500)

@@ -28,7 +28,7 @@ def ridge_lo(teff):
 xp = [6500,6500,5800,5800]
 yp = [ridge_lo(6500),ridge_hi(6500),ridge_hi(5800),ridge_lo(5800)]
 
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 #print(np.shape(cks))
@@ -36,7 +36,7 @@ cks = pd.read_parquet('../data/cks_merged.parquet')
 #print(np.shape(cks))
 
 #Santos et al. 2021
-san = pd.read_csv('../data/S21_rotators.csv')
+san = pd.read_csv(paths.data / 'S21_rotators.csv')
 san = san.add_prefix('san_')
 san = san.sort_values(['san_KIC', 'san_Kp'], ascending = (True, True))
 san = san.drop_duplicates(subset=['san_KIC'], keep='first')
@@ -51,7 +51,7 @@ print(np.shape(cks))
 
 
 cks_pos = cks[['gaia_ra', 'gaia_dec']].copy()
-cks_pos.to_csv('../data/cks-gaia-coords.csv', index=False)
+cks_pos.to_csv(paths.data / 'cks-gaia-coords.csv', index=False)
 
 
 
@@ -59,7 +59,7 @@ cks_pos.to_csv('../data/cks-gaia-coords.csv', index=False)
 from astropy import units as u
 from astroquery.xmatch import XMatch
 import pandas as pd
-table = XMatch.query(cat1=open('../data/cks-gaia-coords.csv'),
+table = XMatch.query(cat1=open(paths.data / 'cks-gaia-coords.csv'),
                      cat2='vizier:J/ApJS/245/34/catalog',
                      max_distance=1 * u.arcsec,
                      colRA1='gaia_ra',
@@ -135,4 +135,4 @@ axes[4][0].set_ylabel('Rotation period [d]\n(McQuillan et al. 2013)')
 
 sns.despine()
 plt.subplots_adjust(hspace=0.25,wspace=0.25)
-plt.savefig('../figures/comparison.pdf')
+plt.savefig(paths.figures / 'comparison.pdf')

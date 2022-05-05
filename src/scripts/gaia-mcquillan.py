@@ -241,5 +241,5 @@ axes[0].set_title("All stars\n(McQuillan et al. 2014 + Gaia EDR3)")
 axes[1].set_title("Low reddening sample\n(A$_\mathregular{V}$<0.2 mag)")
 axes[2].set_title("Low reddening sample\nwith -0.1 mag shift")
 plt.tight_layout()
-plt.savefig('../figures/gaia-mcquillan.pdf')
+plt.savefig(paths.figures / 'gaia-mcquillan.pdf')
 
