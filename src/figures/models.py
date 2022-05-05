@@ -85,7 +85,7 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # van Saders et al. 2019 models
-std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
+std = pd.read_hdf('../data/standard_population.h5', key='sample')
 std = std[std['evo']==1]
 
 roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')

@@ -35,7 +35,7 @@ cks = pd.read_parquet('../data/cks_merged.parquet')
 #print(np.shape(cks))
 
 #Santos et al. 2021
-san = pd.read_csv('../data/santos2021/S21_rotators.csv')
+san = pd.read_csv('../data/S21_rotators.csv')
 san = san.add_prefix('san_')
 san = san.sort_values(['san_KIC', 'san_Kp'], ascending = (True, True))
 san = san.drop_duplicates(subset=['san_KIC'], keep='first')
