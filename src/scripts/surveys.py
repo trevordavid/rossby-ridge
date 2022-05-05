@@ -123,4 +123,5 @@ ax[0].set_ylabel("Rotation period [d]")
 sns.despine()
 plt.subplots_adjust(wspace=0)
 plt.savefig(paths.figures / 'surveys.pdf')
-plt.savefig('../static/surveys.png')
+if False:
+    plt.savefig(paths.static / 'surveys.png')

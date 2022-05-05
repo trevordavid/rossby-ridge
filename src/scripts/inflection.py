@@ -132,4 +132,4 @@ for ind in inds:
 ax.set_xlabel('Effective temperature [K]')
 ax.set_ylabel('Rotation period [d]')
 plt.savefig(paths.figures / 'inflection.pdf')
-plt.show()
+#plt.show()

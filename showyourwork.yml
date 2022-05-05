@@ -1,98 +1,104 @@
-zenodo_sandbox:
-  src/data.tar.gz:
-    id: 1058428
+version: 0.9.0.dev5
+
+scripts:
+  py:
+    python {script} > /dev/null
+
+datasets:
+  10.5072/zenodo.1058428:
     contents:
-      - src/data/cks_merged.parquet
-      - src/data/kepler_apogee_dr16.fits
-      - src/data/kepler_dr2_1arcsec.parquet
-      - src/data/kepler_lamost.csv
-      - src/data/mcquillan2014_table1.parquet
-      - src/data/rocrit_model.csv
-      - src/data/rocrit_population.h5
-      - src/data/S21_rotators.csv
-      - src/data/standard_model.csv
-      - src/data/standard_population.h5
+      data.tar.gz:
+        cks_merged.parquet: src/data/cks_merged.parquet
+        kepler_apogee_dr16.fits: src/data/kepler_apogee_dr16.fits
+        kepler_dr2_1arcsec.parquet: src/data/kepler_dr2_1arcsec.parquet
+        kepler_lamost.csv: src/data/kepler_lamost.csv
+        mcquillan2014_table1.parquet: src/data/mcquillan2014_table1.parquet
+        rocrit_model.csv: src/data/rocrit_model.csv
+        rocrit_population.h5: src/data/rocrit_population.h5
+        S21_rotators.csv: src/data/S21_rotators.csv
+        standard_model.csv: src/data/standard_model.csv
+        standard_population.h5: src/data/standard_population.h5
 
 dependencies:
-  src/figures/ages.py:
+  src/scripts/ages.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
     - src/data/rocrit_population.h5
     - src/data/standard_population.h5
-  src/figures/asteroseismic.py:
+  src/scripts/asteroseismic.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
-  src/figures/cmd.py:
+  src/scripts/cmd.py:
     - src/data/S21_rotators.csv
     - src/data/cks_merged.parquet
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
-  src/figures/comparison.py:
+  src/scripts/comparison.py:
     - src/data/S21_rotators.csv
     - src/data/cks_merged.parquet
-  src/figures/fraction.py:
+  src/scripts/fraction.py:
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-  src/figures/gap.py:
+  src/scripts/gap.py:
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-  src/figures/harmonic.py:
+  src/scripts/harmonic.py:
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
-  src/figures/inflection.py:
+  src/scripts/inflection.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
-  src/figures/kde.py:
-    - src/data/cks_merged.parquet
-    - src/data/kepler_lamost.csv
-    - src/data/mcquillan2014_table1.parquet
-  src/figures/mcmc.py:
+  src/scripts/kde.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-  src/figures/models.py:
+  src/scripts/mcmc.py:
+    - src/data/cks_merged.parquet
+    - src/data/kepler_lamost.csv
+    - src/data/mcquillan2014_table1.parquet
+  src/scripts/models.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
     - src/data/rocrit_population.h5
     - src/data/standard_population.h5
-  src/figures/percentiles.py:
+  src/scripts/percentiles.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
     - src/data/rocrit_model.csv
     - src/data/standard_model.csv
-  src/figures/ridge.py:
+  src/scripts/ridge.py:
     - src/data/cks_merged.parquet
-  src/figures/rocrit.py:
+  src/scripts/rocrit.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-  src/figures/shifted.py:
+  src/scripts/shifted.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
     - src/data/rocrit_population.h5
     - src/data/standard_population.h5
-  src/figures/skumanich.py:
+  src/scripts/skumanich.py:
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-  src/figures/surveys.py:
+  src/scripts/surveys.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_apogee_dr16.fits
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-  src/figures/teffscales.py:
+  src/scripts/teffscales.py:
     - src/data/cks_merged.parquet
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-  src/figures/weights.py:
+  src/scripts/weights.py:
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
-  src/figures/xmatch.py:
+  src/scripts/xmatch.py:
     - src/data/S21_rotators.csv
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
