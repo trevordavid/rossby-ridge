@@ -39,11 +39,6 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
-#                 readme=paths.data / 'mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
@@ -56,8 +51,6 @@ cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
 cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
-# Filter stars that have discrepant Teff between CKS and SPOCS
-#cks_mask = abs(cks['cks_Teff']-cks['bf18_Teff'])/cks['cks_Teff'] < 0.02
 ######################################################################################
 
 
@@ -102,7 +95,6 @@ sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":8, "rasterized":True}
 sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 
-#sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 
 #We only want to plot dwarf stars
 logg_thresh = 4.1
@@ -123,7 +115,7 @@ plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"a",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig(paths.figures / 'std-model-cks.pdf')
 
-#sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'][cks_ms], cks['d21_prot'][cks_ms], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
@@ -142,7 +134,7 @@ mpl.rcParams["legend.markerscale"] = 5
 sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":1, "rasterized":True, "alpha":0.75}
 
-#sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+
 sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'][lam_ms], lam['Prot'][lam_ms], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
@@ -157,7 +149,7 @@ plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"c",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig(paths.figures / 'std-model-lamost.pdf')
 
-#sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})]
+
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'][lam_ms], lam['Prot'][lam_ms], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)

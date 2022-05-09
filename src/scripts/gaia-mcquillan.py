@@ -72,15 +72,12 @@ def gaia_edr3_vizier_xmatch(vizier_code):
     edr3['BP-RP'] = edr3['bp_rp']
     edr3['Gmag'] = edr3['phot_g_mean_mag']
     
-    # Store in the object named "Amy"
     cat1 = edr3.copy()
 
     cmd_coeff = [-0.0319809, 4.08935, 5.76321, -6.98323, 3.06721, -0.589493, 0.0417076]
     hyades_cmd = np.poly1d(np.flip(cmd_coeff))
 
     #Query the dust map
-
-    # I have McQuillan+2014 loaded in an astropy table called "Amy"
     distance_cat1 = 1e3/cat1['parallax']
     ifix = np.where(distance_cat1 <= 0)[0]
     if len(ifix) > 0:
@@ -125,11 +122,6 @@ def gaia_edr3_vizier_xmatch(vizier_code):
 # McQuillan et al. 2014 cross-match with Gaia EDR3
 mcq_vizier_code = "J/ApJS/211/24/table1"
 mcq, mcq_ikep = gaia_edr3_vizier_xmatch(mcq_vizier_code)
-
-# Santos et al. 2021 cross-match with Gaia EDR3
-# san_vizier_code = "J/ApJS/255/17/table1"
-# san, san_ikep = gaia_edr3_vizier_xmatch(san_vizier_code)
-
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl

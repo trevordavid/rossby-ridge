@@ -36,11 +36,6 @@ mcq_koi = mcq_koi.to_pandas()
 mcq_koi = mcq_koi.add_prefix('mcq_')
 
 #McQuillan et al. 2014
-# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
-#                 readme=paths.data / 'mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 

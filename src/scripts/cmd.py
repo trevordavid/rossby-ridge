@@ -131,7 +131,6 @@ axes[1].plot(bprp[san_rot], MG[san_rot], ',', **phot_kws)
 axes[2].plot(bprp[san_rot], MG[san_rot], ',', **phot_kws)
 
 #Hack for legend troubles
-#axes[0].plot(bprp[mcq_rot].iloc[0], MG[mcq_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(McQuillan et al. 2014)')
 axes[1].plot(bprp[san_rot].iloc[0], MG[san_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(Santos et al. 2021)')
 axes[2].plot(bprp[san_rot].iloc[0], MG[san_rot].iloc[0], '.', ms=1, color='orange', alpha=1, label='photometric periods\n(Santos et al. 2021)')
 
@@ -155,7 +154,6 @@ for i in range(2,3):
     f = np.reshape(kernel(positions).T, xx.shape)
 
     cset = axes[i].contour(xx, yy, f, colors='C0', levels=4, linewidths=0.5, zorder=998)
-    #cset.collections[0].set_label('asteroseismic periods\n(Hall et al. 2021)')
 
     #Hack for asteroseismic legend label
     axes[i].plot([-100,-99],[12,12],'C0',label='asteroseismic periods\n(Hall et al. 2021)')

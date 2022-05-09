@@ -60,8 +60,6 @@ cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 ######################################################################################
 # LAMOST-Kepler 
 lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
-#print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
-#print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
 # Drop duplicate sources, keeping the one with the brighter G magnitude
 lam = lam.sort_values(["KIC", "Gmag"], ascending = (True, True))
@@ -171,13 +169,11 @@ def lamost_teff_detrend(teff):
     dteff = 2.55513439e-13*teff**5 - 7.18129973e-09*teff**4 + 8.04175914e-05*teff**3 - 4.48417848e-01*teff**2 + 1.24490338e+03*teff - 1.37649898e+06
     return teff-dteff
 
-#lam["Teff_lam"] = lamost_teff_detrend(lam["Teff_lam"])
-
 lam_teff = lam["Teff_lam"]
 lam_e_teff = lam["e_Teff_lam"]
 lam_prot = lam["Prot"]
 
-#Detrended!
+#Not detrended!
 teff_bin_centers2, period_90th_pctl2, e_period_90th_pctl2 = percentile_bootstrap(pctl=90.)
 teff_bin_centers2, period_10th_pctl2, e_period_10th_pctl2 = percentile_bootstrap(pctl=10.)    
 
@@ -244,8 +240,6 @@ for i,teff in enumerate([cks['cks_Teff'],
     chisq_fix = np.sum((_ydata[_arg] - expected_fix)**2 / expected_fix)
     chisq_var = np.sum((_ydata[_arg] - expected_var)**2 / expected_var)
     
-    #bic_fix = len(_ydata[_arg]) - 2*(-0.5*chisq_fix)
-    #bic_var = len(_ydata[_arg]) - 2*(-0.5*chisq_var)
 
     axes[i].errorbar(_xdata[_arg], _ydata[_arg], yerr = 0.1*_ydata[_arg], 
                      **ebar_kws)

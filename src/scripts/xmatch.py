@@ -33,7 +33,6 @@ mcq = mcq.drop_duplicates(subset=['kepid'], keep='first')
 def lamost_xmatch(df):
     
     df_pos = df[['ra', 'dec']].copy()
-    #df_pos.head()
     df_pos.to_csv(paths.data / 'coords.csv', index=False)
     
     table = XMatch.query(cat1=open(paths.data / 'coords.csv'),
@@ -44,8 +43,6 @@ def lamost_xmatch(df):
                          colRA2='RAJ2000',
                          colDec2='DEJ2000')
 
-    #type(table)
-    #print(table)
     table = table.to_pandas()
     
     unq = np.unique(table['ra'], return_index=True, return_counts=True)
@@ -56,7 +53,6 @@ def lamost_xmatch(df):
         arg = unq[0] == table['ra'].iloc[i]
         table['xmatch_count'].iloc[i] = unq[2][arg]
 
-    #table = table.sort_values(by=["gaia_ra"])
     table = table.merge(df, how='right', left_on='ra', right_on='ra')
     table = table.sort_values(["ra","angDist"], ascending = (True, True))
     table = table.drop_duplicates(subset="ra", keep="first")

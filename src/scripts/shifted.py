@@ -109,8 +109,6 @@ sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":8, "rasterized":True}
 sun_kws = {"marker":"o", "color":"black", "ms":8, "mfc":"None", "mew":1}
 
-#sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
-
 #We only want to plot dwarf stars
 logg_thresh = 4.1
 cks_ms = cks['p20_cks_slogg'] > logg_thresh

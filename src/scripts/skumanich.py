@@ -118,28 +118,6 @@ def curtis_teff_bprp(teff):
     return f(teff)
 
 
-# from scipy.interpolate import interp1d
-
-# std = pd.read_hdf(paths.data / 'standard_population.h5', key='sample')
-# #roc = pd.read_hdf('../models/rocrit_population.h5', key='sample')
-
-# idx = (abs(std['age']-5)<0.01) & (std['evo']==1) & (abs(std['[Fe/H]'])<0.05)
-# model_teff = np.array(std['Teff'][idx])
-# model_prot = np.array(std['period'][idx])
-
-# order = np.argsort(model_teff)
-# model_teff = model_teff[order]
-# model_prot = model_prot[order]
-
-# df = pd.DataFrame({"x": model_teff,
-#                    "y": model_prot})
-# df = df.drop_duplicates()
-
-# x = np.array(df.x)
-# y = np.array(df.y)
-# f = interp1d(x, y, kind='linear', fill_value='extrapolate')
-
-
 #McQuillan et al. 2014
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
@@ -162,14 +140,6 @@ lam_mask &= (lam["logg_lam"]<5)
 lam_mask &= (abs(lam["feh_lam"])<2)
 lam = lam[lam_mask]
 ######################################################################################
-
-# ######################################################################################
-# hall = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/table1.dat",
-#                   readme="https://cdsarc.cds.unistra.fr/ftp/J/other/NatAs/5.707/ReadMe",
-#                   format="ascii.cds")
-
-# hall.info()
-# ######################################################################################
 
 sns.set(style='ticks', font_scale=1.5, context='paper')
 

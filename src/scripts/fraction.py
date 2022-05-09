@@ -30,11 +30,6 @@ sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 
 ######################################################################################
 #McQuillan et al. 2014
-# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
-#                 readme=paths.data / 'mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
@@ -51,7 +46,6 @@ lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 
 lam_mask = (lam["Teff_lam"]>3000)
 lam_mask = (lam["Teff_lam"]<8000)
-#lam_mask &= (lam["logg_lam"]>3)
 lam_mask &= (lam["logg_lam"]>4.1)
 lam_mask &= (lam["logg_lam"]<5)
 lam_mask &= (abs(lam["feh_lam"])<2)
@@ -63,8 +57,6 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 ######################################################################################
 
 ######################################################################################
-#bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
-
 def convective_turnover_timescale(teff):    
     #Returns convective turnover timescale in days
     #Gunn et al. 1998 relation, from Cranmer & Saar 2011

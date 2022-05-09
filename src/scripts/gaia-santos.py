@@ -72,15 +72,12 @@ def gaia_edr3_vizier_xmatch(vizier_code):
     edr3['BP-RP'] = edr3['bp_rp']
     edr3['Gmag'] = edr3['phot_g_mean_mag']
     
-    # Store in the object named "Amy"
     cat1 = edr3.copy()
 
     cmd_coeff = [-0.0319809, 4.08935, 5.76321, -6.98323, 3.06721, -0.589493, 0.0417076]
     hyades_cmd = np.poly1d(np.flip(cmd_coeff))
 
     #Query the dust map
-
-    # I have McQuillan+2014 loaded in an astropy table called "Amy"
     distance_cat1 = 1e3/cat1['parallax']
     ifix = np.where(distance_cat1 <= 0)[0]
     if len(ifix) > 0:
@@ -218,8 +215,6 @@ for ax in zip(axes,axs):
         ax[i].plot(_bprp, constant_rossby(_bprp, 0.8*0.496), color='orange', ls=':', label=r'$\mathregular{Ro} = 0.8 \mathregular{R}_\odot$', zorder=np.inf)
         ax[i].legend(prop={"size":8})
         
-        #for j,seq in enumerate(gyro_sequences):
-        #    ax[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
 
 for i in range(3):
     for j,seq in enumerate(gyro_sequences):

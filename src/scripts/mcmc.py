@@ -56,8 +56,6 @@ cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 ######################################################################################
 # LAMOST-Kepler 
 lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
-#print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
-#print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
 # Drop duplicate sources, keeping the one with the brighter G magnitude
 lam = lam.sort_values(["KIC", "Gmag"], ascending = (True, True))
@@ -243,7 +241,6 @@ def constant_rossby_sampler(x, y, yerr,
 
         for i in range(flat_samples.shape[1]):
             print(np.mean(flat_samples[:,i]), np.std(flat_samples[:,i]))        
-            #print(np.median(flat_samples[:,i]), np.percentile(flat_samples[:,i],[16,84])-np.median(flat_samples[:,i]))        
     
     
     if corner_plot==True:        

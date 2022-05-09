@@ -52,7 +52,7 @@ table = table.to_pandas()
 unq = np.unique(table['gaia_ra'], return_index=True, return_counts=True)
 
 table['xmatch_count'] = np.zeros(len(table))
-#table['xmatch_count'].iloc[unq[1]] = unq[2]
+
 for i in range(len(table)):
     arg = unq[0] == table['gaia_ra'].iloc[i]
     table['xmatch_count'].iloc[i] = unq[2][arg]
@@ -70,11 +70,6 @@ lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 
 #McQuillan et al. 2014
-# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
-#                 readme=paths.data / 'mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
 lam = lam.merge(mcq, how="left", left_on="KIC", right_on="mcq_KIC")

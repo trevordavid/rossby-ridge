@@ -29,11 +29,6 @@ xp = [6500,6500,5800,5800]
 yp = [ridge_lo(6500),ridge_hi(6500),ridge_hi(5800),ridge_lo(5800)]
 
 cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
-# The dataframe has a row entry for each KOI, meaning individual star are represented N times
-# where N is the number of KOIs detected around that star so we drop duplicates.
-#print(np.shape(cks))
-#cks = cks.drop_duplicates(subset=['kepid'], keep='first')
-#print(np.shape(cks))
 
 #Santos et al. 2021
 san = pd.read_parquet(paths.data / 'santos2021_rotators.parquet')
@@ -67,15 +62,12 @@ table = XMatch.query(cat1=open(paths.data / 'cks-gaia-coords.csv'),
                      colRA2='RAJ2000',
                      colDec2='DEJ2000')
 
-type(table)
-print(table)
-
 table = table.to_pandas()
 
 unq = np.unique(table['gaia_ra'], return_index=True, return_counts=True)
 
 table['xmatch_count'] = np.zeros(len(table))
-#table['xmatch_count'].iloc[unq[1]] = unq[2]
+
 for i in range(len(table)):
     arg = unq[0] == table['gaia_ra'].iloc[i]
     table['xmatch_count'].iloc[i] = unq[2][arg]
@@ -110,16 +102,9 @@ for i,pr in enumerate(prot):
     
 for i in range(5):
     for j in range(4):
-        #if i<3:
-        #    axes[i][j].set_xticklabels('')
-        #if j>0:
-        #    axes[i][j].set_yticklabels('')
             
         axes[i][j].set_xlim(7000,4100)
         axes[i][j].set_ylim(-2,65)
-       
-        #Parallelogram
-        #axes[i][j].add_patch(patches.Polygon(xy=list(zip(xp,yp)), fill=False, lw=1, color='k'))
 
         
 axes[4][0].set_xlabel('Effective temperature [K]\n(LAMOST; Xiang et al. 2019)')

@@ -57,20 +57,6 @@ lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 
-#ik = (lam['Teff_lam']>0)
-#ik &= (lam['Gmag']<15)
-
-#ik &= (lam['l20_Rvar']/lam['rrmscdpp03p0'] > 10)
-#ik &= (lam['logg_lam']-3*lam['e_logg_lam']>4)
-#ik &= (lam['duplicated_source']==False)
-#ik &= (abs(lam["Gmag"]-lam["phot_g_mean_mag"])<1)
-#ik &= (abs(lam["Gmag"]-lam["kepmag"])<1)
-#ik &= (abs(lam["Teff_lam"]-lam["teff_val"])<1000)
-#ik &= (lam['parallax_over_error']>50)
-#ik &= (lam["vim_r"]<0.5)
-#ik &= (lam["ruwe"]<1.2)
-
-
 # ### Comparison with Hall et al. 2021 asteroseismic sample
 sns.set(font_scale=1.2, context="paper", style="ticks")
 
@@ -115,7 +101,6 @@ for i in range(2):
                     label="Masuda et al. 2021", ms=4, lw=1, 
                     **ebar_kws)
     ax1[i].set_xlim(6500,5000)
-    #ax1[i].set_ylim(0,60)
 
     ax1[i].plot(sun["teff"], sun["prot"], zorder=np.inf, **sun_kws)
     ax1[i].plot(sun["teff"], sun["prot"], 'k.', zorder=np.inf)

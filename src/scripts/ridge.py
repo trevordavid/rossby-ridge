@@ -176,6 +176,6 @@ for i,y in enumerate(ys):
 sns.despine()    
 plt.tight_layout()
 plt.savefig(paths.figures / 'ridge.pdf')
-#plt.show()
+
 
 
