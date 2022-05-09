@@ -38,11 +38,6 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
-#                 readme=paths.data / 'mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
@@ -79,28 +74,16 @@ lam = lam[lam_mask]
 
 
 ######################################################################################
-#bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
-
-def convective_turnover_timescale(teff,
-                                  ref='gunn1998'):
+def convective_turnover_timescale(teff):    
+    #Returns convective turnover timescale in days    
+    #Gunn et al. 1998 relation, from Cranmer & Saar 2011
+    return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
     
-    #Returns convective turnover timescale in days
-    if ref == 'gunn1998':
-        #Gunn et al. 1998 relation, from Cranmer & Saar 2011
-        return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
-    
-    # elif ref == '2010':
-    #     # & Kim 2010 relation for local tau_c
-    #     teff_pts = 10.**bk['logT']
-    #     tc_pts   = bk['Local_tau_c']
-    #     return np.interp(teff, teff_pts, tc_pts)
-
 def constant_rossby(teff, ro):
     #Return locus of rotation periods corresponding to constant Rossby number
     return ro * convective_turnover_timescale(teff)
 
-lam["Ro"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"], ref='gunn1998')    
-#lam["Ro_"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"], ref='2010')
+lam["Ro"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"])    
 ######################################################################################
 
     

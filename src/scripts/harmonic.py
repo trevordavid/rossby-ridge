@@ -82,20 +82,11 @@ ms  = arg & (xm["logg_x"]>logg_thresh)
 sg  = arg & (xm["logg_x"]<logg_thresh)
 
 
-def convective_turnover_timescale(teff,
-                                  ref='gunn1998'):
+def convective_turnover_timescale(teff):
     #Returns convective turnover timescale in days
+    #Gunn et al. 1998 relation, from Cranmer & Saar 2011
+    return 314.24*np.exp(-(teff/1952.5) - (teff/6250.)**18.) + 0.002
     
-    if ref == 'gunn1998':
-        #Gunn et al. 1998 relation, from Cranmer & Saar 2011
-        return 314.24*np.exp(-(teff/1952.5) - (teff/6250.)**18.) + 0.002
-    
-    elif ref == 'barnes2010':
-        #Barnes & Kim 2010 relation for local tau_c
-        teff_pts = 10.**bk['logT']
-        tc_pts   = bk['Local_tau_c']
-        return np.interp(teff, teff_pts, tc_pts)
-
 
 def constant_rossby(teff, ro):
     #Return locus of rotation periods corresponding to constant Rossby number

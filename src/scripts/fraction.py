@@ -65,63 +65,20 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 ######################################################################################
 #bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
 
-def convective_turnover_timescale(teff,
-                                  ref='gunn1998'):
-    
+def convective_turnover_timescale(teff):    
     #Returns convective turnover timescale in days
-    if ref == 'gunn1998':
-        #Gunn et al. 1998 relation, from Cranmer & Saar 2011
-        return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
+    #Gunn et al. 1998 relation, from Cranmer & Saar 2011
+    return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
     
-    # elif ref == '2010':
-    #     # & Kim 2010 relation for local tau_c
-    #     teff_pts = 10.**bk['logT']
-    #     tc_pts   = bk['Local_tau_c']
-    #     return np.interp(teff, teff_pts, tc_pts)
-
 def constant_rossby(teff, ro):
     #Return locus of rotation periods corresponding to constant Rossby number
     return ro * convective_turnover_timescale(teff)
 ######################################################################################
 
 
-# fig, ax = plt.subplots()
-# sns.kdeplot(
-#     x=lam["Teff_lam"], 
-#     y=lam["Prot"], 
-#     fill=True, 
-#     bw_adjust=0.25,
-#     levels=4,
-#     #levels=[0.25,0.5,0.75,1],
-#     ax=ax
-# )
-
-
-# ax.scatter(lam["Teff_lam"], lam["mcq_Prot"], s=0.1, c='orange', alpha=1, rasterized=True, label='LAMOST–McQuillan')
-# ax.set_xlim(5000,7000)
-# ax.set_ylim(0,30)
-
-
-
-# xcen = 6150
-# ycen = constant_rossby(xcen, 1.3)
-# xeps = 50
-# yeps = 1
-
-# ax.plot([xcen+xeps,xcen+xeps,xcen-xeps,xcen-xeps,xcen+xeps], 
-#         [ycen+yeps,ycen-yeps,ycen-yeps,ycen+yeps,ycen+yeps], 'k--')
-
-# _x = np.linspace(5000,6250,100)
-# #ax.plot(_x, m*_x + c, 'k--')
-# ax.plot(_x, constant_rossby(_x, 1.3), 'k--')
-# ax.plot(_x, constant_rossby(_x, 0.5), 'k--')
-
-
 dist = abs(lam["Prot"] - constant_rossby(lam["Teff_lam"], 1.3))
 frac_dist = abs(lam["Prot"] - constant_rossby(lam["Teff_lam"], 1.3))/constant_rossby(lam["Teff_lam"], 1.3)
 lam_ridge = (frac_dist<0.05) & (lam["Teff_lam"]>5500) & (lam["Teff_lam"]<6500) & (lam["logg_lam"]>4) & (lam["logg_lam"]<4.75)
-
-
 
 sns.set(font_scale=1.5, context="paper", style="ticks", palette="Blues")
 
@@ -153,9 +110,3 @@ plt.xlabel("Effective temperature [K]")
 plt.legend()
 sns.despine()
 plt.savefig(paths.figures / 'fraction.pdf')
-#plt.show()
-
-
-
-
-

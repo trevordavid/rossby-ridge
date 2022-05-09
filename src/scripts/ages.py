@@ -106,22 +106,11 @@ ridge &= mask
 ############################################
 
 ######################################################################################
-#bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
-
-def convective_turnover_timescale(teff,
-                                  ref='gunn1998'):
-    
+def convective_turnover_timescale(teff):
     #Returns convective turnover timescale in days
-    if ref == 'gunn1998':
-        #Gunn et al. 1998 relation, from Cranmer & Saar 2011
-        return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
+    #Gunn et al. 1998 relation, from Cranmer & Saar 2011
+    return 314.24*np.exp( -(teff/1952.5) - (teff/6250.)**18. ) + 0.002
     
-    # elif ref == '2010':
-    #     # & Kim 2010 relation for local tau_c
-    #     teff_pts = 10.**bk['logT']
-    #     tc_pts   = bk['Local_tau_c']
-    #     return np.interp(teff, teff_pts, tc_pts)
-
 def constant_rossby(teff, ro):
     #Return locus of rotation periods corresponding to constant Rossby number
     return ro * convective_turnover_timescale(teff)
