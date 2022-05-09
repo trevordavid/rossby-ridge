@@ -69,8 +69,8 @@ dependencies:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
     - src/data/mcquillan2014_table1.parquet
-    - src/data/rocrit_model.csv
-    - src/data/standard_model.csv
+    - src/data/rocrit_population.h5
+    - src/data/standard_population.h5
   src/scripts/ridge.py:
     - src/data/cks_merged.parquet
   src/scripts/rocrit.py:
