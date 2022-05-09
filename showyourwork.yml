@@ -8,12 +8,12 @@ datasets:
   10.5281/zenodo.6391526:
     contents:
       data.tar.gz:
-        cks_merged.parquet: src/data/cks_merged.parquet
-        kepler_apogee_dr16.fits: src/data/kepler_apogee_dr16.fits
-        kepler_dr2_1arcsec.parquet: src/data/kepler_dr2_1arcsec.parquet
-        kepler_lamost.csv: src/data/kepler_lamost.csv
-        mcquillan2014_table1.parquet: src/data/mcquillan2014_table1.parquet
-        santos2021_rotators.parquet: src/data/santos2021_rotators.parquet        
+        data/cks_merged.parquet: src/data/cks_merged.parquet
+        data/kepler_apogee_dr16.fits: src/data/kepler_apogee_dr16.fits
+        data/kepler_dr2_1arcsec.parquet: src/data/kepler_dr2_1arcsec.parquet
+        data/kepler_lamost.csv: src/data/kepler_lamost.csv
+        data/mcquillan2014_table1.parquet: src/data/mcquillan2014_table1.parquet
+        data/santos2021_rotators.parquet: src/data/santos2021_rotators.parquet        
   10.5281/zenodo.6471539:
     contents:
       rocrit_population.h5: src/data/rocrit_population.h5

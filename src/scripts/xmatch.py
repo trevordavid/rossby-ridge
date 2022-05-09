@@ -125,7 +125,8 @@ plt.savefig(paths.figures / 'lamost-mcquillan.pdf')
 
 
 #Santos et al. 2021
-san = pd.read_csv(paths.data / 'S21_rotators.csv')
+#san = pd.read_csv(paths.data / 'S21_rotators.csv')
+san = pd.read_parquet(paths.data / 'santos2021_rotators.parquet')
 print(len(san), 'stars before removing duplicates')
 san = san.add_prefix('san_')
 san = san.merge(gk, how="left", left_on="san_KIC", right_on="kepid")

@@ -50,7 +50,7 @@ dr2['MG'] = dr2['dr2_phot_g_mean_mag'] - 5 * (np.log10(dr2['dr2_r_est']) - 1)
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
 #Santos et al. 2021
-san = pd.read_csv(paths.data / 'S21_rotators.csv')
+san = pd.read_parquet(paths.data / 'santos2021_rotators.parquet')
 san = san.add_prefix('san_')
 
 #Hall et al. 2021
