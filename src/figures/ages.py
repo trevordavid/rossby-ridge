@@ -128,11 +128,11 @@ def constant_rossby(teff, ro):
 
 
 #Models
-std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
+std = pd.read_hdf('../data/standard_population.h5', key='sample')
 std['ro'] = std['period']/(std['taucz']/86400)
 std = std[std['evo']==1] # limit to main-sequence
 
-roc = pd.read_hdf('../data/models/rocrit_population.h5', key='sample')
+roc = pd.read_hdf('../data/rocrit_population.h5', key='sample')
 roc['ro'] = roc['period']/(roc['taucz']/86400)
 roc = roc[roc['evo']==1] # limit to main-sequence
 

@@ -119,7 +119,7 @@ def curtis_teff_bprp(teff):
 
 # from scipy.interpolate import interp1d
 
-# std = pd.read_hdf('../data/models/standard_population.h5', key='sample')
+# std = pd.read_hdf('../data/standard_population.h5', key='sample')
 # #roc = pd.read_hdf('../models/rocrit_population.h5', key='sample')
 
 # idx = (abs(std['age']-5)<0.01) & (std['evo']==1) & (abs(std['[Fe/H]'])<0.05)
