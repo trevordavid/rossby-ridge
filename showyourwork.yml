@@ -5,7 +5,7 @@ scripts:
     python {script} > /dev/null
 
 datasets:
-  10.5072/zenodo.1058428:
+  10.5281/zenodo.6391526:
     contents:
       data.tar.gz:
         cks_merged.parquet: src/data/cks_merged.parquet
@@ -13,11 +13,12 @@ datasets:
         kepler_dr2_1arcsec.parquet: src/data/kepler_dr2_1arcsec.parquet
         kepler_lamost.csv: src/data/kepler_lamost.csv
         mcquillan2014_table1.parquet: src/data/mcquillan2014_table1.parquet
-        rocrit_model.csv: src/data/rocrit_model.csv
-        rocrit_population.h5: src/data/rocrit_population.h5
-        S21_rotators.csv: src/data/S21_rotators.csv
-        standard_model.csv: src/data/standard_model.csv
-        standard_population.h5: src/data/standard_population.h5
+        santos2021_rotators.parquet: src/data/santos2021_rotators.parquet        
+  10.5281/zenodo.6471539:
+    contents:
+      rocrit_population.h5: src/data/rocrit_population.h5
+      standard_population.h5: src/data/standard_population.h5
+
 
 dependencies:
   src/scripts/ages.py:
@@ -30,12 +31,12 @@ dependencies:
     - src/data/cks_merged.parquet
     - src/data/kepler_lamost.csv
   src/scripts/cmd.py:
-    - src/data/S21_rotators.csv
+    - src/data/santos2021_rotators.parquet
     - src/data/cks_merged.parquet
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
   src/scripts/comparison.py:
-    - src/data/S21_rotators.csv
+    - src/data/santos2021_rotators.parquet
     - src/data/cks_merged.parquet
   src/scripts/fraction.py:
     - src/data/kepler_lamost.csv
@@ -99,6 +100,6 @@ dependencies:
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet
   src/scripts/xmatch.py:
-    - src/data/S21_rotators.csv
+    - src/data/santos2021_rotators.parquet
     - src/data/kepler_dr2_1arcsec.parquet
     - src/data/mcquillan2014_table1.parquet

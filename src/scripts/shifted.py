@@ -39,11 +39,6 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
-#                 readme=paths.data / 'mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
@@ -86,9 +81,6 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # van Saders et al. 2019 models
-# std = pd.read_csv(paths.data / 'models/standard_model.csv')
-# roc = pd.read_csv(paths.data / 'models/rocrit_model.csv')
-
 std = pd.read_hdf(paths.data / 'standard_population.h5', key='sample')
 std = std[std['evo']==1]
 
@@ -138,7 +130,7 @@ plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"a",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig(paths.figures / 'std-model-cks-shifted.pdf')
 
-#sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(cks['cks_Teff'][cks_ms]+cks_shift, cks['d21_prot'][cks_ms], label='California–Kepler Survey', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
@@ -157,7 +149,7 @@ mpl.rcParams["legend.markerscale"] = 5
 sns.set(font_scale=1.2, context="paper", style="ticks")
 sc_kws = {"marker":",", "color":"orange", "s":1, "rasterized":True, "alpha":0.75}
 
-#sns.displot(data=std, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
+
 sns.displot(data=std, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'][lam_ms]+lamost_shift, lam['Prot'][lam_ms], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
@@ -172,7 +164,7 @@ plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"c",transform=plt.gca().transAxes,weight="bold",size=14)
 plt.savefig(paths.figures / 'std-model-lamost-shifted.pdf')
 
-#sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})]
+
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 plt.scatter(lam['Teff_lam'][lam_ms]+lamost_shift, lam['Prot'][lam_ms], label='LAMOST–McQuillan', **sc_kws)
 plt.plot(sun["teff"], sun["prot"], **sun_kws)
