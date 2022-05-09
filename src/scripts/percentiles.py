@@ -34,11 +34,6 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
-#                 readme=paths.data / 'mcquillan2014/ReadMe',
-#                 format='ascii.cds')
-# mcq = mcq.to_pandas()
-# mcq = mcq.add_prefix('mcq_')
 mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
@@ -96,14 +91,11 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # van Saders et al. 2019 models
-std = pd.read_csv(paths.data / 'standard_model.csv')
-roc = pd.read_csv(paths.data / 'rocrit_model.csv')
+std = pd.read_hdf(paths.data / 'standard_population.h5', key='sample')
+std = std[std['evo']==1]
 
-# std = pd.read_hdf(paths.data / 'standard_population.h5', key='sample')
-# std = std[std['evo']==1]
-
-# roc = pd.read_hdf(paths.data / 'models/rocrit_population.h5', key='sample')
-# roc = roc[roc['evo']==1]
+roc = pd.read_hdf(paths.data / 'rocrit_population.h5', key='sample')
+roc = roc[roc['evo']==1]
 
 std['flag'] = 'std'
 roc['flag'] = 'roc'
@@ -111,27 +103,12 @@ roc['flag'] = 'roc'
 model = pd.concat([std, roc], ignore_index=True, sort=True)
 ######################################################################################
 
-
-#bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
-
-def convective_turnover_timescale(teff,
-                                  ref='gunn1998'):
+def convective_turnover_timescale(teff):
     #Returns convective turnover timescale in days
-    
-    if ref == 'gunn1998':
-        #Gunn et al. 1998 relation, from Cranmer & Saar 2011
-        return 314.24*np.exp(-(teff/1952.5) - (teff/6250.)**18.) + 0.002
-    
-    # elif ref == '2010':
-    #     # & Kim 2010 relation for local tau_c
-    #     teff_pts = 10.**bk['logT']
-    #     tc_pts   = bk['Local_tau_c']
-    #     return np.interp(teff, teff_pts, tc_pts)
+    return 314.24*np.exp(-(teff/1952.5) - (teff/6250.)**18.) + 0.002
 
 
-
-lam["Ro"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"], ref='gunn1998')    
-#lam["Ro_"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"], ref='2010')
+lam["Ro"] = lam["Prot"]/convective_turnover_timescale(lam["Teff_lam"])    
       
 def percentile_bootstrap(nsamples=100, f=0.5, pctl=90.):
     
@@ -170,13 +147,13 @@ std_period_90th_pctl = np.zeros(len(teff_bin_centers))
 std_period_10th_pctl = np.zeros(len(teff_bin_centers))
 
 for i, tc in enumerate(teff_bin_centers):
-    roc_arg = (abs(roc["Teff(K)"]-tc)<100)
-    roc_period_90th_pctl[i] = np.nanpercentile(roc["Prot(days)"][roc_arg], 90.)
-    roc_period_10th_pctl[i] = np.nanpercentile(roc["Prot(days)"][roc_arg], 10.)
+    roc_arg = (abs(roc["Teff"]-tc)<100)
+    roc_period_90th_pctl[i] = np.nanpercentile(roc["period"][roc_arg], 90.)
+    roc_period_10th_pctl[i] = np.nanpercentile(roc["period"][roc_arg], 10.)
     
-    std_arg = (abs(std["Teff(K)"]-tc)<100)
-    std_period_90th_pctl[i] = np.nanpercentile(std["Prot(days)"][std_arg], 90.)
-    std_period_10th_pctl[i] = np.nanpercentile(std["Prot(days)"][std_arg], 10.)    
+    std_arg = (abs(std["Teff"]-tc)<100)
+    std_period_90th_pctl[i] = np.nanpercentile(std["period"][std_arg], 90.)
+    std_period_10th_pctl[i] = np.nanpercentile(std["period"][std_arg], 10.)    
         
 plt.plot(teff_bin_centers, std_period_90th_pctl, color='C2', label='Standard model', lw=6, alpha=0.5)
 plt.plot(teff_bin_centers, roc_period_90th_pctl, color='C5', label='WMB model', lw=3, alpha=0.5, ls='--')
@@ -192,14 +169,10 @@ plt.ylabel("Rotation period [d]")
 plt.legend(prop={'size':13})
 sns.despine()
 plt.savefig(paths.figures / 'percentiles.pdf')
-#plt.show()
 
 arg = (teff_bin_centers<6250) & (teff_bin_centers>4500)
 chisq_roc = np.sum((period_90th_pctl[arg] - roc_period_90th_pctl[arg])**2 / roc_period_90th_pctl[arg])
-#chisq_roc += np.sum((period_10th_pctl[arg] - roc_period_10th_pctl[arg])**2 / roc_period_10th_pctl[arg])
-
 chisq_std = np.sum((period_90th_pctl[arg] - std_period_90th_pctl[arg])**2 / std_period_90th_pctl[arg])
-#chisq_std += np.sum((period_10th_pctl[arg] - std_period_10th_pctl[arg])**2 / std_period_10th_pctl[arg])
 
 print('WMB model chi-squared      :', chisq_roc)
 print('Standard model chi-squared :', chisq_std)
