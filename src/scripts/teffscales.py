@@ -65,7 +65,7 @@ table = table.drop_duplicates(subset="gaia_ra", keep="first")
 
 
 
-lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
+lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 

@@ -52,7 +52,7 @@ cks = cks.drop_duplicates(subset=['kepid'], keep='first')
 cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 
 # ### LAMOST-Kepler sample
-lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
+lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
 
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')

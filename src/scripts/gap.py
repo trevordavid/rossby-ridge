@@ -44,7 +44,7 @@ gk = pd.read_parquet(paths.data / 'kepler_dr2_1arcsec.parquet')
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
+lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 

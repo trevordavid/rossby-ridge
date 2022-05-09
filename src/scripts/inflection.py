@@ -18,7 +18,7 @@ mpl.rcParams["savefig.dpi"] = 300
 cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 
 #LAMOST-McQuillan
-lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
+lam = pd.read_parquet(paths.data / 'kepler_lamost.parquet')
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 
 def ridge_hi(teff):
