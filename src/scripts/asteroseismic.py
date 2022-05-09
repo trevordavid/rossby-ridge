@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import numpy as np
 import pandas as pd
 
@@ -44,14 +45,14 @@ mcq_koi = Table.read("https://cdsarc.cds.unistra.fr/ftp/J/ApJ/775/L11/table1.dat
 mcq_koi = mcq_koi.to_pandas()
 mcq_koi = mcq_koi.add_prefix('mcq_')
 
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
 cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 
 # ### LAMOST-Kepler sample
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
@@ -134,4 +135,4 @@ for i in range(2):
     
 sns.despine()    
 plt.tight_layout()
-plt.savefig('../figures/asteroseismic.pdf')
+plt.savefig(paths.figures / 'asteroseismic.pdf')

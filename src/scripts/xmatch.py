@@ -1,3 +1,4 @@
+import paths
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -19,10 +20,10 @@ import pandas as pd
 
 
 #McQuillan et al. 2014
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
 #Gaia-Kepler cross-match from Megan Bedell
-gk = pd.read_parquet('../data/kepler_dr2_1arcsec.parquet')
+gk = pd.read_parquet(paths.data / 'kepler_dr2_1arcsec.parquet')
 
 mcq = mcq.merge(gk, how="left", left_on="mcq_KIC", right_on="kepid")
 #np.shape(mcq)
@@ -33,9 +34,9 @@ def lamost_xmatch(df):
     
     df_pos = df[['ra', 'dec']].copy()
     #df_pos.head()
-    df_pos.to_csv('../data/coords.csv', index=False)
+    df_pos.to_csv(paths.data / 'coords.csv', index=False)
     
-    table = XMatch.query(cat1=open('../data/coords.csv'),
+    table = XMatch.query(cat1=open(paths.data / 'coords.csv'),
                          cat2='vizier:J/ApJS/245/34/catalog',
                          max_distance=1 * u.arcsec,
                          colRA1='ra',
@@ -120,11 +121,11 @@ for i,ax in enumerate(axes):
 
 sns.despine()
 plt.tight_layout()
-plt.savefig('../figures/lamost-mcquillan.pdf')
+plt.savefig(paths.figures / 'lamost-mcquillan.pdf')
 
 
 #Santos et al. 2021
-san = pd.read_csv('../data/S21_rotators.csv')
+san = pd.read_csv(paths.data / 'S21_rotators.csv')
 print(len(san), 'stars before removing duplicates')
 san = san.add_prefix('san_')
 san = san.merge(gk, how="left", left_on="san_KIC", right_on="kepid")
@@ -139,7 +140,7 @@ arg = (np.isfinite(xm["Teff"])&(np.isfinite(xm["san_Prot"])))
 print(len(xm[arg]), 'unique stars in LAMOST-Santos cross-match with Teff and Prot')
 
 xm = xm[arg]
-xm.to_parquet('../data/lamost-santos-xmatch.parquet')
+xm.to_parquet(paths.data / 'lamost-santos-xmatch.parquet')
 
 x = xm["Teff"]
 y = xm["san_Prot"]
@@ -181,4 +182,4 @@ for i,ax in enumerate(axes):
 
 sns.despine()
 plt.tight_layout()
-plt.savefig('../figures/lamost-santos.pdf')
+plt.savefig(paths.figures / 'lamost-santos.pdf')

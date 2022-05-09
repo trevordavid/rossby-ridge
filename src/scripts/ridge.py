@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -101,7 +102,7 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 #CKS catalog with auxiliary data
 #Originally from Fulton & Petigura 2018, with auxiliary literature data compiled in David et al. 2021
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -174,7 +175,7 @@ for i,y in enumerate(ys):
 
 sns.despine()    
 plt.tight_layout()
-plt.savefig('../figures/ridge.pdf')
+plt.savefig(paths.figures / 'ridge.pdf')
 #plt.show()
 
 

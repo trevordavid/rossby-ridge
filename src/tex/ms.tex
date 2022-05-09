@@ -97,6 +97,7 @@
 \usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{longtable}
+\usepackage{showyourwork}
 
 \newcommand{\taucz}{$\tau_\mathrm{cz}$\xspace}
 \newcommand{\rocrit}{$\mathrm{Ro_{crit}}$\xspace}
@@ -295,6 +296,7 @@ Below, we describe the samples utilized in this work. All stars characterized he
     \includegraphics[width=\textwidth]{./figures/surveys.pdf}
     \caption{The \teff-\prot plane using rotation periods from \mma or, in the case of the CKS sample, \citet{McQuillan2013} which applied an identical analysis to Kepler Objects of Interest (KOIs), with \teff originating from the source denoted at top. The \mma \teff values originate from the Kepler Input Catalog \citep[KIC,][]{Brown2011} or \citet{Dressing2013} for low-mass stars. The orange point in each panel indicates the Sun's equatorial rotation period, with the errorbar capturing the range of periods measured from the \edit1{activity belts}. Many of the stars above the long-period pileup are subgiants which have experienced spin-down due to expansion off the main-sequence, as pointed out in \jvs.}
     \label{fig:surveys}
+    \script{surveys.py}
 \end{figure*}
 
 \subsection{California--Kepler Survey} \label{subsec:cks}
@@ -323,6 +325,7 @@ To place the Sun in the context of the long-period pileup, we use up-to-date est
     \includegraphics[width=\textwidth]{./figures/lamost-santos.pdf}
     \caption{Two-dimensional histograms indicating the number of Kepler target stars in the \teff–\prot plane for the \lamostmcq sample (top row) and the \lamostsan sample (bottom row). The effects of a simple cut in \logg to separate subgiants and dwarfs are shown in the middle and right columns. In each panel the Sun is indicated by the orange point, with an errorbar reflecting the range of periods measured from \edit1{the activity belts}. The long-period pileup for dwarf stars is clearly seen to extend to the solar temperature. The short-period pileup is clearer in the smaller \lamostmcq dwarf sample, potentially because the \santos catalog detected more stars at longer periods. The secondary overdensity observed in the subgiant samples, most visible in the bottom center panel, appears to be at twice the period of the primary overdensity, potentially due to erroneously determined rotation periods.}
     \label{fig:xmatch}
+    \script{xmatch.py}
 \end{figure*}
 
 
@@ -339,6 +342,7 @@ We first noted a pileup of stars along the long-period edge for stars with \teff
     \includegraphics[width=\linewidth]{./figures/kde.pdf}
     \caption{Gaussian kernel density estimation (blue contours) of the \teff--\prot distributions of the CKS--McQuillan, \lamostmcq, and asteroseismic \hall samples, from left to right. Empirical cluster sequences from \curtis are shown by the dark grey lines. The orange dashed lines show constant Rossby curves of fiducial values (see \S\ref{subsec:rossby}). The short-period pileup can be observed in the LAMOST--McQuillan sample for \teff~$\gtrsim$~5500~K. The orange point indicates the Sun's temperature and equatorial rotation period, with the errorbar capturing the range of periods measured from \edit1{the activity belts}.}
     \label{fig:kde}
+    \script{kde.py}
 \end{figure*}
 
 \edit1{A change in slope along the long-period edge is observed} in both the CKS and LAMOST samples (Figure~\ref{fig:inflection}), with an inflection point corresponding closely to the Kraft break at $\approx$~6250~K, the point at which convective envelopes become vanishingly thin \citep{Kraft1967}. A piecewise linear fit to the ridge in the CKS sample confirmed that the inflection point occurs at \teff~=~6224~$\pm$~24~K, where the uncertainty was estimated from Markov chain Monte Carlo (MCMC) sampling. This change in slope \edit1{may be} due to the fact that the convective turnover timescale, \taucz, changes rapidly above 6250~K.
@@ -353,6 +357,7 @@ A secondary pileup at the short-period edge is also apparent, though less pronou
     \includegraphics[width=\linewidth]{./figures/inflection.pdf}
     \caption{The \teff–\prot plane for the \lamostmcq sample (grey points) and the CKS sample (blue points) with periods sourced from \citet{David2021}. The selection used to identify long-period pileup stars in the CKS sample is shown by the region enclosed by the black lines. Stars with \teff differences $>100$~K between the CKS \citep{Fulton2018} and SPOCS \citep{Brewer2018} catalogs are shown by open black circles. The orange point indicates the Sun. Random draws from the MCMC chain of a piecewise linear fit to the CKS long-period pileup are shown by the blue lines. An inflection point in the long-period edge is apparent near \teff=~6250~K.}
     \label{fig:inflection}
+    \script{inflection.py}
 \end{figure}
 
 \subsection{Constant Rossby model}
@@ -406,6 +411,7 @@ The constant Rossby model provides a reasonably good description of the \lamostm
     \includegraphics[width=\linewidth]{./figures/mcmc.pdf}
     \caption{\textit{Top:} Gaussian kernel density estimation of the LAMOST--McQuillan sample and the 10th and 90th \prot percentiles (white and black points, respectively), computed as described in \S\ref{subsec:rossby}. \textit{Middle:} The same 10th and 90th percentile curves shown in relation to constant Rossby curves. \textit{Bottom:} Residuals from the median models resulting from the MCMC sampling. The fits depicted above do not include a \teff offset.}
     \label{fig:mcmc}
+    \script{mcmc.py}
 \end{figure}
 
 
@@ -414,6 +420,7 @@ The constant Rossby model provides a reasonably good description of the \lamostm
     \includegraphics[width=\linewidth]{./figures/rocrit.pdf}
     \caption{Non-linear least-squares fits to the long-period pileup for a \rocrit~=~\edit1{\rosun} model with constant \teff offset (orange) and a variable \rocrit model with no \teff offset (blue). The $\Delta \chi^2$ values printed in each panel are computed as $\chi^2_{\text{Ro}_\text{crit}=\text{Ro}_\odot} - \chi^2_{\Delta T_{eff}=0}$.}
     \label{fig:rocrit}
+    \script{rocrit.py}
 \end{figure*}
 
 \begin{deluxetable*}{lllll}
@@ -470,6 +477,7 @@ Notably, both models fail to reproduce the observed short-period pileup, possibl
     \includegraphics[width=0.49\linewidth]{./figures/wmb-model-lamost.pdf}
     \caption{The \teff-\prot plane for the CKS sample (top panels) and LAMOST sample (bottom panels) in comparison to the standard and WMB models (2-d histograms) presented in \jvs. Shown here are stars with \logg~$>$~4.1. Rotation periods for the CKS sample here are sourced from the \citet{David2021} compilation. The black symbol in each panel indicates the position of the Sun.}
     \label{fig:models}
+    \script{models.py}
 \end{figure*}
 
 
@@ -481,6 +489,7 @@ Notably, both models fail to reproduce the observed short-period pileup, possibl
     \includegraphics[width=0.49\linewidth]{./figures/wmb-model-lamost-shifted.pdf}
     \caption{Same as Figure~\ref{fig:models} with constant \teff offsets applied to the data. \edit1{Shifts of +111~K and +116~K are applied to the CKS and LAMOST \teff, respectively. The \teff shifts originate from a least-squares fit of a \rocrit~=~\rosun curve (with a \teff offset) to the long-period pileup (as described in \S\ref{subsec:rossby})}.}
     \label{fig:shifted}
+    \script{shifted.py}
 \end{figure*}
 
 
@@ -489,6 +498,7 @@ Notably, both models fail to reproduce the observed short-period pileup, possibl
     \includegraphics[width=\linewidth]{./figures/percentiles.pdf}
     \caption{\edit1{Comparison of the theoretically predicted \teff--\prot distribution of Kepler stars from \jvs (given by the 10th and 90th \prot percentiles) with the same percentile ranges from the \lamostmcq sample (black points) and the CKS long-period pileup (open circles).}}
     \label{fig:percentiles}
+    \script{percentiles.py}
 \end{figure}
 
 \subsection{Comparison with \edit1{literature surveys}}
@@ -505,6 +515,7 @@ To \edit1{assess the consistency of the \teff scales between catalogs}, we cross
     \includegraphics[width=\linewidth]{./figures/asteroseismic.pdf}
     \caption{Comparison of CKS (left column) and \edit1{\lamostmcq} samples (right column) with the \hall main-sequence asteroseismic sample (top row) \edit1{and the \masuda sample (bottom row)} in the \teff--\prot plane. \edit1{The black point indicates the Sun.} Note, the CKS, LAMOST, and \hall samples derive \teff from distinct pipelines. \edit1{In the top panels, constant offsets of -29~K and +41~K were added to the CKS and LAMOST \teff, respectively, based on comparisons to those stars with overlap in the H21 sample (see \S~\ref{subsec:asteroseismic} and Appendix~\ref{app:teff}).} Using LAMOST \teff, where it exists, for the \hall sample brings that sample into even closer agreement with the long-period pileup in the LAMOST-McQuillan sample.}
     \label{fig:asteroseismic}
+    \script{asteroseismic.py}
 \end{figure*}
 
 
@@ -525,6 +536,7 @@ We additionally selected stars on the long-period pileup from the \lamostmcq sam
     \includegraphics[width=\linewidth]{./figures/ages.pdf}
     \caption{Above, H-R diagram placement of long-period pileup stars relative to the Sun and the CKS sample (a) and similarly for the \lamostmcq sample (b). Below, the \teff-age plane for CKS stars along the long-period pileup using isochrone ages from the CKS (c) and SPOCS (d) catalogs. The light shaded points represent predictions from the WMB model of \jvs for stars with Ro~$<$~2 (blue) and Ro~$>$~2 (orange). Note, panels (a), (c), and (d) all pertain to the CKS sample, whereas panel (b) relates to the \lamostmcq sample, for which homogeneous ages have not been published.}
     \label{fig:ages}
+    \script{ages.py}
 \end{figure*}
 
 \edit1{To further assess the evolutionary state of stars on the long-period pileup, we constructed a color-magnitude diagram (CMD) from the Gaia DR2 photometry and parallaxes for the Kepler field, the \mma and \santos rotation period catalogs, the \hall asteroseismic sample, and the CKS long-period pileup stars from this work (Figure~\ref{fig:cmd}). Stars with detected periods from rotational brightness modulations are primarily solar-type and lower-mass dwarfs, with a comparatively small number of subgiants. The \santos catalog contains more stars, in part due to the higher sensitivity to more slowly rotating, evolved stars, relative to \mma. CKS stars on the long-period pileup clearly occupy a well-defined region of the upper main-sequence which overlaps well with the \hall asteroseismic sample.}
@@ -533,6 +545,7 @@ We additionally selected stars on the long-period pileup from the \lamostmcq sam
     \includegraphics[width=\linewidth]{./figures/cmd.pdf}
     \caption{Gaia DR2 color-magnitude diagram. In each panel, a 2-d histogram of all Kepler targets is shown in grayscale, with darker shades representing a higher number of targets in each cell. The estimated position of the Sun is indicated by the black point, based on the calibration of \citet{Casagrande2018}. In the middle and right panels, the \santos targets with photometric rotation period detections are overplotted in orange. In the right panel, the CKS long-period pileup stars identified in this work are shown by blue points and a Gaussian kernel density estimation of the \hall asteroseismic sample is shown by blue contours. No reddening corrections were performed to the photometry in this figure.}
     \label{fig:cmd}
+    \script{cmd.py}
 \end{figure*}
 
 
@@ -546,6 +559,7 @@ While it not clear whether or not these declines are astrophysical in nature, th
     \includegraphics[width=\linewidth]{./figures/fraction.pdf}
     \caption{The relative fraction of stars on the long- and short-period pileups, in the \lamostmcq sample, in 10~K windows of \teff (for stars with \logg~$>$4.1 dex).}
     \label{fig:fraction}
+    \script{fraction.py}
 \end{figure}
 
 
@@ -569,7 +583,8 @@ While it not clear whether or not these declines are astrophysical in nature, th
     \centering
     \includegraphics[width=\linewidth]{./figures/weights.pdf}
     \caption{The \teff–\prot distribution of the \lamostmcq sample for different weight thresholds (indicated above each panel) computed by \mma.}
-    \label{fig:weights}    
+    \label{fig:weights}
+    \script{weights.py}    
 \end{figure}
 
 
@@ -599,7 +614,8 @@ It is evident from Figure~\ref{fig:gap} that the long-period pileup also coincid
     \centering
     \includegraphics[width=\linewidth]{./figures/skumanich.pdf}
     \caption{A 2-d histogram of the \lamostmcq \teff–\prot distribution compared to an empirical $\approx$~2.5~Gyr hybrid cluster sequence from \curtis (solid line). The dashed and dotted lines show the same sequence evolved forward to 5~Gyr assuming braking indices of $n=0.5$ (Skumanich-like spin-down) and $n=0.65$, which is favored by \curtis. For comparison, the white points indicate the peak of the \prot distribution from \masuda and the black point indicates the Sun.}
-    \label{fig:skumanich}    
+    \label{fig:skumanich}
+    \script{skumanich.py}    
 \end{figure}
 
 \subsection{Short-period behavior} \label{subsec:shortperiod}
@@ -635,6 +651,7 @@ The short- and long-period pileups we examine here naturally produce a dearth of
     \caption{The \teff--\prot distribution of the \lamostmcq (left) and \mma samples color coded by the variability amplitude, \rper. Black contours show Gaussian kernel density estimation of the plotted distributions, and the dashed line shows a constant Rossby curve of Ro~=~0.5.
     The long- and short-period pileups are separated by a relative dearth of stars with intermediate rotation periods. A strong gradient in \rper is apparent across this gap, such that variability amplitude reaches a local minimum near the gap's center.}
     \label{fig:gap}
+    \script{gap.py}
 \end{figure*}
 
 \subsection{Does the Sun reside on the long-period pileup?} \label{subsec:thesun}
@@ -681,6 +698,7 @@ In Figure~\ref{fig:comparison}, we show how the \teff--\prot distribution of the
     \includegraphics[width=\linewidth]{./figures/comparison.pdf}
     \caption{Comparison of the \teff--\prot distribution for the CKS sample using rotation periods and \teff from the sources indicated by the axes labels.}
     \label{fig:comparison}
+    \script{comparison.py}
 \end{figure*}
 
 \section{Comparison of spectroscopic temperature scales}\label{app:teff}
@@ -692,6 +710,7 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
     \includegraphics[width=\linewidth]{./figures/teffscales.pdf}
     \caption{Comparison of \teff estimates from different catalogs: LAMOST \citep{Xiang2019}, CKS \citep{Fulton2018}, SPOCS \citep{Brewer2018}, M19 \citep{Martinez2019}, \mma, and \hall.}
     \label{fig:teffscales}
+    \script{teffscales.py}
 \end{figure}
 
 
@@ -705,6 +724,7 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
     \includegraphics[width=\linewidth]{./figures/gaia-mcquillan.pdf}
     \caption{The color–\prot plane for the \mma sample in relation to a curve of constant Rossby number (orange dashed curve, $\mathrm{Ro} = \mathrm{Ro}_\odot = 0.496$) from the empirical \taucz calibration of \citet{Corsaro2021}, which is valid in the color range $0.55 < (G_\mathrm{BP}−G_\mathrm{RP}) < 0.97$. The top rows show 2–d histograms of the probability density for the entire sample (left), a subsample with low reddening (middle), and the same low reddening subsample with a -0.1 mag color shift applied to the data and cluster sequences. Each panel in the bottom row shows a Gaussian kernel density estimation of the respective panel above. The orange point in each panel represents the position of the Sun, using the estimated Gaia color of \citet{Casagrande2018}. The grey lines indicate empirical cluster sequences derived in \curtis. From top to bottom, the cluster sequences are Pleiades (0.12~Gyr), Praesepe (0.67~Gyr), NGC 6811 (1~Gyr), and NGC 6819 + Ruprecht 147 (2.5~Gyr).}
     \label{fig:gaia-mcquillan}
+    \script{gaia-mcquillan.py}
 \end{figure}
 
 
@@ -712,6 +732,7 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
     \includegraphics[width=\linewidth]{./figures/gaia-santos.pdf}
     \caption{The same as Figure~\ref{fig:gaia-mcquillan} but for the \santos sample.}
     \label{fig:gaia-santos}
+    \script{gaia-santos.py}
 \end{figure}
 
 \section{Confounding scenarios for the short-period pileup}\label{app:harmonics}
@@ -722,7 +743,8 @@ In Figure~\ref{fig:teffscales} we compare temperatures between the \edit1{LAMOST
     \centering
     \includegraphics[width=0.5\linewidth]{./figures/harmonic.pdf}
     \caption{Gaussian kernel density estimation of the \teff–\prot distribution in the \lamostmcq sample for stars with \logg~$>$~4.1. A curve of constant Rossby number is shown by the solid line. The \prot/2 and \prot/3 harmonics of this curve are shown by the dashed and dotted lines, respectively. The short-period pileup is seen near the short-period edge, particularly for \teff~$>$~6000~K. The short-period pileup does not appear to be simply a harmonic of the long-period pileup, as one might expect if the periods for the stars in the short-period pileup were erroneously determined.}
-    \label{fig:harmonic}    
+    \label{fig:harmonic}
+    \script{harmonic.py}    
 \end{figure}
 
 

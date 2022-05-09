@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import numpy as np
 import pandas as pd
 
@@ -119,7 +120,7 @@ def curtis_teff_bprp(teff):
 
 # from scipy.interpolate import interp1d
 
-# std = pd.read_hdf('../data/standard_population.h5', key='sample')
+# std = pd.read_hdf(paths.data / 'standard_population.h5', key='sample')
 # #roc = pd.read_hdf('../models/rocrit_population.h5', key='sample')
 
 # idx = (abs(std['age']-5)<0.01) & (std['evo']==1) & (abs(std['[Fe/H]'])<0.05)
@@ -140,12 +141,12 @@ def curtis_teff_bprp(teff):
 
 
 #McQuillan et al. 2014
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
@@ -200,4 +201,4 @@ plt.xlim(7000,5000)
 plt.ylim(0,50)
 plt.xlabel("Effective temperature [K]")
 plt.ylabel("Rotation period [d]")
-plt.savefig('../figures/skumanich.pdf')
+plt.savefig(paths.figures / 'skumanich.pdf')

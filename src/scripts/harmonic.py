@@ -1,3 +1,4 @@
+import paths
 import scipy.stats as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -19,10 +20,10 @@ from astroquery.xmatch import XMatch
 import pandas as pd
 
 #McQuillan et al. 2014
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
 #Gaia-Kepler cross-match from Megan Bedell
-gk = pd.read_parquet('../data/kepler_dr2_1arcsec.parquet')
+gk = pd.read_parquet(paths.data / 'kepler_dr2_1arcsec.parquet')
 
 mcq = mcq.merge(gk, how="left", left_on="mcq_KIC", right_on="kepid")
 #np.shape(mcq)
@@ -33,9 +34,9 @@ def lamost_xmatch(df):
     
     df_pos = df[['ra', 'dec']].copy()
     #df_pos.head()
-    df_pos.to_csv('../data/coords.csv', index=False)
+    df_pos.to_csv(paths.data / 'coords.csv', index=False)
     
-    table = XMatch.query(cat1=open('../data/coords.csv'),
+    table = XMatch.query(cat1=open(paths.data / 'coords.csv'),
                          cat2='vizier:J/ApJS/245/34/catalog',
                          max_distance=1 * u.arcsec,
                          colRA1='ra',
@@ -148,4 +149,4 @@ ax.set_ylabel('Rotation period [d]')
 ax.legend(prop={"size":10})
 
 plt.tight_layout()
-plt.savefig('../figures/harmonic.pdf')
+plt.savefig(paths.figures / 'harmonic.pdf')

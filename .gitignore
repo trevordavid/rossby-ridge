@@ -1,12 +1,14 @@
-# Snakemake temporaries
-.snakemake
-.showyourwork
+# Snakemake and showyourwork temporaries
+**/.snakemake
+**/.showyourwork*
 
 # Showyourwork output files
+/*.pdf
 report.html
 arxiv.tar.gz
-ms.pdf
-dag.pdf
 
-# Conda environment
-env
+# Figure output
+src/tex/figures/*
+
+# Miscellaneous
+__pycache__

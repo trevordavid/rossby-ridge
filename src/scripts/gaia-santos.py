@@ -1,3 +1,4 @@
+import paths
 from dustmaps.bayestar import BayestarWebQuery
 from dustmaps.config import config
 config.reset()
@@ -121,13 +122,9 @@ def gaia_edr3_vizier_xmatch(vizier_code):
     return cat1, ikep
 
 
-# McQuillan et al. 2014 cross-match with Gaia EDR3
-mcq_vizier_code = "J/ApJS/211/24/table1"
-mcq, mcq_ikep = gaia_edr3_vizier_xmatch(mcq_vizier_code)
-
 # Santos et al. 2021 cross-match with Gaia EDR3
-# san_vizier_code = "J/ApJS/255/17/table1"
-# san, san_ikep = gaia_edr3_vizier_xmatch(san_vizier_code)
+san_vizier_code = "J/ApJS/255/17/table1"
+san, san_ikep = gaia_edr3_vizier_xmatch(san_vizier_code)
 
 
 import matplotlib.pyplot as plt
@@ -161,7 +158,6 @@ sun = {"teff": 5772,
     "e_prot": 25.4-24.5,
     "E_prot": 27-25.4,
     "bprp": 0.818,
-
     }
 ####################################################################
 
@@ -178,7 +174,7 @@ fig,(axes,axs) = plt.subplots(nrows=2,
                         figsize=(12,6))
 
 
-x, y = mcq['bp_rp'], mcq['Prot']
+x, y = san['bp_rp'], san['Prot']
 cb0 = axes[0].hist2d(x, y, **h_kws)
 sns.kdeplot(
     x=x, 
@@ -188,7 +184,7 @@ sns.kdeplot(
 )
 axes[0].text(0.75,0.07,str(len(x))+' stars', transform=axes[0].transAxes, size=9)
 
-x, y = mcq['bp_rp'][mcq_ikep], mcq['Prot'][mcq_ikep]
+x, y = san['bp_rp'][san_ikep], san['Prot'][san_ikep]
 cb1 = axes[1].hist2d(x, y, **h_kws)
 sns.kdeplot(
     x=x, 
@@ -198,7 +194,7 @@ sns.kdeplot(
 )
 axes[1].text(0.75,0.07,str(len(x))+' stars', transform=axes[1].transAxes, size=9)
 
-x, y = mcq['bp_rp'][mcq_ikep]-0.1, mcq['Prot'][mcq_ikep]
+x, y = san['bp_rp'][san_ikep]-0.1, san['Prot'][san_ikep]
 cb2 = axes[2].hist2d(x, y, **h_kws)
 sns.kdeplot(
     x=x, 
@@ -208,11 +204,12 @@ sns.kdeplot(
 )
 axes[2].text(0.75,0.07,str(len(x))+' stars', transform=axes[2].transAxes, size=9)
 
+
 for ax in zip(axes,axs):
     for i in range(2):
         ax[i].plot(sun["bprp"], sun["prot"], **sun_kws)
         ax[i].plot(sun["bprp"], sun["prot"], '.', color='orange')
-        ax[i].set_xlim(0.5,2.5)
+        ax[i].set_xlim(0.5,1.3)
         ax[i].set_ylim(0,50)
         ax[i].set_xlabel(r"$G_\mathregular{BP}-G_\mathregular{RP}$ [mag]")
         ax[i].set_ylabel("Rotation period [d]")
@@ -220,10 +217,9 @@ for ax in zip(axes,axs):
         ax[i].plot(_bprp, constant_rossby(_bprp, 0.496), color='orange', ls='--', label=r'$\mathregular{Ro} = 1.0 \mathregular{R}_\odot$', zorder=np.inf)
         ax[i].plot(_bprp, constant_rossby(_bprp, 0.8*0.496), color='orange', ls=':', label=r'$\mathregular{Ro} = 0.8 \mathregular{R}_\odot$', zorder=np.inf)
         ax[i].legend(prop={"size":8})
-
-        # for j,seq in enumerate(gyro_sequences):
-        #     ax[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
-
+        
+        #for j,seq in enumerate(gyro_sequences):
+        #    ax[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
 
 for i in range(3):
     for j,seq in enumerate(gyro_sequences):
@@ -232,13 +228,11 @@ for i in range(3):
             axs[i].plot(_bprp_cluster-0.1, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
         else:
             axes[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
-            axs[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)
+            axs[i].plot(_bprp_cluster, curtis_gyrochrone(_bprp_cluster, kind=seq), label=gyro_ages[j], color='grey', lw=3, alpha=0.4)        
 
-
-
-axes[0].set_title("All stars\n(McQuillan et al. 2014 + Gaia EDR3)")
+axes[0].set_title("All stars\n(Santos et al. 2021 + Gaia EDR3)")
 axes[1].set_title("Low reddening sample\n(A$_\mathregular{V}$<0.2 mag)")
 axes[2].set_title("Low reddening sample\nwith -0.1 mag shift")
 plt.tight_layout()
-plt.savefig('../figures/gaia-mcquillan.pdf')
+plt.savefig(paths.figures / 'gaia-santos.pdf')
 

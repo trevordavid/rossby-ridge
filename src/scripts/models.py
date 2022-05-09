@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import numpy as np
 import pandas as pd
 import astropy.constants as c
@@ -38,19 +39,19 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-# mcq = Table.read('../data/mcquillan2014/table1.dat',
-#                 readme='../data/mcquillan2014/ReadMe',
+# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
+#                 readme=paths.data / 'mcquillan2014/ReadMe',
 #                 format='ascii.cds')
 # mcq = mcq.to_pandas()
 # mcq = mcq.add_prefix('mcq_')
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
 
 ######################################################################################
 # California-Kepler Survey (Fulton & Petigura 2018)
 # This data table has been augmented with data from other surveys (see David et al. 2021)
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -62,7 +63,7 @@ cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
@@ -85,10 +86,10 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 
 ######################################################################################
 # van Saders et al. 2019 models
-std = pd.read_hdf('../data/standard_population.h5', key='sample')
+std = pd.read_hdf(paths.data / 'standard_population.h5', key='sample')
 std = std[std['evo']==1]
 
-roc = pd.read_hdf('../data/rocrit_population.h5', key='sample')
+roc = pd.read_hdf(paths.data / 'rocrit_population.h5', key='sample')
 roc = roc[roc['evo']==1]
 
 std['flag'] = 'std'
@@ -120,7 +121,7 @@ plt.title('Standard model')
 plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"a",transform=plt.gca().transAxes,weight="bold",size=14)
-plt.savefig('../figures/std-model-cks.pdf')
+plt.savefig(paths.figures / 'std-model-cks.pdf')
 
 #sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
@@ -135,7 +136,7 @@ plt.title('Weakened magnetic braking model')
 plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"b",transform=plt.gca().transAxes,weight="bold",size=14)
-plt.savefig('../figures/wmb-model-cks.pdf')
+plt.savefig(paths.figures / 'wmb-model-cks.pdf')
 
 mpl.rcParams["legend.markerscale"] = 5
 sns.set(font_scale=1.2, context="paper", style="ticks")
@@ -154,7 +155,7 @@ plt.title('Standard model')
 plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"c",transform=plt.gca().transAxes,weight="bold",size=14)
-plt.savefig('../figures/std-model-lamost.pdf')
+plt.savefig(paths.figures / 'std-model-lamost.pdf')
 
 #sns.displot(data=roc, x="Teff(K)", y="Prot(days)", binwidth=(20, 0.5), cbar=True, cbar_kws={'label': r'N$_\mathregular{stars}$'})]
 sns.displot(data=roc, x="Teff", y="period", binwidth=(20, 0.5), cbar=True, vmin=0, vmax=100, cbar_kws={'label': r'N$_\mathregular{stars}$'})
@@ -169,4 +170,4 @@ plt.title('Weakened magnetic braking model')
 plt.xlabel('Effective temperature [K]')
 plt.ylabel('Rotation period [d]')
 plt.text(1.15,1.05,"d",transform=plt.gca().transAxes,weight="bold",size=14)
-plt.savefig('../figures/wmb-model-lamost.pdf')
+plt.savefig(paths.figures / 'wmb-model-lamost.pdf')

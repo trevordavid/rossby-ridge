@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import numpy as np
 import pandas as pd
 
@@ -26,7 +27,7 @@ sun = {"teff": 5772,
 
 sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 
-#bk = pd.read_csv("../data/_kim_2010/-kim-2010.csv")
+#bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
 
 def convective_turnover_timescale(teff,
                                   ref='gunn1998'):
@@ -139,19 +140,19 @@ mcq_koi = mcq_koi.add_prefix('mcq_')
 
 
 #McQuillan et al. 2014
-# mcq = Table.read('../data/mcquillan2014/table1.dat',
-#                 readme='../data/mcquillan2014/ReadMe',
+# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
+#                 readme=paths.data / 'mcquillan2014/ReadMe',
 #                 format='ascii.cds')
 # mcq = mcq.to_pandas()
 # mcq = mcq.add_prefix('mcq_')
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
 
 ######################################################################################
 # California-Kepler Survey (Fulton & Petigura 2018)
 # This data table has been augmented with data from other surveys (see David et al. 2021)
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 cks = cks.drop_duplicates(subset=['kepid'], keep='first')
@@ -161,7 +162,7 @@ cks = cks.merge(mcq_koi, how='left', left_on='kepid', right_on='mcq_KIC')
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
@@ -258,4 +259,4 @@ ax2.set_title('LAMOST–McQuillan')
 ax3.set_title('Hall et al. 2021')
 sns.despine()
 plt.tight_layout()
-plt.savefig('../figures/kde.pdf')
+plt.savefig(paths.figures / 'kde.pdf')

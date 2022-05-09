@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -19,7 +20,7 @@ from astropy.table import Table
 from astropy import units as u
 from astroquery.xmatch import XMatch
 
-cks = pd.read_parquet('../data/cks_merged.parquet')
+cks = pd.read_parquet(paths.data / 'cks_merged.parquet')
 # The dataframe has a row entry for each KOI, meaning individual star are represented N times
 # where N is the number of KOIs detected around that star so we drop duplicates.
 print(np.shape(cks))
@@ -33,12 +34,12 @@ cks = cks.dropna(subset=['gaia_ra'])
 print(np.shape(cks))
 
 cks_pos = cks[['gaia_ra', 'gaia_dec']].copy()
-cks_pos.to_csv('../data/cks-gaia-coords.csv', index=False)
+cks_pos.to_csv(paths.data / 'cks-gaia-coords.csv', index=False)
 
 
 
 
-table = XMatch.query(cat1=open('../data/cks-gaia-coords.csv'),
+table = XMatch.query(cat1=open(paths.data / 'cks-gaia-coords.csv'),
                      cat2='vizier:J/ApJS/245/34/catalog',
                      max_distance=1 * u.arcsec,
                      colRA1='gaia_ra',
@@ -64,17 +65,17 @@ table = table.drop_duplicates(subset="gaia_ra", keep="first")
 
 
 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 #Drop duplicates
 lam = lam.drop_duplicates(subset=['KIC'], keep='first')
 
 #McQuillan et al. 2014
-# mcq = Table.read('../data/mcquillan2014/table1.dat',
-#                 readme='../data/mcquillan2014/ReadMe',
+# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
+#                 readme=paths.data / 'mcquillan2014/ReadMe',
 #                 format='ascii.cds')
 # mcq = mcq.to_pandas()
 # mcq = mcq.add_prefix('mcq_')
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 
 lam = lam.merge(mcq, how="left", left_on="KIC", right_on="mcq_KIC")
 
@@ -87,7 +88,7 @@ hall = hall.to_pandas()
 hall = hall.add_prefix("hall_")
 
 #Gaia-Kepler cross-match from Megan Bedell
-gk = pd.read_parquet('../data/kepler_dr2_1arcsec.parquet')
+gk = pd.read_parquet(paths.data / 'kepler_dr2_1arcsec.parquet')
 gk = gk.add_prefix('gaia_')
 
 hall = hall.merge(gk,
@@ -97,10 +98,10 @@ hall = hall.merge(gk,
 
 
 hall_pos = hall[['gaia_ra', 'gaia_dec']].copy()
-hall_pos.to_csv('../data/hall2021-gaia-coords.csv', index=False)
+hall_pos.to_csv(paths.data / 'hall2021-gaia-coords.csv', index=False)
 
 
-hall_lamost_xmatch = XMatch.query(cat1=open('../data/hall2021-gaia-coords.csv'),
+hall_lamost_xmatch = XMatch.query(cat1=open(paths.data / 'hall2021-gaia-coords.csv'),
                      cat2='vizier:J/ApJS/245/34/catalog',
                      max_distance=1 * u.arcsec,
                      colRA1='gaia_ra',
@@ -241,4 +242,4 @@ for ax in [ax1,ax3,ax5,ax7,ax9]:
     
 plt.tight_layout()
 plt.subplots_adjust(hspace=0)
-plt.savefig('../figures/teffscales.pdf')
+plt.savefig(paths.figures / 'teffscales.pdf')

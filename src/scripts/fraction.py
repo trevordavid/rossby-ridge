@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import paths
 import numpy as np
 import pandas as pd
 
@@ -29,17 +30,17 @@ sun["logg"] = np.log10(c.GM_sun.cgs.value/c.R_sun.cgs.value**2)
 
 ######################################################################################
 #McQuillan et al. 2014
-# mcq = Table.read('../data/mcquillan2014/table1.dat',
-#                 readme='../data/mcquillan2014/ReadMe',
+# mcq = Table.read(paths.data / 'mcquillan2014/table1.dat',
+#                 readme=paths.data / 'mcquillan2014/ReadMe',
 #                 format='ascii.cds')
 # mcq = mcq.to_pandas()
 # mcq = mcq.add_prefix('mcq_')
-mcq = pd.read_parquet('../data/mcquillan2014_table1.parquet')
+mcq = pd.read_parquet(paths.data / 'mcquillan2014_table1.parquet')
 ######################################################################################
 
 ######################################################################################
 # LAMOST-Kepler 
-lam = pd.read_csv('../data/kepler_lamost.csv')
+lam = pd.read_csv(paths.data / 'kepler_lamost.csv')
 print('LAMOST unique KIC targets:', len(np.unique(lam["KIC"])))
 print('LAMOST unique DR2 targets:', len(np.unique(lam["DR2Name"])))
 
@@ -62,7 +63,7 @@ print('Median LAMOST Teff error:', np.median(lam["e_Teff_lam"]))
 ######################################################################################
 
 ######################################################################################
-#bk = pd.read_csv("../data/_kim_2010/-kim-2010.csv")
+#bk = pd.read_csv(paths.data / "_kim_2010/-kim-2010.csv")
 
 def convective_turnover_timescale(teff,
                                   ref='gunn1998'):
@@ -151,7 +152,7 @@ plt.ylabel("Relative fraction of pile-up stars")
 plt.xlabel("Effective temperature [K]")
 plt.legend()
 sns.despine()
-plt.savefig('../figures/fraction.pdf')
+plt.savefig(paths.figures / 'fraction.pdf')
 #plt.show()
 
 
