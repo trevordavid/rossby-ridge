@@ -4,8 +4,8 @@
 </a>
 <br>
 <br>
-<a href="https://github.com/trevordavid/rossby-ridge/actions/workflows/showyourwork.yml">
-<img src="https://github.com/trevordavid/rossby-ridge/actions/workflows/showyourwork.yml/badge.svg" alt="Article status"/>
+<a href="https://github.com/trevordavid/rossby-ridge/actions/workflows/build.yml">
+<img src="https://github.com/trevordavid/rossby-ridge/actions/workflows/build.yml/badge.svg" alt="Article status"/>
 </a>
 <a href="https://github.com/trevordavid/rossby-ridge/raw/main-pdf/arxiv.tar.gz">
 <img src="https://img.shields.io/badge/article-tarball-blue.svg?style=flat" alt="Article tarball"/>
