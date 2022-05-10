@@ -20,4 +20,4 @@
 
 ## Pileups in the Temperature–Period Distribution
 
-Code for reproducing the analysis and text presented in "Further Evidence of Modified Spin-down in Sun-like Stars: Pileups in the Temperature–Period Distribution," (David et al., accepted to ApJ). Pre-print available on [arXiv](https://arxiv.org/abs/2203.08920).
+Code for reproducing the analysis and text presented in "Further Evidence of Modified Spin-down in Sun-like Stars: Pileups in the Temperature–Period Distribution," (David et al. 2022, accepted to ApJ). Pre-print available on [arXiv](https://arxiv.org/abs/2203.08920).
