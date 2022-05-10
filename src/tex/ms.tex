@@ -1,39 +1,10 @@
-%% Beginning of file 'sample631.tex'
-%%
-%% Modified 2021 March
-%%
-%% This is a sample manuscript marked up using the
-%% AASTeX v6.31 LaTeX 2e macros.
-%%
-%% AASTeX is now based on Alexey Vikhlinin's emulateapj.cls 
-%% (Copyright 2000-2015).  See the classfile for details.
-
-%% AASTeX requires revtex4-1.cls and other external packages such as
-%% latexsym, graphicx, amssymb, longtable, and epsf.  Note that as of 
-%% Oct 2020, APS now uses revtex4.2e for its journals but remember that 
-%% AASTeX v6+ still uses v4.1. All of these external packages should 
-%% already be present in the modern TeX distributions but not always.
-%% For example, revtex4.1 seems to be missing in the linux version of
-%% TexLive 2020. One should be able to get all packages from www.ctan.org.
-%% In particular, revtex v4.1 can be found at 
-%% https://www.ctan.org/pkg/revtex4-1.
-
-%% The first piece of markup in an AASTeX v6.x document is the \documentclass
-%% command. LaTeX will ignore any data that comes before this command. The 
-%% documentclass can take an optional argument to modify the output style.
-%% The command below calls the preprint style which will produce a tightly 
-%% typeset, one-column, single-spaced document.  It is the default and thus
-%% does not need to be explicitly stated.
-%%
-%% using aastex version 6.3
-\documentclass[trackchanges,twocolumn]{aastex631}
+\documentclass[twocolumn]{aastex631}
 
 \usepackage{xspace}
 \usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{showyourwork}
-\DeclareUnicodeCharacter{2212}{\textendash}
 
 \newcommand{\taucz}{$\tau_\mathrm{cz}$\xspace}
 \newcommand{\rocrit}{$\mathrm{Ro_{crit}}$\xspace}
@@ -84,10 +55,7 @@
 
 \newcommand{\gaia}{\textit{Gaia}\xspace}
 \newcommand{\kepler}{\textit{Kepler}\xspace}
-\newcommand{\spitzer}{\textit{Spitzer}}
-\newcommand{\tess}{\textit{TESS}\xspace}
 \newcommand{\emcee}{\texttt{emcee}\xspace}
-\newcommand{\stardate}{\texttt{stardate}\xspace}
 \newcommand{\python}{\textsc{python}\xspace}
 
 \newcommand{\cca}{Center for Computational Astrophysics, Flatiron Institute, New York, NY 10010, USA}
@@ -105,25 +73,9 @@
 %% Adds "Submitted to " the argument.
 \submitjournal{ApJ}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% The following section outlines numerous optional output that
-%% can be displayed in the front matter or as running meta-data.
-%%
-%% If you wish, you may supply running head information, although
-%% this information may be modified by the editorial offices.
 \shorttitle{The Rossby Ridge}
 \shortauthors{David et al.}
-%%
-%% You can add a light gray and diagonal water-mark to the first page 
-%% with this command:
-%% \watermark{text}
-%% where "text", e.g. DRAFT, is the text to appear.  If the text is 
-%% long you can control the water-mark size with:
-%% \setwatermarkfontsize{dimension}
-%% where dimension is any recognized LaTeX dimension, e.g. pt, in, etc.
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \graphicspath{{./}{figures/}}
 
 \begin{document}
@@ -668,8 +620,5 @@ This research has made use of NASA's Astrophysics Data System Bibliographic Serv
 \bibliography{bib}{}
 \bibliographystyle{aasjournal}
 
-%% Include this line if you are using the \added, \replaced, \deleted
-%% commands to see a summary list of all changes at the end of the article.
-%\listofchanges
 
 \end{document}
